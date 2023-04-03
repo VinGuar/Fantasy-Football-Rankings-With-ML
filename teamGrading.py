@@ -55,3 +55,19 @@ for item in teams:
 
 print(statsPrevious)
 
+for item in teams:
+    oline = []
+    rbs = []
+    wrs = []
+    tes = []
+    
+    url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
+
+
+
+
+
+
+
+
+
