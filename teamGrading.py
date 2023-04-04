@@ -17,19 +17,21 @@ def checkRate(r):
 def makeCommentTable(soup1):
     global rate
 
-    #finds all comments in soup. 
-    comments = soup1.find_all(string=lambda text: isinstance(text, Comment))
+    #finds all comments in soup and makes them not comments and just html. 
+    comments = soup1.find_all(string=lambda text: isinstance(text, Comment) and "table_container" in text)
+    roster_html = str(comments).replace('<!--', '').replace('-->', '')
+    
+    #parse through the HTML content using Beautiful Soup
+    roster_soup = BeautifulSoup(roster_html, 'html.parser')
 
-    #this iterates through each of comments "things" and sees if it has table. If it is table, appends to table array.
-    allTables = []
-    for things in comments:
-        if 'table' in things:
-            try:
-                return pd.read_html(things)[0]
-            except:
-                continue
+    #find the roster table by its HTML id
+    table = roster_soup.find('table', {'id': 'roster'})
 
-    return allTables
+    #reads roster table html into a dataframe
+    df = pd.read_html(str(table))[0]
+
+    return df
+
 
 #takes positional dataframe and returns dataframe with only the player names.
 def makePosArrays(df):
@@ -48,7 +50,6 @@ def findAV(df, allPlayers, birthArray):
     avValue = 0
     avDict = {}
     x = 0
-
     #iterates through small positional df
     for item in df:
         #iterates through large df of all players to see if it is in it, and if it is, adds the Av value to the player
@@ -61,7 +62,7 @@ def findAV(df, allPlayers, birthArray):
                 if (bday == birthArray[x]):
                     avValue = playerRow["AV"]
                     avDict[item] = avValue.iloc[0]
-            x+=1
+        x+=1
     
     return avDict
 
@@ -168,6 +169,7 @@ for item in teams:
     #append table for current team in loop to all teams
     statsPrevious.append(table)
     
+    
 
     
 for item in teams:
@@ -188,6 +190,7 @@ for item in teams:
 
 
     soupCurrent = BeautifulSoup(response.text, 'html.parser')
+
     currTable = makeCommentTable(soupCurrent)
 
     #gets df to be only positions and columns wanted and non rookies, and resets index
@@ -239,27 +242,6 @@ for item in teams:
     print(item, "qb", qbGrade)
     print(item, "ol", olGrade)
     print()
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    
-
-
-
 
 
 
