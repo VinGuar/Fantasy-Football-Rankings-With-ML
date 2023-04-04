@@ -42,20 +42,27 @@ def makePosArrays(df):
     return array
 
 
-#takes in positional array of players and dictionary of all teams players and finds each players AV and returns dict of that AV
-def findAV(df, allPlayers):
+#takes in positional array of players and dictionary of all teams players, and birthdate/pos for verification, and finds each players AV and returns dict of that AV
+def findAV(df, allPlayers, birthArray):
     global rate
     avValue = 0
     avDict = {}
+    x = 0
+
     #iterates through small positional df
     for item in df:
         #iterates through large df of all players to see if it is in it, and if it is, adds the Av value to the player
         for thing in allPlayers:
-            thing = thing[["Player", "AV"]]
+            thing = thing[["Player", "AV", "Pos", "BirthDate"]]
             if len(thing[thing.Player == item]) >0:
                 playerRow = thing[thing.Player == item]
-                avValue = playerRow["AV"]
-                avDict[item] = avValue.iloc[0]
+                bday = playerRow["BirthDate"].iloc[0]
+                print(bday)
+                #makes sure its not just same name, like how there are two josh allens
+                if (bday == birthArray[x]):
+                    avValue = playerRow["AV"]
+                    avDict[item] = avValue.iloc[0]
+            x+=1
     
     return avDict
 
@@ -123,7 +130,14 @@ def grader(dict2, pos):
 
     return grade
 
+#makes array that includes only bdays
+def makeBday(df):
+    array = []
+    for index, row in df.iterrows():
+        bday = row["BirthDate"]
+        array.append(bday)
 
+    return array
     
 
 #team abbrevitions
@@ -140,7 +154,7 @@ statsPrevious = []
 for item in teams: 
 
     #makes url for every team
-    url = "https://www.pro-football-reference.com/teams/" + item + "/2022_roster.htm"
+    url = "https://www.pro-football-reference.com/teams/" + "buf" + "/2022_roster.htm"
 
     #get page wanted and make a beautiful soup out of it.
     checkRate(rate)
@@ -153,6 +167,7 @@ for item in teams:
 
     #append table for current team in loop to all teams
     statsPrevious.append(table)
+    break
 
     
 for item in teams:
@@ -164,7 +179,7 @@ for item in teams:
     qbs = []
     
     #get urls table for current team
-    url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
+    url = "https://www.pro-football-reference.com/teams/" + "buf" + "/2023_roster.htm"
 
     checkRate(rate)
     response = requests.get(url)
@@ -180,7 +195,7 @@ for item in teams:
     currTable = currTable.loc[currTable['Pos'].isin(posWanted)]
     currTable = currTable[currTable.Yrs != "Rook"]
     currTable = currTable.reset_index()
-    currTable = currTable[["Player", "Pos"]]
+    currTable = currTable[["Player", "Pos", "BirthDate"]]
 
     #make individual position arrays
     rbDF = currTable.loc[currTable['Pos'] == "RB"]
@@ -190,7 +205,14 @@ for item in teams:
     olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
     qbDF = currTable.loc[currTable['Pos'] == "QB"]
 
-    #make arrays of positons include the players
+    #make array that has each positions bdays
+    bdayRB = makeBday(rbDF)
+    bdayWR = makeBday(wrDF)
+    bdayTE = makeBday(teDF)
+    bdayQB = makeBday(qbDF)
+    bdayOL = makeBday(olDF)
+
+    #make arrays of positons to include only the players
     ols = makePosArrays(olDF)
     rbs = makePosArrays(rbDF)
     wrs = makePosArrays(wrDF)
@@ -198,11 +220,11 @@ for item in teams:
     qbs = makePosArrays(qbDF)
 
     #makes array of positions with AV values for players
-    rbAV = findAV(rbs, statsPrevious)
-    wrAV = findAV(wrs, statsPrevious)
-    teAV = findAV(tes, statsPrevious)
-    qbAV = findAV(qbs, statsPrevious)
-    olAV = findAV(ols, statsPrevious)
+    rbAV = findAV(rbs, statsPrevious, bdayRB)
+    wrAV = findAV(wrs, statsPrevious, bdayWR)
+    teAV = findAV(tes, statsPrevious, bdayTE)
+    qbAV = findAV(qbs, statsPrevious, bdayQB)
+    olAV = findAV(ols, statsPrevious, bdayOL)
 
     #grades each position on each time
     rbGrade = grader(rbAV, "rb")
@@ -217,7 +239,7 @@ for item in teams:
     print(item, "qb", qbGrade)
     print(item, "ol", olGrade)
     print()
-
+    break
 
 
     
