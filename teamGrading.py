@@ -39,6 +39,26 @@ def makePosArrays(df):
     
     return array
 
+#takes in positional array of players and dictionary of all teams players and finds each players AV and returns dict of that AV
+def findAV(df, allPlayers):
+    avValue = 0
+    avDict = {}
+    #iterates through small positional df
+    for item in df:
+        #iterates through large df of all players to see if it is in it, and if it is, adds the Av value to the player
+        for thing in allPlayers:
+            thing = thing[["Player", "AV"]]
+            if len(thing[thing.Player == item]) >0:
+                playerRow = thing[thing.Player == item]
+                avValue = playerRow["AV"]
+                avDict[item] = avValue.iloc[0]
+    
+    return avDict
+
+
+
+
+
     
 
 #team abbrevitions
@@ -52,7 +72,7 @@ statsPrevious = []
 
 
 #make statPrevious array
-"""for item in teams: 
+for item in teams: 
 
     #makes url for every team
     url = "https://www.pro-football-reference.com/teams/" + item + "/2022_roster.htm"
@@ -69,9 +89,10 @@ statsPrevious = []
     #append table for current team in loop to all teams
     statsPrevious.append(table)
 
+    
 
 
-print(statsPrevious)"""
+
 
 for item in teams:
     #arrays for positional grading
@@ -82,8 +103,7 @@ for item in teams:
     qbs = []
     
     #get urls table for current team
-    #url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
-    url = "https://www.pro-football-reference.com/teams/" + "was" + "/2023_roster.htm"
+    url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
 
     checkRate(rate)
     response = requests.get(url)
@@ -114,18 +134,28 @@ for item in teams:
     wrs = makePosArrays(wrDF)
     tes = makePosArrays(teDF)
     qbs = makePosArrays(qbDF)
+    rbAV = findAV(rbs, statsPrevious)
+
+    #makes array of positions with AV values for players
+    wrAV = findAV(wrs, statsPrevious)
+    teAV = findAV(tes, statsPrevious)
+    qbAV = findAV(qbs, statsPrevious)
+    olAV = findAV(oline, statsPrevious)
+
+
+
+
     
 
-    print(qbs)
 
 
-    if rate == 1:
-        break
-
+    
 
 
 
-print(dictOfTeamsGrade)
+
+
+
 
 
 
