@@ -30,6 +30,16 @@ def makeCommentTable(soup1):
 
     return allTables
 
+#takes dataframe and returns dataframe with only the names.
+def makePosArrays(df):
+    array = []
+    for index, row in df.iterrows():
+        player = row["Player"]
+        array.append(player)
+    
+    return array
+
+    
 
 #team abbrevitions
 teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -69,6 +79,7 @@ for item in teams:
     rbs = []
     wrs = []
     tes = []
+    qbs = []
     
     #get urls table for current team
     #url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
@@ -81,16 +92,37 @@ for item in teams:
     soupCurrent = BeautifulSoup(response.text, 'html.parser')
     currTable = makeCommentTable(soupCurrent)
 
-    #gets df to be only positions wanted and non rookies
+    #gets df to be only positions and columns wanted and non rookies, and resets index
     posWanted = ["QB", "WR", "RB", "TE", "OL", "C", "T", "G"]
     currTable = currTable.loc[currTable['Pos'].isin(posWanted)]
     currTable = currTable[currTable.Yrs != "Rook"]
+    currTable = currTable.reset_index()
+    currTable = currTable[["Player", "Pos"]]
 
-    print(currTable)
+    #make individual position arrays
+    rbDF = currTable.loc[currTable['Pos'] == "RB"]
+    wrDF = currTable.loc[currTable['Pos'] == "WR"]
+    teDF = currTable.loc[currTable['Pos'] == "TE"]
+    olstuff = ["OL", "C", "T", "G"]
+    olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
+    qbDF = currTable.loc[currTable['Pos'] == "QB"]
+
+
+    #make arrays of positons include the players
+    oline = makePosArrays(olDF)
+    rbs = makePosArrays(rbDF)
+    wrs = makePosArrays(wrDF)
+    tes = makePosArrays(teDF)
+    qbs = makePosArrays(qbDF)
+    
+
+    print(qbs)
 
 
     if rate == 1:
         break
+
+
 
 
 print(dictOfTeamsGrade)
