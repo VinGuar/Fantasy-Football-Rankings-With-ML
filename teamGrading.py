@@ -30,7 +30,7 @@ def makeCommentTable(soup1):
 
     return allTables
 
-#takes dataframe and returns dataframe with only the names.
+#takes positional dataframe and returns dataframe with only the player names.
 def makePosArrays(df):
     array = []
     for index, row in df.iterrows():
