@@ -15,6 +15,7 @@ def checkRate(r):
 
 #since roster table is hidden in comments, needs this to fish it out
 def makeCommentTable(soup1):
+    global rate
 
     #finds all comments in soup. 
     comments = soup1.find_all(string=lambda text: isinstance(text, Comment))
@@ -32,6 +33,7 @@ def makeCommentTable(soup1):
 
 #takes positional dataframe and returns dataframe with only the player names.
 def makePosArrays(df):
+    global rate
     array = []
     for index, row in df.iterrows():
         player = row["Player"]
@@ -42,6 +44,7 @@ def makePosArrays(df):
 
 #takes in positional array of players and dictionary of all teams players and finds each players AV and returns dict of that AV
 def findAV(df, allPlayers):
+    global rate
     avValue = 0
     avDict = {}
     #iterates through small positional df
@@ -58,6 +61,7 @@ def findAV(df, allPlayers):
 
 #takes position and dict of positional grades and makes one grade per position and returns said grade.
 def grader(dict2, pos):
+    global rate
     grade = 0
 
     #counting variables
@@ -164,8 +168,9 @@ for item in teams:
 
     checkRate(rate)
     response = requests.get(url)
-    print(response)
     rate += 1
+    print(response)
+
 
     soupCurrent = BeautifulSoup(response.text, 'html.parser')
     currTable = makeCommentTable(soupCurrent)
