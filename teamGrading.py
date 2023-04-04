@@ -57,7 +57,6 @@ def findAV(df, allPlayers, birthArray):
             if len(thing[thing.Player == item]) >0:
                 playerRow = thing[thing.Player == item]
                 bday = playerRow["BirthDate"].iloc[0]
-                print(bday)
                 #makes sure its not just same name, like how there are two josh allens
                 if (bday == birthArray[x]):
                     avValue = playerRow["AV"]
@@ -154,11 +153,12 @@ statsPrevious = []
 for item in teams: 
 
     #makes url for every team
-    url = "https://www.pro-football-reference.com/teams/" + "buf" + "/2022_roster.htm"
+    url = "https://www.pro-football-reference.com/teams/" + item + "/2022_roster.htm"
 
     #get page wanted and make a beautiful soup out of it.
     checkRate(rate)
     response = requests.get(url)
+    print(response)
     rate += 1
 
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -167,7 +167,7 @@ for item in teams:
 
     #append table for current team in loop to all teams
     statsPrevious.append(table)
-    break
+    
 
     
 for item in teams:
@@ -179,7 +179,7 @@ for item in teams:
     qbs = []
     
     #get urls table for current team
-    url = "https://www.pro-football-reference.com/teams/" + "buf" + "/2023_roster.htm"
+    url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
 
     checkRate(rate)
     response = requests.get(url)
@@ -239,7 +239,7 @@ for item in teams:
     print(item, "qb", qbGrade)
     print(item, "ol", olGrade)
     print()
-    break
+    
 
 
     
