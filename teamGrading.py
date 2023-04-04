@@ -39,6 +39,7 @@ def makePosArrays(df):
     
     return array
 
+
 #takes in positional array of players and dictionary of all teams players and finds each players AV and returns dict of that AV
 def findAV(df, allPlayers):
     avValue = 0
@@ -55,8 +56,68 @@ def findAV(df, allPlayers):
     
     return avDict
 
+#takes position and dict of positional grades and makes one grade per position and returns said grade.
+def grader(dict2, pos):
+    grade = 0
 
+    #counting variables
+    x = 0
+    y = 1
 
+    #how many players per position it wants to include in grade
+    if pos == "qb":
+        x = 1
+    elif pos == "rb":
+        x = 2
+    elif pos == "wr":
+        x = 3
+    elif pos == "ol":
+        x = 5
+    elif pos == "te":
+        x = 2
+    
+    sortedDict = sorted(dict2.items(), key=lambda x:x[1], reverse=True)
+
+    for i in sortedDict:
+        if y > x:
+            break
+
+        #the next large if loop grades them. gives different percentages based on if starter, 2nd, or 3rd string, etc.
+        if (x == 1):
+            grade = i[1]
+        elif (x==2):
+            if pos == "rb":
+                if (y == 1):
+                    grade = grade + i[1]*.7
+                else:
+                    grade = grade + i[1]*.3
+            else:
+                if (y == 1):
+                    grade = grade + i[1]*.8
+                else:
+                    grade = grade + i[1]*.2
+        elif (x==3):
+            if (y == 1):
+                grade = grade + i[1]*.38
+            elif (y == 2):
+                grade = grade + i[1]*.335
+            else:
+                grade = grade + i[1]*.285
+        elif (x==5):
+            if (y == 1):
+                grade = grade + i[1]/5
+            elif (y == 2):
+                grade = grade + i[1]/5
+            elif (y == 3):
+                grade = grade + i[1]/5
+            elif (y == 4):
+                grade = grade + i[1]/5
+            elif (y == 5):
+                grade = grade + i[1]/5
+
+        y+=1
+
+    return grade
 
 
     
@@ -90,13 +151,9 @@ for item in teams:
     statsPrevious.append(table)
 
     
-
-
-
-
 for item in teams:
     #arrays for positional grading
-    oline = []
+    ols = []
     rbs = []
     wrs = []
     tes = []
@@ -107,6 +164,7 @@ for item in teams:
 
     checkRate(rate)
     response = requests.get(url)
+    print(response)
     rate += 1
 
     soupCurrent = BeautifulSoup(response.text, 'html.parser')
@@ -127,20 +185,42 @@ for item in teams:
     olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
     qbDF = currTable.loc[currTable['Pos'] == "QB"]
 
-
     #make arrays of positons include the players
-    oline = makePosArrays(olDF)
+    ols = makePosArrays(olDF)
     rbs = makePosArrays(rbDF)
     wrs = makePosArrays(wrDF)
     tes = makePosArrays(teDF)
     qbs = makePosArrays(qbDF)
-    rbAV = findAV(rbs, statsPrevious)
 
     #makes array of positions with AV values for players
+    rbAV = findAV(rbs, statsPrevious)
     wrAV = findAV(wrs, statsPrevious)
     teAV = findAV(tes, statsPrevious)
     qbAV = findAV(qbs, statsPrevious)
-    olAV = findAV(oline, statsPrevious)
+    olAV = findAV(ols, statsPrevious)
+
+    #grades each position on each time
+    rbGrade = grader(rbAV, "rb")
+    wrGrade = grader(wrAV, "wr")
+    teGrade = grader(teAV, "te")
+    qbGrade = grader(qbAV, "qb")
+    olGrade = grader(olAV, "ol")
+
+    print(item, "rb", rbGrade)
+    print(item, "wr", wrGrade)
+    print(item, "te", teGrade)
+    print(item, "qb", qbGrade)
+    print(item, "ol", olGrade)
+    print()
+
+
+
+    
+
+
+
+
+
 
 
 
