@@ -146,10 +146,9 @@ def makeBday(df):
 teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
 #years for machine learning. if x is true it uses them
-#yearsBig = ["2012", "2013", "2014", "2016", "2017", "2018", "2020", "2021", "2022"]
-#yearsSmall = ["2011", "2012", "2013", "2014", "2016", "2017", "2018", "2020", "2021"]
-yearsBig = ["2021", "2022"]
-yearsSmall = ["2020", "2021"]
+yearsBig = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+yearsSmall = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020", "2021"]
+
 
 x = True
 
@@ -186,13 +185,13 @@ for arr in yearsSmall:
 
         #append table for current team in loop to all teams
         statsPrevious.append(table)
+        
 
     
     statsPreviousAll.append(statsPrevious)
     statsPrevious = []
 
             
-    
 allTeams = {}
 bigYears = {}
 
@@ -204,10 +203,12 @@ else:
 
 for arr in yearsBig:
     #if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
-
+   
+    #reset all teams dict
+    allTeams = {}
+    h = 0
     for item in teams:
-        #reset all teams dict
-        allTeams = {}
+
 
         #arrays for positional grading
         
@@ -285,6 +286,10 @@ for arr in yearsBig:
         current["te"] = teGrade
         allTeams[item] = current
 
+
+        
+        
+
         
 
     q = q + 1
@@ -316,6 +321,9 @@ if x:
 
 
     largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
+    largeDF.to_csv("tenYearsGrades.csv", encoding='utf-8', index=False)
+
+    
 
     print(largeDF)
 
