@@ -145,127 +145,197 @@ def makeBday(df):
 #team abbrevitions
 teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
+#years for machine learning. if x is true it uses them
+#yearsBig = ["2012", "2013", "2014", "2016", "2017", "2018", "2020", "2021", "2022"]
+#yearsSmall = ["2011", "2012", "2013", "2014", "2016", "2017", "2018", "2020", "2021"]
+yearsBig = ["2021", "2022"]
+yearsSmall = ["2020", "2021"]
+
+x = True
+
 #array of each teams grade per positional groups
 dictOfTeamsGrade = []
 
 #array of dictionaries of all teams previous year roster with AV
 statsPrevious = []
 
+statsPreviousAll = []
 
-#make statPrevious array
-for item in teams: 
+#if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
+if x:
+    pass
+else: 
+    yearsSmall = ["2022"] 
 
-    #makes url for every team
-    url = "https://www.pro-football-reference.com/teams/" + item + "/2022_roster.htm"
+for arr in yearsSmall:
 
-    #get page wanted and make a beautiful soup out of it.
-    checkRate(rate)
-    response = requests.get(url)
-    print(response)
-    rate += 1
+    for item in teams: 
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+        #makes url for every team
+        url = "https://www.pro-football-reference.com/teams/" + item + "/" + arr + "_roster.htm"
 
-    table = makeCommentTable(soup)
+        #get page wanted and make a beautiful soup out of it.
+        checkRate(rate)
+        response = requests.get(url)
+        print(response)
+        rate += 1
 
-    #append table for current team in loop to all teams
-    statsPrevious.append(table)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        table = makeCommentTable(soup)
+
+        #append table for current team in loop to all teams
+        statsPrevious.append(table)
+
     
-    
-    
+    statsPreviousAll.append(statsPrevious)
+    statsPrevious = []
+
+            
     
 allTeams = {}
+bigYears = {}
+
+q = 0
+if x:
+    pass
+else: 
+    yearsBig = ["2023"] 
+
+for arr in yearsBig:
+    #if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
+
+    for item in teams:
+        #reset all teams dict
+        allTeams = {}
+
+        #arrays for positional grading
+        
+        ols = []
+        rbs = []
+        wrs = []
+        tes = []
+        qbs = []
+        
+        #get urls table for current team
+        url = "https://www.pro-football-reference.com/teams/" + item + "/" + arr + "_roster.htm"
+
+        checkRate(rate)
+        response = requests.get(url)
+        rate += 1
+        print(response)
+
+
+        soupCurrent = BeautifulSoup(response.text, 'html.parser')
+
+        currTable = makeCommentTable(soupCurrent)
+
+        #gets df to be only positions and columns wanted and non rookies, and resets index
+        posWanted = ["QB", "WR", "RB", "TE", "OL", "C", "T", "G"]
+        currTable = currTable.loc[currTable['Pos'].isin(posWanted)]
+        currTable = currTable[currTable.Yrs != "Rook"]
+        currTable = currTable.reset_index()
+        currTable = currTable[["Player", "Pos", "BirthDate"]]
+
+        #make individual position arrays
+        rbDF = currTable.loc[currTable['Pos'] == "RB"]
+        wrDF = currTable.loc[currTable['Pos'] == "WR"]
+        teDF = currTable.loc[currTable['Pos'] == "TE"]
+        olstuff = ["OL", "C", "T", "G"]
+        olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
+        qbDF = currTable.loc[currTable['Pos'] == "QB"]
+
+        #make array that has each positions bdays
+        bdayRB = makeBday(rbDF)
+        bdayWR = makeBday(wrDF)
+        bdayTE = makeBday(teDF)
+        bdayQB = makeBday(qbDF)
+        bdayOL = makeBday(olDF)
+
+        #make arrays of positons to include only the players
+        ols = makePosArrays(olDF)
+        rbs = makePosArrays(rbDF)
+        wrs = makePosArrays(wrDF)
+        tes = makePosArrays(teDF)
+        qbs = makePosArrays(qbDF)
+
+        #previous years stats
+        stats = statsPreviousAll[q]
+
+        #makes array of positions with AV values for players
+        rbAV = findAV(rbs, stats, bdayRB)
+        wrAV = findAV(wrs, stats, bdayWR)
+        teAV = findAV(tes, stats, bdayTE)
+        qbAV = findAV(qbs, stats, bdayQB)
+        olAV = findAV(ols, stats, bdayOL)
+
+        #grades each position on each time
+        rbGrade = grader(rbAV, "rb")
+        wrGrade = grader(wrAV, "wr")
+        teGrade = grader(teAV, "te")
+        qbGrade = grader(qbAV, "qb")
+        olGrade = grader(olAV, "ol")
+
+        #make dictionary and have teams grades of all position into main dictionary
+        current = {}
+        current["ol"] = olGrade
+        current["rb"] = rbGrade
+        current["wr"] = wrGrade
+        current["qb"] = qbGrade
+        current["te"] = teGrade
+        allTeams[item] = current
+
+        
+
+    q = q + 1
+
+    #add the year to whole year array
+    bigYears[arr] = allTeams
+
+
+#df that will have all years
+largeDF = pd.DataFrame()
+
+if x:
+    for key in bigYears:
+        #make dictionary into panda dataframe
+        dfAll = pd.DataFrame.from_dict(bigYears[key], orient="index")
+
+        #reset/add index
+        dfAll = dfAll.reset_index()
+
+        #rename index column as team column 
+        dfAll.rename(columns = {'index':'team'}, inplace = True)
+
+        #write dataframe into csv to be used later
+        dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
+
+        dfAll['year'] = key
+
+        largeDF = pd.concat([largeDF, dfAll], ignore_index=True, keys=None, levels=None, names=None, verify_integrity=False, copy=True)
+
+
+    largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
+
+    print(largeDF)
+
     
-for item in teams:
-    #arrays for positional grading
-    ols = []
-    rbs = []
-    wrs = []
-    tes = []
-    qbs = []
-    
-    #get urls table for current team
-    url = "https://www.pro-football-reference.com/teams/" + item + "/2023_roster.htm"
+else:
+    #make dictionary into panda dataframe
+    dfAll = pd.DataFrame.from_dict(allTeams, orient="index")
 
-    checkRate(rate)
-    response = requests.get(url)
-    rate += 1
-    print(response)
+    #reset/add index
+    dfAll = dfAll.reset_index()
 
+    #rename index column as team column 
+    dfAll.rename(columns = {'index':'team'}, inplace = True)
 
-    soupCurrent = BeautifulSoup(response.text, 'html.parser')
-
-    currTable = makeCommentTable(soupCurrent)
-
-    #gets df to be only positions and columns wanted and non rookies, and resets index
-    posWanted = ["QB", "WR", "RB", "TE", "OL", "C", "T", "G"]
-    currTable = currTable.loc[currTable['Pos'].isin(posWanted)]
-    currTable = currTable[currTable.Yrs != "Rook"]
-    currTable = currTable.reset_index()
-    currTable = currTable[["Player", "Pos", "BirthDate"]]
-
-    #make individual position arrays
-    rbDF = currTable.loc[currTable['Pos'] == "RB"]
-    wrDF = currTable.loc[currTable['Pos'] == "WR"]
-    teDF = currTable.loc[currTable['Pos'] == "TE"]
-    olstuff = ["OL", "C", "T", "G"]
-    olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
-    qbDF = currTable.loc[currTable['Pos'] == "QB"]
-
-    #make array that has each positions bdays
-    bdayRB = makeBday(rbDF)
-    bdayWR = makeBday(wrDF)
-    bdayTE = makeBday(teDF)
-    bdayQB = makeBday(qbDF)
-    bdayOL = makeBday(olDF)
-
-    #make arrays of positons to include only the players
-    ols = makePosArrays(olDF)
-    rbs = makePosArrays(rbDF)
-    wrs = makePosArrays(wrDF)
-    tes = makePosArrays(teDF)
-    qbs = makePosArrays(qbDF)
-
-    #makes array of positions with AV values for players
-    rbAV = findAV(rbs, statsPrevious, bdayRB)
-    wrAV = findAV(wrs, statsPrevious, bdayWR)
-    teAV = findAV(tes, statsPrevious, bdayTE)
-    qbAV = findAV(qbs, statsPrevious, bdayQB)
-    olAV = findAV(ols, statsPrevious, bdayOL)
-
-    #grades each position on each time
-    rbGrade = grader(rbAV, "rb")
-    wrGrade = grader(wrAV, "wr")
-    teGrade = grader(teAV, "te")
-    qbGrade = grader(qbAV, "qb")
-    olGrade = grader(olAV, "ol")
-
-    #make dictionary and have teams grades of all position into main dictionary
-    current = {}
-    current["ol"] = olGrade
-    current["rb"] = rbGrade
-    current["wr"] = wrGrade
-    current["qb"] = qbGrade
-    current["te"] = teGrade
-    allTeams[item] = current
-    
-    
-
-#make dictionary into panda dataframe
-dfAll = pd.DataFrame.from_dict(allTeams, orient="index")
-
-#reset/add index
-dfAll = dfAll.reset_index()
-
-#rename index column as team column 
-dfAll.rename(columns = {'index':'team'}, inplace = True)
-
-#write dataframe into csv to be used later
-dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
+    #write dataframe into csv to be used later
+    dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
 
 
 
-print(dfAll)
+    #print(dfAll)
 
 
 
