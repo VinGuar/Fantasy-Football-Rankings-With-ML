@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup, Comment
 import pandas as pd
 import time
 from unidecode import unidecode
+import numpy as np
+
 
 #make sure do not go over rate limit of 20 requests per minute. If over, sportsreference puts in "jail" for an hour
 rate = 0
@@ -170,7 +172,9 @@ for item in teams:
     statsPrevious.append(table)
     
     
-
+    
+    
+allTeams = {}
     
 for item in teams:
     #arrays for positional grading
@@ -236,15 +240,32 @@ for item in teams:
     qbGrade = grader(qbAV, "qb")
     olGrade = grader(olAV, "ol")
 
-    print(item, "rb", rbGrade)
-    print(item, "wr", wrGrade)
-    print(item, "te", teGrade)
-    print(item, "qb", qbGrade)
-    print(item, "ol", olGrade)
-    print()
+    #make dictionary and have teams grades of all position into main dictionary
+    current = {}
+    current["ol"] = olGrade
+    current["rb"] = rbGrade
+    current["wr"] = wrGrade
+    current["qb"] = qbGrade
+    current["te"] = teGrade
+    allTeams[item] = current
+    
+    
+
+#make dictionary into panda dataframe
+dfAll = pd.DataFrame.from_dict(allTeams, orient="index")
+
+#reset/add index
+dfAll = dfAll.reset_index()
+
+#rename index column as team column 
+dfAll.rename(columns = {'index':'team'}, inplace = True)
+
+#write dataframe into csv to be used later
+dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
 
 
 
+print(dfAll)
 
 
 
