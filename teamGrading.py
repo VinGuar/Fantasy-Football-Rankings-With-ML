@@ -167,9 +167,9 @@ else:
     yearsSmall = ["2022"] 
 
 for arr in yearsSmall:
-
+    print(arr + " small")
     for item in teams: 
-
+        print(item + " small")
         #makes url for every team
         url = "https://www.pro-football-reference.com/teams/" + item + "/" + arr + "_roster.htm"
 
@@ -203,12 +203,12 @@ else:
 
 for arr in yearsBig:
     #if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
-   
+    print(arr)
     #reset all teams dict
     allTeams = {}
     h = 0
     for item in teams:
-
+        print(item)
 
         #arrays for positional grading
         
