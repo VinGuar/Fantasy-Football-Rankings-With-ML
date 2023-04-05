@@ -145,9 +145,14 @@ def makeBday(df):
 #team abbrevitions
 teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
-#years for machine learning. if x is true it uses them
-yearsBig = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
-yearsSmall = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020", "2021"]
+#years for machine learning. if x is true it uses them. 
+#may have to split up the years into multiple smaller groups to prevent errors. then combine smaller csvs into the one main csv. 
+#I split the 10 years (below) up into first 3, next 3, and last 4, and then combined them all to get csv shown in repo
+#yearsBig = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
+#yearsSmall = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020", "2021"]
+yearsBig = ["2019", "2020", "2021", "2022"]
+yearsSmall = ["2018", "2019", "2020", "2021"]
+
 
 
 x = True
@@ -185,6 +190,7 @@ for arr in yearsSmall:
 
         #append table for current team in loop to all teams
         statsPrevious.append(table)
+        
         
 
     
@@ -232,7 +238,7 @@ for arr in yearsBig:
         currTable = makeCommentTable(soupCurrent)
 
         #gets df to be only positions and columns wanted and non rookies, and resets index
-        posWanted = ["QB", "WR", "RB", "TE", "OL", "C", "T", "G"]
+        posWanted = ["QB", "WR", "RB", "TE", "OL", "C", "T", "G", "LG", "LT", "RG", "RT"]
         currTable = currTable.loc[currTable['Pos'].isin(posWanted)]
         currTable = currTable[currTable.Yrs != "Rook"]
         currTable = currTable.reset_index()
@@ -242,7 +248,7 @@ for arr in yearsBig:
         rbDF = currTable.loc[currTable['Pos'] == "RB"]
         wrDF = currTable.loc[currTable['Pos'] == "WR"]
         teDF = currTable.loc[currTable['Pos'] == "TE"]
-        olstuff = ["OL", "C", "T", "G"]
+        olstuff = ["OL", "C", "T", "G", "LG", "LT", "RG", "RT"]
         olDF = currTable.loc[currTable['Pos'].isin(olstuff)]
         qbDF = currTable.loc[currTable['Pos'] == "QB"]
 
@@ -285,6 +291,7 @@ for arr in yearsBig:
         current["qb"] = qbGrade
         current["te"] = teGrade
         allTeams[item] = current
+        
 
 
         
@@ -312,18 +319,15 @@ if x:
         #rename index column as team column 
         dfAll.rename(columns = {'index':'team'}, inplace = True)
 
-        #write dataframe into csv to be used later
-        dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
-
         dfAll['year'] = key
 
         largeDF = pd.concat([largeDF, dfAll], ignore_index=True, keys=None, levels=None, names=None, verify_integrity=False, copy=True)
 
 
     largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
-    largeDF.to_csv("tenYearsGrades.csv", encoding='utf-8', index=False)
 
-    
+    #write dataframe into csv to be used later
+    largeDF.to_csv("19202122Grades.csv", encoding='utf-8', index=False)
 
     print(largeDF)
 
@@ -341,9 +345,7 @@ else:
     #write dataframe into csv to be used later
     dfAll.to_csv("teamsGrade.csv", encoding='utf-8', index=False)
 
-
-
-    #print(dfAll)
+    print(dfAll)
 
 
 
