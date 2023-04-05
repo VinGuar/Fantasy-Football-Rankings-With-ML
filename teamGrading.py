@@ -148,8 +148,8 @@ teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "
 #years for machine learning. if x is true it uses them. 
 #may have to split up the years into multiple smaller groups to prevent errors. then combine smaller csvs into the one main csv. 
 #I split the 10 years (below) up into first 3, next 3, and last 4, and then combined them all to get csv shown in repo
-#yearsBig = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
-#yearsSmall = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020", "2021"]
+#yearsBig = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"]
+#yearsSmall = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020"]
 yearsBig = ["2012"]
 yearsSmall = ["2011"]
 
