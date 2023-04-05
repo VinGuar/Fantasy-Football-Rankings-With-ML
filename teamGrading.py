@@ -150,8 +150,8 @@ teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "
 #I split the 10 years (below) up into first 3, next 3, and last 4, and then combined them all to get csv shown in repo
 #yearsBig = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022"]
 #yearsSmall = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020", "2021"]
-yearsBig = ["2019", "2020", "2021", "2022"]
-yearsSmall = ["2018", "2019", "2020", "2021"]
+yearsBig = ["2012"]
+yearsSmall = ["2011"]
 
 
 
@@ -327,7 +327,7 @@ if x:
     largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
 
     #write dataframe into csv to be used later
-    largeDF.to_csv("19202122Grades.csv", encoding='utf-8', index=False)
+    largeDF.to_csv("12Grades.csv", encoding='utf-8', index=False)
 
     print(largeDF)
 
