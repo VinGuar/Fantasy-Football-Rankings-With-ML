@@ -54,13 +54,13 @@ def findAV(df, allPlayers, birthArray):
     x = 0
     #iterates through small positional df
     for item in df:
-        #iterates through large df of all players to see if it is in it, and if it is, adds the Av value to the player
+        #iterates through large df of all players to see if it is in it, and if it is, adds the AV value to the player
         for thing in allPlayers:
             thing = thing[["Player", "AV", "Pos", "BirthDate"]]
             if len(thing[thing.Player == item]) >0:
                 playerRow = thing[thing.Player == item]
                 bday = playerRow["BirthDate"].iloc[0]
-                #makes sure its not just same name, like how there are two josh allens
+                #makes sure its not just same name, like how there are two josh allens. confirms with birthdays.
                 if (bday == birthArray[x]):
                     avValue = playerRow["AV"]
                     avDict[item] = avValue.iloc[0]
@@ -89,13 +89,16 @@ def grader(dict2, pos):
     elif pos == "te":
         x = 2
     
+    #sort dictionary in order of AV Grade
     sortedDict = sorted(dict2.items(), key=lambda x:x[1], reverse=True)
 
+    #for loop grades.
     for i in sortedDict:
+        #breaks once it has done enough grades (does how ever large x is)
         if y > x:
             break
 
-        #the next large if loop grades them. gives different percentages based on if starter, 2nd, or 3rd string, etc.
+        #the next large if loop grades them. gives different percentages based on if starter, 2nd, or 3rd string, etc. also based on positions
         if (x == 1):
             grade = i[1]
         elif (x==2):
@@ -148,13 +151,12 @@ teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "
 #years for machine learning. if x is true it uses them. 
 #may have to split up the years into multiple smaller groups to prevent errors. then combine smaller csvs into the one main csv. 
 #I split the 10 years (below) up into first 3, next 3, and last 4, and then combined them all to get csv shown in repo
-#yearsBig = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"]
-#yearsSmall = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020"]
-yearsBig = ["2012"]
-yearsSmall = ["2011"]
+yearsBig = ["2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"]
+yearsSmall = ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" "2020"]
 
 
-
+#if x is true, it does the years in yearsBig and yearsSmall above(to get data for machine learning). 
+#if false, it only does current year (for grading of players for rankings)
 x = True
 
 #array of each teams grade per positional groups
@@ -163,6 +165,7 @@ dictOfTeamsGrade = []
 #array of dictionaries of all teams previous year roster with AV
 statsPrevious = []
 
+#to get multiple years of data
 statsPreviousAll = []
 
 #if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
@@ -171,6 +174,7 @@ if x:
 else: 
     yearsSmall = ["2022"] 
 
+#for loop gets data to use for grading of the next year
 for arr in yearsSmall:
     print(arr + " small")
     for item in teams: 
@@ -190,23 +194,29 @@ for arr in yearsSmall:
 
         #append table for current team in loop to all teams
         statsPrevious.append(table)
-        
-        
+                
 
-    
+    #appends current year to array with all years
     statsPreviousAll.append(statsPrevious)
     statsPrevious = []
 
-            
+#dictionary that has each teams grades
 allTeams = {}
+
+#has each teams grade for each year
 bigYears = {}
 
+
 q = 0
+
+#only current year if x is false
 if x:
     pass
 else: 
     yearsBig = ["2023"] 
 
+
+#grading the year with past data (achieved from yearsSmall in for loop above)
 for arr in yearsBig:
     #if the if statement is true it makes it of last ten years data to be used for machine learning. if false, just this year.
     print(arr)
@@ -231,7 +241,6 @@ for arr in yearsBig:
         response = requests.get(url)
         rate += 1
         print(response)
-
 
         soupCurrent = BeautifulSoup(response.text, 'html.parser')
 
@@ -292,13 +301,7 @@ for arr in yearsBig:
         current["te"] = teGrade
         allTeams[item] = current
         
-
-
-        
-        
-
-        
-
+    #to iterate through statsPreviousAll
     q = q + 1
 
     #add the year to whole year array
@@ -319,11 +322,13 @@ if x:
         #rename index column as team column 
         dfAll.rename(columns = {'index':'team'}, inplace = True)
 
+        #add column year
         dfAll['year'] = key
 
+        #combine the dataframes into one large one
         largeDF = pd.concat([largeDF, dfAll], ignore_index=True, keys=None, levels=None, names=None, verify_integrity=False, copy=True)
 
-
+    #make columns
     largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
 
     #write dataframe into csv to be used later
