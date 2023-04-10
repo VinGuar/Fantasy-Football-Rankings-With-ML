@@ -20,8 +20,8 @@ import joblib
 scaler = MinMaxScaler()
 
 #read csv files into pandas
-dfFantasy = pd.read_csv("models_and_modelcode/datasets_used_in_model/12-21FantasyData.csv")
-dfGrades = pd.read_csv("models_and_modelcode/datasets_used_in_model/12-21Grades.csv")
+dfFantasy = pd.read_csv("ML_models_and_things/datasets_used_in_model/12-21FantasyData.csv")
+dfGrades = pd.read_csv("ML_models_and_things/datasets_used_in_model/12-21Grades.csv")
 
 def correctData(df, pos, pprTF):
   #cols to make per game
@@ -383,13 +383,13 @@ qbModel = qbArray[1]
 print("qb score: ", num)
 
 #dumps each model into a file to be used later.
-joblib.dump(rbModel, "models_and_modelcode/models_per_position/rbModel.joblib")
-joblib.dump(wrModel, "models_and_modelcode/models_per_position/wrModel.joblib")
-joblib.dump(qbModel, "models_and_modelcode/models_per_position/qbModel.joblib")
-joblib.dump(teModel, "models_and_modelcode/models_per_position/teModel.joblib")
+joblib.dump(rbModel, "ML_models_and_things/models_per_position/rbModel.joblib")
+joblib.dump(wrModel, "ML_models_and_things/models_per_position/wrModel.joblib")
+joblib.dump(qbModel, "ML_models_and_things/models_per_position/qbModel.joblib")
+joblib.dump(teModel, "ML_models_and_things/models_per_position/teModel.joblib")
 
 #loads models
-#loadedRB = joblib.load("models_and_modelcode/models_per_position/rbModel.joblib")
-#loadedWR = joblib.load("models_and_modelcode/models_per_position/wrModel.joblib")
-#loadedQB = joblib.load("models_and_modelcode/models_per_position/qbModel.joblib")
-#loadedTE = joblib.load("models_and_modelcode/models_per_position/teModel.joblib")
+#loadedRB = joblib.load("ML_models_and_things/models_per_position/rbModel.joblib")
+#loadedWR = joblib.load("ML_models_and_things/models_per_position/wrModel.joblib")
+#loadedQB = joblib.load("ML_models_and_things/models_per_position/qbModel.joblib")
+#loadedTE = joblib.load("ML_models_and_things/models_per_position/teModel.joblib")
