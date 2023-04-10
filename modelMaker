@@ -1,7 +1,11 @@
+#made originally on google colab
 #imports necesary things
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+
+pd.options.mode.chained_assignment = None
+
 
 import sklearn
 from sklearn.neural_network import MLPRegressor
@@ -164,7 +168,6 @@ def machineLearning(df, arr, dictParam):
   #make the model based on parameters from function below
   mlp = MLPRegressor(hidden_layer_sizes=dictParam["hidden_layer_sizes"], activation=dictParam["activation"], solver=dictParam["solver"], max_iter=dictParam["max_iter"])
 
-  print(dictParam)
 
   #fit it with the data
   mlp.fit(x_train,y_train)
@@ -181,7 +184,6 @@ def machineLearning(df, arr, dictParam):
 
   #average error 
   mae = mean_absolute_error(y_test, predict_test)
-  print("test ", mae)
 
   arr2 = [mae, mlp]
   return arr2
@@ -235,8 +237,7 @@ def getScaleBack(df):
   #min value of column:
   min_value = df["PPG"].min()
 
-  #scaling valye of column
-  #scaling_factor = scaler.scale_[column_index]
+  #max value of column
   max_value = df["PPG"].max()
 
   #array to be used later to scale each data
@@ -349,33 +350,37 @@ paramTE = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200
 paramQB = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
 #paramQB = getBestParams(dfFantasyQB, scaleQB)
 
-#makes array of model and score, then prints it
+#makes array of model and score, then prints it. 
+#run program multiple times and see printed output to make sure final model used is not an outlier.
 rbArray = machineLearning(dfFantasyRB, scaleRB, paramRB)
 num = rbArray[0]
 rbModel = rbArray[1]
 
-print(rbModel, rbArray[0])
+print("rb score: ", num)
 
 #makes array of model and score, then prints it
+#run program multiple times and see printed output to make sure final model used is not an outlier.
 wrArray = machineLearning(dfFantasyWR, scaleWR, paramWR)
 num = wrArray[0]
 wrModel = wrArray[1]
 
-print(wrModel, num)
+print("wr score: ", num)
 
 #makes array of model and score, then prints it
+#run program multiple times and see printed output to make sure final model used is not an outlier.
 teArray = machineLearning(dfFantasyTE, scaleTE, paramTE)
 num = teArray[0]
 teModel = teArray[1]
 
-print(teModel, teArray[0])
+print("te score: ", num)
 
 #makes array of model and score, then prints it
+#run program multiple times and see printed output to make sure final model used is not an outlier.
 qbArray = machineLearning(dfFantasyQB, scaleQB, paramQB)
 num = qbArray[0]
 qbModel = qbArray[1]
   
-print(qbModel, qbArray[0])
+print("qb score: ", num)
 
 #dumps each model into a file to be used later.
 joblib.dump(rbModel, "rbModel.joblib")
