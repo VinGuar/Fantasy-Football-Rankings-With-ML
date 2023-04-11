@@ -53,7 +53,7 @@ def correctData(df, pos, pprTF):
 
 
   #only players with more than 8 games.
-  df = df[df.G > 8]
+  df = df[df.G > 7]
   df = df[df.FantasyPoints >= 0]
 
   
