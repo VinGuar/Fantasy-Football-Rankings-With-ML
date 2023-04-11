@@ -140,7 +140,7 @@ def putAV(df, dfAV):
 
 #removes unneccesary stats
 def removeUnwanted(dfPos, pos):
-  dfPos = dfPos.drop(columns=["FantasyPoints", "Player", "Year", "FumblesLost", "Tm", "Pos"])
+  dfPos = dfPos.drop(columns=["G", "GS", "FantasyPoints", "Player", "Year", "FumblesLost", "Tm", "Pos"])
   if pos == "QB":
     dfPos = dfPos.drop(columns=["ReceivingYds", "ReceivingTD", "Tgt", "Rec"])
   else:
