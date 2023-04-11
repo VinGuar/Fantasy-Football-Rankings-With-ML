@@ -52,7 +52,7 @@ def correctData(df, pos, pprTF):
     df.loc[:, col] = df[col] / df['G'] 
 
 
-  #only players with more than 8 games.
+  #only players with more than 7 games.
   df = df[df.G > 7]
   df = df[df.FantasyPoints >= 0]
 
