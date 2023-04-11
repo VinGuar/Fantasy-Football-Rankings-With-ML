@@ -1,7 +1,7 @@
-#made originally on google colab
 #imports necesary things
 import pandas as pd
 import numpy as np
+import warnings
 from sklearn.preprocessing import MinMaxScaler
 
 pd.options.mode.chained_assignment = None
@@ -11,6 +11,7 @@ import sklearn
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_absolute_error
+
 
 from sklearn.model_selection import train_test_split
 import joblib
@@ -34,10 +35,13 @@ def correctData(df, pos, pprTF):
 
 
   #basing data if ppr or not
-  if pprTF == True:
+  if pprTF == 2:
     pass
-  else:
+  elif pprTF == 0:
     df.loc[:, "FantasyPoints"] = df["FantasyPoints"] - df['Rec']
+  elif pprTF == 1:
+    df.loc[:, "FantasyPoints"] = df["FantasyPoints"] - (df['Rec']/2)
+
     
   #adding ppg column
   df.loc[:, 'PPG'] = df['FantasyPoints'] / df['G']
@@ -57,15 +61,19 @@ def correctData(df, pos, pprTF):
   if (pos=="RB"):
     df = df[df.PPG > 2]
   elif (pos=="WR"):
-    if pprTF == True:
+    if pprTF == 2:
       df = df[df.PPG > 2]
-    else:
+    elif pprTF == 0:
       df = df[df.PPG > 1]
+    elif pprTF == 1:
+      df = df[df.PPG > 1.5]
   elif (pos=="TE"):
-    if pprTF == True:
+    if pprTF == 2:
       df = df[df.PPG > 2]
-    else:
+    elif pprTF == 0:
       df = df[df.PPG > 1]
+    elif pprTF == 1:
+      df = df[df.PPG > 1.5]
   elif (pos=="QB"):
       df = df[df.PPG > 5]
   
@@ -168,6 +176,7 @@ def machineLearning(df, arr, dictParam):
   #make the model based on parameters from function below
   mlp = MLPRegressor(hidden_layer_sizes=dictParam["hidden_layer_sizes"], activation=dictParam["activation"], solver=dictParam["solver"], max_iter=dictParam["max_iter"])
 
+  #print(dictParam)
 
   #fit it with the data
   mlp.fit(x_train,y_train)
@@ -184,6 +193,7 @@ def machineLearning(df, arr, dictParam):
 
   #average error 
   mae = mean_absolute_error(y_test, predict_test)
+  #print("test ", mae)
 
   arr2 = [mae, mlp]
   return arr2
@@ -237,7 +247,8 @@ def getScaleBack(df):
   #min value of column:
   min_value = df["PPG"].min()
 
-  #max value of column
+  #scaling valye of column
+  #scaling_factor = scaler.scale_[column_index]
   max_value = df["PPG"].max()
 
   #array to be used later to scale each data
@@ -268,8 +279,8 @@ def test(df, model, arr):
   mae = mean_absolute_error(y_test, predict_test)
   print("test ", mae)
 
-#if ppr is true, than it is ppr. if false, than it is non ppr
-ppr = True
+#if ppr is 0, than it is non ppr. if 1, then it is half ppr. if 2, full ppr
+ppr = 2
 dfFantasy = dfFantasy.dropna()
 
 #removes 2 team players as it will not work well with datasets
@@ -350,8 +361,7 @@ paramTE = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200
 paramQB = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
 #paramQB = getBestParams(dfFantasyQB, scaleQB)
 
-#makes array of model and score, then prints it. 
-#run program multiple times and see printed output to make sure final model used is not an outlier.
+#makes array of model and score, then prints it
 rbArray = machineLearning(dfFantasyRB, scaleRB, paramRB)
 num = rbArray[0]
 rbModel = rbArray[1]
@@ -359,7 +369,6 @@ rbModel = rbArray[1]
 print("rb score: ", num)
 
 #makes array of model and score, then prints it
-#run program multiple times and see printed output to make sure final model used is not an outlier.
 wrArray = machineLearning(dfFantasyWR, scaleWR, paramWR)
 num = wrArray[0]
 wrModel = wrArray[1]
@@ -367,7 +376,6 @@ wrModel = wrArray[1]
 print("wr score: ", num)
 
 #makes array of model and score, then prints it
-#run program multiple times and see printed output to make sure final model used is not an outlier.
 teArray = machineLearning(dfFantasyTE, scaleTE, paramTE)
 num = teArray[0]
 teModel = teArray[1]
@@ -375,7 +383,6 @@ teModel = teArray[1]
 print("te score: ", num)
 
 #makes array of model and score, then prints it
-#run program multiple times and see printed output to make sure final model used is not an outlier.
 qbArray = machineLearning(dfFantasyQB, scaleQB, paramQB)
 num = qbArray[0]
 qbModel = qbArray[1]
@@ -393,3 +400,4 @@ joblib.dump(teModel, "ML_models_and_things/models_per_position/teModel.joblib")
 #loadedWR = joblib.load("ML_models_and_things/models_per_position/wrModel.joblib")
 #loadedQB = joblib.load("ML_models_and_things/models_per_position/qbModel.joblib")
 #loadedTE = joblib.load("ML_models_and_things/models_per_position/teModel.joblib")
+
