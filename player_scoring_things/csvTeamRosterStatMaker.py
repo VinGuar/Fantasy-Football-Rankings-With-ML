@@ -44,7 +44,7 @@ def makeCommentTable(soup1, type):
 def rosterMaker():
 
     #empty df to add things to
-    df = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year", "YearsBack"])
+    df = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year", "YearsBack", "Team"])
 
     global rate
 
@@ -77,11 +77,16 @@ def rosterMaker():
             #add in year and years back columns
             table['Year'] = num
             table["YearsBack"] = x
+            table["Team"] = item
+
 
             #make all into one df
             df = pd.concat([df, table], ignore_index=True, join="inner")
-        
+            break
+   
         x+=1
+        break
+    
 
 
     #write dfs into csv files for later use
@@ -99,10 +104,10 @@ def statMaker():
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
     #empty df to add things to
-    passing = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "Year", "YearsBack"])
+    passing = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "Year", "YearsBack", "Team"])
 
     #empty df to add things to
-    rushRec = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack"])
+    rushRec = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"])
 
     #to find years back
     x = 1
@@ -127,25 +132,39 @@ def statMaker():
             passingDF = table[0]
             rushRecDF = table[1]
 
-            #add in year and years back columns
+            #add in year, team and years back columns
             passingDF["Year"] = num
             passingDF["YearsBack"] = x
+            passingDF["Team"] = item
             rushRecDF["Year"] = num
             rushRecDF["YearsBack"] = x
+            rushRecDF["Team"] = item
+
 
             #since there was duplicate column headers, have to change that so there isnt.
-            rushRecDF.columns = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack"]
+            rushRecDF.columns = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"]
 
             #make all into one df
             passing = pd.concat([passing, passingDF], ignore_index=True, join="inner")
             rushRec = pd.concat([rushRec, rushRecDF], ignore_index=True, join="inner")
 
-            #write into csv
-            passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldPassingStats.csv", encoding='utf-8', index=False)
-            rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)
+            break
+        x+=1
+
+        break
+
+    #cleaning/combing data into one final dataframe
+    
+
+
+    #write into csv
+    passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldPassingStats.csv", encoding='utf-8', index=False)
+    rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)
+            
+        
 
             
 
-        x+=1
 
+rosterMaker()
 statMaker()

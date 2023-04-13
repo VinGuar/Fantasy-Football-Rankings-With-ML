@@ -279,7 +279,7 @@ def test(df, model, arr):
   mae = mean_absolute_error(y_test, predict_test)
   print("test ", mae)
 
-#if ppr is 0, than it is non ppr. if 1, then it is half ppr. if 2, full ppr
+#if ppr is 0, than it is non ppr. if 1, then it is half ppr. if 2, full ppr. need to run each to get each model.
 ppr = 2
 dfFantasy = dfFantasy.dropna()
 
@@ -389,11 +389,22 @@ qbModel = qbArray[1]
   
 print("qb score: ", num)
 
+if ppr == 0:
+  joblib.dump(rbModel, "ML_models_and_things/models_per_position/rbModelNonPPR.joblib")
+  joblib.dump(wrModel, "ML_models_and_things/models_per_position/wrModelNonPPR.joblib")
+  joblib.dump(qbModel, "ML_models_and_things/models_per_position/qbModelNonPPR.joblib")
+  joblib.dump(teModel, "ML_models_and_things/models_per_position/teModelNonPPR.joblib")
 #dumps each model into a file to be used later.
-joblib.dump(rbModel, "ML_models_and_things/models_per_position/rbModel.joblib")
-joblib.dump(wrModel, "ML_models_and_things/models_per_position/wrModel.joblib")
-joblib.dump(qbModel, "ML_models_and_things/models_per_position/qbModel.joblib")
-joblib.dump(teModel, "ML_models_and_things/models_per_position/teModel.joblib")
+elif ppr == 1:
+    joblib.dump(rbModel, "ML_models_and_things/models_per_position/rbModelHalfPPR.joblib")
+    joblib.dump(wrModel, "ML_models_and_things/models_per_position/wrModelHalfPPR.joblib")
+    joblib.dump(qbModel, "ML_models_and_things/models_per_position/qbModelHalfPPR.joblib")
+    joblib.dump(teModel, "ML_models_and_things/models_per_position/teModelHalfPPR.joblib")
+elif ppr == 2:
+  joblib.dump(rbModel, "ML_models_and_things/models_per_position/rbModelPPR.joblib")
+  joblib.dump(wrModel, "ML_models_and_things/models_per_position/wrModelPPR.joblib")
+  joblib.dump(qbModel, "ML_models_and_things/models_per_position/qbModelPPR.joblib")
+  joblib.dump(teModel, "ML_models_and_things/models_per_position/teModelPPR.joblib")
 
 #loads models
 #loadedRB = joblib.load("ML_models_and_things/models_per_position/rbModel.joblib")
