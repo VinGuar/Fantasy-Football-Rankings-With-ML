@@ -35,6 +35,7 @@ def makeCommentTable(soup1, type):
         passingTable = soup.find('table', {'id': 'passing'})
         otherTable = soup.find('table', {'id': 'rushing_and_receiving'})
 
+        #make array of two df instead of one, then flatten it to 1d array to be used later
         df = [pd.read_html(str(passingTable)), pd.read_html(str(otherTable))]
         df = list(chain.from_iterable(df))
 
@@ -43,7 +44,7 @@ def makeCommentTable(soup1, type):
 def rosterMaker():
 
     #empty df to add things to
-    df = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
+    df = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year", "YearsBack"])
 
     global rate
 
@@ -73,6 +74,7 @@ def rosterMaker():
             #dataframe of table
             table = makeCommentTable(soup, False)
 
+            #add in year and years back columns
             table['Year'] = num
             table["YearsBack"] = x
 
@@ -91,24 +93,22 @@ def rosterMaker():
 def statMaker():
     global rate
 
-    #years = ["2019", "2020", "2021", "2022"]
+    #years = ["2022", "2021", "2020", "2019"]
     years = ["2022"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
     #empty df to add things to
-    passing = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
+    passing = pd.DataFrame(columns= ['Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "Year", "YearsBack"])
 
     #empty df to add things to
-    other = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
-
-
-
+    rushRec = pd.DataFrame(columns= ['Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'Lng', 'Y/A', 'Y/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'Lng', 'R/G', 'Y/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack"])
 
     #to find years back
     x = 1
 
+    #loop to go through each team in each year and make df of stats of passing/rushRec for each team per year
     for num in years:
         for item in teams: 
             #makes url for every team
@@ -126,23 +126,31 @@ def statMaker():
             table = makeCommentTable(soup, True)
 
             passingDF = table[0]
-            otherDF = table[1]
+            rushRecDF = table[1]
 
+            #add in year and years back columns
             passingDF["Year"] = num
             passingDF["YearsBack"] = x
+            rushRecDF["Year"] = num
+            rushRecDF["YearsBack"] = x
 
-            otherDF["Year"] = num
-            otherDF["YearsBack"] = x
+            #since there was duplicate column headers, have to change that so there isnt.
+            rushRecDF.DataFrame.columns = ['Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'Lng', 'Y/A', 'Y/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'Lng', 'R/G', 'Y/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack"]
+
 
             #make all into one df
             passing = pd.concat([passing, passingDF], ignore_index=True, join="inner")
-            other = pd.concat([other, otherDF], ignore_index=True, join="inner")
+            rushRec = pd.concat([rushRec, rushRecDF], ignore_index=True, join="inner")
 
             print(passing)
-            print(other)
+            print(rushRec)
+
+            #write into csv
+            passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldPassingStats.csv", encoding='utf-8', index=False)
+            rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)
 
             break
 
         x+=1
 
-rosterMaker()
+statMaker()
