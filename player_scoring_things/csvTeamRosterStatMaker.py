@@ -48,8 +48,9 @@ def rosterMaker():
 
     global rate
 
-    #years used for grading. changes each season. if making currYearRoster, make this just current year
+    #years used for grading. changes each season. if making currYearRoster, use array below with current year
     years = ["2022", "2021", "2020", "2019"]
+    #years = ["2023"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -82,15 +83,24 @@ def rosterMaker():
 
             #make all into one df
             df = pd.concat([df, table], ignore_index=True, join="inner")
-            break
+            break    
    
         x+=1
         break
+        
     
-
-
     #write dfs into csv files for later use
     if len(years)==1:
+        #change all rb type positions to rb
+        rbValues = ['RB', 'HB', 'TB', 'FB', "LH", "RH", "BB", "B", "WB"]
+        df.loc[df['Pos'].isin(rbValues), 'Pos'] = "RB"
+
+        #make only first two strings kept, and only keep rb, wr, qb, te columns
+        df.loc[df['Pos'].str.len() > 2, 'Pos'] = df.loc[df['Pos'].str.len() > 2, 'Pos'].apply(lambda x: x[:2])
+        keepers = ["RB", "QB", "TE", "WR"]
+
+        df = df.loc[df['Pos'].isin(keepers)]
+
         df.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/currYearRoster.csv", encoding='utf-8', index=False)
     else:
         df.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv", encoding='utf-8', index=False)
@@ -154,7 +164,8 @@ def statMaker():
         break
 
     #cleaning/combing data into one final dataframe
-    
+    passing = passing.loc[passing['Pos'] == "QB"]
+
 
 
     #write into csv
