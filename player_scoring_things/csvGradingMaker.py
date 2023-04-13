@@ -4,6 +4,8 @@ import pandas as pd
 import time
 from unidecode import unidecode
 import numpy as np
+from itertools import chain
+
 
 #make sure do not go over rate limit of 20 requests per minute. If over, sportsreference puts in "jail" for an hour
 rate = 0
@@ -14,21 +16,27 @@ def checkRate(r):
         time.sleep(61)
 
 #since roster table is hidden in comments, needs this to fish it out
-def makeCommentTable(soup1):
+def makeCommentTable(soup1, type):
     global rate
 
     #finds all comments in soup and makes them not comments and just html. 
     comments = soup1.find_all(string=lambda text: isinstance(text, Comment) and "table_container" in text)
-    roster_html = str(comments).replace('<!--', '').replace('-->', '')
+    html = str(comments).replace('<!--', '').replace('-->', '')
     
     #parse through the HTML content using Beautiful Soup
-    roster_soup = BeautifulSoup(roster_html, 'html.parser')
-
-    #find the roster table by its HTML id
-    table = roster_soup.find('table', {'id': 'roster'})
+    soup = BeautifulSoup(html, 'html.parser')
 
     #reads roster table html into a dataframe
-    df = pd.read_html(str(table))[0]
+    if type == False:
+        #find the roster table by its HTML id
+        rosterTable = soup.find('table', {'id': 'roster'})
+        df = pd.read_html(str(rosterTable))[0]
+    else:
+        passingTable = soup.find('table', {'id': 'passing'})
+        otherTable = soup.find('table', {'id': 'rushing_and_receiving'})
+
+        df = [pd.read_html(str(passingTable)), pd.read_html(str(otherTable))]
+        df = list(chain.from_iterable(df))
 
     return df
 
@@ -37,15 +45,16 @@ def rosterMaker():
     #empty df to add things to
     df = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
 
-
     global rate
 
     #years used for grading. changes each season. if making currYearRoster, make this just current year
-    years = ["2019", "2020", "2021", "2022"]
+    years = ["2022", "2021", "2020", "2019"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
+    #used to find yearsback from present
+    x = 1
 
     #loop to go through each team in each year and make df of roster for each team per year
     for num in years:
@@ -62,12 +71,15 @@ def rosterMaker():
             soup = BeautifulSoup(response.text, 'html.parser')
 
             #dataframe of table
-            table = makeCommentTable(soup)
+            table = makeCommentTable(soup, False)
+
             table['Year'] = num
-            #append table for current team in loop to all teams
+            table["YearsBack"] = x
 
             #make all into one df
             df = pd.concat([df, table], ignore_index=True, join="inner")
+        
+        x+=1
 
 
     #write dfs into csv files for later use
@@ -77,6 +89,60 @@ def rosterMaker():
         df.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv", encoding='utf-8', index=False)
 
 def statMaker():
+    global rate
 
-    #make it so have one csv file for passing and one for rushing/recieving
-    #also remeber may have to deal with commented out tables
+    #years = ["2019", "2020", "2021", "2022"]
+    years = ["2022"]
+
+    #team abbr list
+    teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
+
+    #empty df to add things to
+    passing = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
+
+    #empty df to add things to
+    other = pd.DataFrame(columns= ["No.", "Player", "Age", "Pos", "G", "GS", "Wt", "Ht", "College/Univ", "BirthDate", "Yrs", "AV", "Drafted (tm/rnd/yr)", "Year"])
+
+
+
+
+    #to find years back
+    x = 1
+
+    for num in years:
+        for item in teams: 
+            #makes url for every team
+            url = "https://www.pro-football-reference.com/teams/" + item + "/" + num + ".htm"
+
+            #get page wanted and make a beautiful soup out of it.
+            checkRate(rate)
+            response = requests.get(url)
+            print(response)
+            rate += 1
+
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            #dataframe of table
+            table = makeCommentTable(soup, True)
+
+            passingDF = table[0]
+            otherDF = table[1]
+
+            passingDF["Year"] = num
+            passingDF["YearsBack"] = x
+
+            otherDF["Year"] = num
+            otherDF["YearsBack"] = x
+
+            #make all into one df
+            passing = pd.concat([passing, passingDF], ignore_index=True, join="inner")
+            other = pd.concat([other, otherDF], ignore_index=True, join="inner")
+
+            print(passing)
+            print(other)
+
+            break
+
+        x+=1
+
+rosterMaker()

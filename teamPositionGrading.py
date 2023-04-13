@@ -350,7 +350,7 @@ else:
     dfAll.rename(columns = {'index':'team'}, inplace = True)
 
     #write dataframe into csv to be used later
-    dfAll.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrade.csv", encoding='utf-8', index=False)
+    dfAll.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv", encoding='utf-8', index=False)
 
     print(dfAll)
 
