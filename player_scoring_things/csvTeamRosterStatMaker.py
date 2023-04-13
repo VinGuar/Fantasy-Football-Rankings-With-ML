@@ -83,10 +83,9 @@ def rosterMaker():
 
             #make all into one df
             df = pd.concat([df, table], ignore_index=True, join="inner")
-            break    
-   
+                
         x+=1
-        break
+        
         
     
     #write dfs into csv files for later use
@@ -176,6 +175,6 @@ def statMaker():
 
             
 
-
+#comment out whichever one you are not running.
 rosterMaker()
-statMaker()
+#statMaker()
