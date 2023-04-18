@@ -113,7 +113,7 @@ def statMaker():
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
     #empty df to add things to
-    passing = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "Year", "YearsBack", "Team"])
+    passing = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "RushAtt", "RushYds", "RushTD", "Fmb", "Year", "YearsBack", "Team"])
 
     #empty df to add things to
     rushRec = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"])
@@ -141,6 +141,16 @@ def statMaker():
             passingDF = table[0]
             rushRecDF = table[1]
 
+
+            #make it single index
+            rushRecDF.columns = rushRecDF.columns.droplevel()
+
+            #add in rushing columns for qbs
+            passingDF["RushAtt"] = 0
+            passingDF["RushTD"] = 0
+            passingDF["RushYds"] = 0
+            passingDF["Fmb"] = 0
+
             #add in year, team and years back columns
             passingDF["Year"] = num
             passingDF["YearsBack"] = x
@@ -149,9 +159,22 @@ def statMaker():
             rushRecDF["YearsBack"] = x
             rushRecDF["Team"] = item
 
-
             #since there was duplicate column headers, have to change that so there isnt.
             rushRecDF.columns = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"]
+            
+            #make passing/qb df into full stats needed for grading from this section
+            for i in range(len(passingDF)):
+                currRow = passingDF.iloc[[i]]
+
+                playerStatsRush = rushRecDF.loc[(rushRecDF['Player'] == currRow["Player"].item()) & (rushRecDF["Year"] == currRow["Year"].item())]
+
+                #make sure there actually is a rushrec row for player
+                if len(playerStatsRush) > 0:
+                    passingDF.iloc[i, passingDF.columns.get_loc("RushAtt")] = playerStatsRush["Att"]
+                    passingDF.iloc[i, passingDF.columns.get_loc("RushTD")] = playerStatsRush["RushTD"]
+                    passingDF.iloc[i, passingDF.columns.get_loc("RushYds")] = playerStatsRush["RushYds"]
+                    passingDF.iloc[i, passingDF.columns.get_loc("Fmb")] = playerStatsRush["Fmb"]
+
 
             #make all into one df
             passing = pd.concat([passing, passingDF], ignore_index=True, join="inner")
@@ -162,19 +185,22 @@ def statMaker():
 
         break
 
+
+
     #cleaning/combing data into one final dataframe
     passing = passing.loc[passing['Pos'] == "QB"]
 
 
-
+    print(passing)
+    print(rushRec)
     #write into csv
-    passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldPassingStats.csv", encoding='utf-8', index=False)
+    passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv", encoding='utf-8', index=False)
     rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)
             
-        
+    
 
             
 
 #comment out whichever one you are not running.
-rosterMaker()
-#statMaker()
+#rosterMaker()
+statMaker()
