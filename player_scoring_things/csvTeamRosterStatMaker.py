@@ -113,7 +113,7 @@ def statMaker():
     years = ["2022", "2021", "2020", "2019"]
 
     #team abbr list
-    teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
+    teams = ["atl", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
     #empty df to add things to
     passingCol = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "RushAtt", "RushYds", "RushTD", "Fmb", "FantasyPPG", "Year", "YearsBack", "Team"]
@@ -199,12 +199,12 @@ def statMaker():
     #cleaning/combing data into one final dataframe
     passing = passing.loc[passing['Pos'] == "QB"]
 
-    #rushRec.loc[rushRec.rushRecCol == "NaN", rushRecCol] = 0
+    #replace NaN with 0
     passing.fillna(0, inplace=True)
     rushRec.fillna(0, inplace=True)
 
     #make ppg column
-    rushRec.loc[:, "FantasyPPG"] = (rushRec["RushYds"]*0.1) + (rushRec["RecYds"]*0.1) + (rushRec["RushTD"]*6) + (rushRec["RecTD"]*6) + (passing["Fmb"]*-2)
+    rushRec.loc[:, "FantasyPPG"] = (rushRec["RushYds"]*0.1) + (rushRec["RecYds"]*0.1) + (rushRec["RushTD"]*6) + (rushRec["RecTD"]*6) + (rushRec["Fmb"]*-2)
 
     if ppr == 2:
         rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"] + (rushRec["Rec"])
