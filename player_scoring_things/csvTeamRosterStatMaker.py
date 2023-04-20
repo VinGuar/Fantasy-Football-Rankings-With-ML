@@ -49,8 +49,8 @@ def rosterMaker():
     global rate
 
     #years used for grading. changes each season. if making currYearRoster, use array below with current year
-    years = ["2022", "2021", "2020", "2019"]
-    #years = ["2023"]
+    #years = ["2022", "2021", "2020", "2019"]
+    years = ["2023"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -107,16 +107,21 @@ def rosterMaker():
 def statMaker():
     global rate
 
+    #change if ppr or not. 0 is non, 1 is half-ppr, 2 is ppr
+    ppr = 0
+
     years = ["2022", "2021", "2020", "2019"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
 
     #empty df to add things to
-    passing = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "RushAtt", "RushYds", "RushTD", "Fmb", "Year", "YearsBack", "Team"])
+    passingCol = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'QBrec', 'Cmp', 'Att', 'Cmp%', 'Yds', 'TD', 'TD%', 'Int', 'Int%', 'Lng', 'Y/A', 'AY/A', 'Y/C', 'Y/G', 'Rate', 'QBR', 'Sk', 'Sk%', 'NY/A', 'ANY/A', '4QC', 'GWD', "RushAtt", "RushYds", "RushTD", "Fmb", "FantasyPPG", "Year", "YearsBack", "Team"]
+    passing = pd.DataFrame(columns= passingCol)
 
     #empty df to add things to
-    rushRec = pd.DataFrame(columns= ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"])
+    rushRecCol = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "FantasyPPG", "Year", "YearsBack", "Team"]
+    rushRec = pd.DataFrame(columns= rushRecCol)
 
     #to find years back
     x = 1
@@ -151,6 +156,10 @@ def statMaker():
             passingDF["RushYds"] = 0
             passingDF["Fmb"] = 0
 
+            #add in ppg column
+            passingDF["FantasyPPG"] = 0
+            rushRecDF["FantasyPPG"] = 0
+
             #add in year, team and years back columns
             passingDF["Year"] = num
             passingDF["YearsBack"] = x
@@ -158,9 +167,10 @@ def statMaker():
             rushRecDF["Year"] = num
             rushRecDF["YearsBack"] = x
             rushRecDF["Team"] = item
+           
 
             #since there was duplicate column headers, have to change that so there isnt.
-            rushRecDF.columns = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "Year", "YearsBack", "Team"]
+            rushRecDF.columns = ["No.", "Player", 'Age', 'Pos', 'G', 'GS', 'Att', 'RushYds', 'RushTD', 'RushLng', 'Y/A', 'RushY/G', 'A/G', 'Tgt', 'Rec', 'RecYds', 'Y/R', 'RecTD', 'RecLng', 'R/G', 'RecY/G', 'Ctch%', 'Y/Tgt', 'Touch', 'Y/Tch', 'YScm', 'RRTD', 'Fmb', "FantasyPPG", "Year", "YearsBack", "Team"]
             
             #make passing/qb df into full stats needed for grading from this section
             for i in range(len(passingDF)):
@@ -174,8 +184,7 @@ def statMaker():
                     passingDF.iloc[i, passingDF.columns.get_loc("RushTD")] = playerStatsRush["RushTD"]
                     passingDF.iloc[i, passingDF.columns.get_loc("RushYds")] = playerStatsRush["RushYds"]
                     passingDF.iloc[i, passingDF.columns.get_loc("Fmb")] = playerStatsRush["Fmb"]
-
-
+                
             #make all into one df
             passing = pd.concat([passing, passingDF], ignore_index=True, join="inner")
             rushRec = pd.concat([rushRec, rushRecDF], ignore_index=True, join="inner")
@@ -190,13 +199,37 @@ def statMaker():
     #cleaning/combing data into one final dataframe
     passing = passing.loc[passing['Pos'] == "QB"]
 
+    #rushRec.loc[rushRec.rushRecCol == "NaN", rushRecCol] = 0
+    passing.fillna(0, inplace=True)
+    rushRec.fillna(0, inplace=True)
+
+    #make ppg column
+    rushRec.loc[:, "FantasyPPG"] = (rushRec["RushYds"]*0.1) + (rushRec["RecYds"]*0.1) + (rushRec["RushTD"]*6) + (rushRec["RecTD"]*6) + (passing["Fmb"]*-2)
+
+    if ppr == 2:
+        rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"] + (rushRec["Rec"])
+    elif ppr == 1:
+        rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"] + ((rushRec["Rec"])/2)
+
+    rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"]/rushRec["G"]
+
+    #make ppg column
+    passing.loc[:, "FantasyPPG"] = (passing["RushYds"]*0.1) + (passing["Yds"]*.04) + (passing["RushTD"]*6) + (passing["TD"]*4) + (passing["Fmb"]*-2) + (passing["Int"]*-2)
+    passing.loc[:, "FantasyPPG"] = passing["FantasyPPG"]/passing["G"]
 
     print(passing)
     print(rushRec)
+
     #write into csv
-    passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv", encoding='utf-8', index=False)
-    rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)
-            
+    if ppr == 0:
+        passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsNonPPR/teamsOldQBStatsNonPPR.csv", encoding='utf-8', index=False)
+        rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsNonPPR/teamsOldRushRecStatsNonPPR.csv", encoding='utf-8', index=False)
+    elif ppr == 1:
+        passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsHalfPPR/teamsOldQBStatsHalfPPR.csv", encoding='utf-8', index=False)
+        rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsHalfPPR/teamsOldRushRecStatsHalfPPR.csv", encoding='utf-8', index=False)
+    elif ppr == 2:
+        passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsPPR/teamsOldQBStatsPPR.csv", encoding='utf-8', index=False)
+        rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldStatsPPR/teamsOldRushRecStatsPPR.csv", encoding='utf-8', index=False)            
     
 
             

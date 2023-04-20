@@ -6,6 +6,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 6.0,James Conner,28,RB,,,233,6-1,Pittsburgh,5/5/1995,6,,Pittsburgh Steelers / 3rd / 105th pick / 2017,2023,1,crd
 ,Pharoh Cooper,28,WR,,,208,5-11,South Carolina,3/7/1995,7,,Los Angeles Rams / 4th / 117th pick / 2016,2023,1,crd
 83.0,Greg Dortch,25,WR,,,173,5-7,Wake Forest,5/29/1998,4,,,2023,1,crd
+,Jeff Driskel,30,QB,,,235,6-4,"Florida,Louisiana Tech",4/23/1993,5,,San Francisco 49ers / 6th / 207th pick / 2016,2023,1,crd
 86.0,Zach Ertz,33,TE,,,250,6-5,Stanford,11/10/1990,10,,Philadelphia Eagles / 2nd / 35th pick / 2013,2023,1,crd
 10.0,DeAndre Hopkins,31,WR,,,212,6-1,Clemson,6/6/1992,10,,Houston Texans / 1st / 27th pick / 2013,2023,1,crd
 30.0,Keaontay Ingram,24,RB,,,215,6-0,"Texas,USC",10/26/1999,1,,Arizona Cardinals / 6th / 201st pick / 2022,2023,1,crd
@@ -16,7 +17,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 ,Zach Pascal,29,WR,,,214,6-2,Old Dominion,12/18/1994,5,,,2023,1,crd
 49.0,Chris Pierce,25,TE,,,230,6-3,Vanderbilt,11/2/1998,Rook,,,2023,1,crd
 80.0,Bernhard Seikovits,26,TE,,,262,6-5,,7/24/1997,Rook,,,2023,1,crd
-29.0,Auden Tate,26,WR,,,228,6-5,Florida St.,2/3/1997,5,,Cincinnati Bengals / 7th / 253rd pick / 2018,2023,1,crd
+89.0,Auden Tate,26,WR,,,228,6-5,Florida St.,2/3/1997,5,,Cincinnati Bengals / 7th / 253rd pick / 2018,2023,1,crd
 81.0,Noah Togiai,26,TE,,,246,6-4,Oregon St.,7/6/1997,3,,,2023,1,crd
 22.0,Ty\'Son Williams,27,RB,,,220,6-0,BYU,9/4/1996,2,,,2023,1,crd
 84.0,Javon Wims,29,WR,,,221,6-2,Georgia,9/11/1994,5,,Chicago Bears / 7th / 224th pick / 2018,2023,1,crd
@@ -32,23 +33,23 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 81.0,Ra\'Shaun Henry,,WR,,,190,6-3,Virginia,,Rook,,,2023,1,atl
 46.0,Parker Hesse,28.0,TE,,,261,6-3,Iowa,5/26/1995,2,,,2023,1,atl
 12.0,KhaDarel Hodge,28.0,WR,,,183,5-11,Prairie View A&M,1/3/1995,5,,,2023,1,atl
-,Mack Hollins,30.0,WR,,,221,6-4,North Carolina,9/16/1993,6,,Philadelphia Eagles / 4th / 118th pick / 2017,2023,1,atl
+18.0,Mack Hollins,30.0,WR,,,221,6-4,North Carolina,9/16/1993,6,,Philadelphia Eagles / 4th / 118th pick / 2017,2023,1,atl
 42.0,Caleb Huntley,25.0,RB,,,229,5-10,Ball St.,9/15/1998,1,,,2023,1,atl
 5.0,Drake London,22.0,WR,,,210,6-5,USC,7/24/2001,1,,Atlanta Falcons / 1st / 8th pick / 2022,2023,1,atl
-,Scott Miller,26.0,WR,,,174,5-9,Bowling Green,7/31/1997,4,,Tampa Bay Buccaneers / 6th / 208th pick / 2019,2023,1,atl
+16.0,Scott Miller,26.0,WR,,,174,5-9,Bowling Green,7/31/1997,4,,Tampa Bay Buccaneers / 6th / 208th pick / 2019,2023,1,atl
 84.0,Cordarrelle Patterson,32.0,RB,,,220,6-2,Tennessee,3/17/1991,10,,Minnesota Vikings / 1st / 29th pick / 2013,2023,1,atl
 8.0,Kyle Pitts,23.0,TE,,,246,6-6,Florida,10/6/2000,2,,Atlanta Falcons / 1st / 4th pick / 2021,2023,1,atl
 41.0,John Raine,25.0,TE,,,235,6-2,Northwestern,3/27/1998,Rook,,,2023,1,atl
-,Clint Ratkovich,26.0,RB,,,220,6-1,Northern Illinois,9/16/1997,Rook,,,2023,1,atl
-4.0,Desmond Ridder,24.0,QB,,,215,6-4,Cincinnati,8/31/1999,1,,Atlanta Falcons / 3rd / 74th pick / 2022,2023,1,atl
-,Jonnu Smith,28.0,TE,,,248,6-3,Florida International,8/22/1995,6,,Tennessee Titans / 3rd / 100th pick / 2017,2023,1,atl
+38.0,Clint Ratkovich,26.0,RB,,,220,6-1,Northern Illinois,9/16/1997,Rook,,,2023,1,atl
+9.0,Desmond Ridder,24.0,QB,,,215,6-4,Cincinnati,8/31/1999,1,,Atlanta Falcons / 3rd / 74th pick / 2022,2023,1,atl
+81.0,Jonnu Smith,28.0,TE,,,248,6-3,Florida International,8/22/1995,6,,Tennessee Titans / 3rd / 100th pick / 2017,2023,1,atl
 40.0,Keith Smith,31.0,RB,,,240,6-0,San Jose St.,4/8/1992,9,,,2023,1,atl
 35.0,Avery Williams,25.0,RB,,,195,5-9,Boise St.,7/15/1998,2,,Atlanta Falcons / 5th / 183rd pick / 2021,2023,1,atl
 6.0,Logan Woodside,28.0,QB,,,213,6-1,Toledo,1/27/1995,5,,Cincinnati Bengals / 7th / 249th pick / 2018,2023,1,atl
-,Nelson Agholor,30,WR,,,198,6-0,USC,5/24/1993,8,,Philadelphia Eagles / 1st / 20th pick / 2015,2023,1,rav
+15.0,Nelson Agholor,30,WR,,,198,6-0,USC,5/24/1993,8,,Philadelphia Eagles / 1st / 20th pick / 2015,2023,1,rav
 89.0,Mark Andrews,28,TE,,,256,6-5,Oklahoma,9/6/1995,5,,Baltimore Ravens / 3rd / 86th pick / 2018,2023,1,rav
 7.0,Rashod Bateman,24,WR,,,210,6-2,Minnesota,11/29/1999,2,,Baltimore Ravens / 1st / 27th pick / 2021,2023,1,rav
-,Odell Beckham Jr.,31,WR,,,198,5-11,LSU,11/5/1992,9,,New York Giants / 1st / 12th pick / 2014,2023,1,rav
+3.0,Odell Beckham Jr.,31,WR,,,198,5-11,LSU,11/5/1992,9,,New York Giants / 1st / 12th pick / 2014,2023,1,rav
 85.0,Shemar Bridges,26,WR,,,208,6-4,Fort Valley State,12/26/1997,Rook,,,2023,1,rav
 12.0,Anthony Brown,25,QB,,,228,6-1,"Boston Col.,Oregon",7/27/1998,1,,,2023,1,rav
 27.0,J.K. Dobbins,25,RB,,,214,5-10,Ohio St.,12/17/1998,3,,Baltimore Ravens / 2nd / 55th pick / 2020,2023,1,rav
@@ -61,7 +62,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 88.0,Charlie Kolar,24,TE,,,260,6-6,Iowa St.,2/10/1999,1,,Baltimore Ravens / 4th / 128th pick / 2022,2023,1,rav
 80.0,Isaiah Likely,23,TE,,,240,6-4,Coastal Carolina,4/18/2000,1,,Baltimore Ravens / 4th / 139th pick / 2022,2023,1,rav
 38.0,Ben Mason,24,RB,,,254,6-3,Michigan,5/25/1999,Rook,,Baltimore Ravens / 5th / 184th pick / 2021,2023,1,rav
-3.0,James Proche,27,WR,,,193,5-11,SMU,9/21/1996,3,,Baltimore Ravens / 6th / 201st pick / 2020,2023,1,rav
+10.0,James Proche,27,WR,,,193,5-11,SMU,9/21/1996,3,,Baltimore Ravens / 6th / 201st pick / 2020,2023,1,rav
 42.0,Patrick Ricard,29,RB,,,311,6-3,Maine,5/27/1994,6,,,2023,1,rav
 87.0,Mike Thomas,29,WR,,,189,6-1,Southern Miss,8/16/1994,7,,Los Angeles Rams / 6th / 206th pick / 2016,2023,1,rav
 16.0,Tylan Wallace,24,WR,,,195,5-11,Oklahoma St.,5/13/1999,2,,Baltimore Ravens / 4th / 131st pick / 2021,2023,1,rav
@@ -69,22 +70,23 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 9.0,Kyle Allen,27,QB,,,210,6-3,"Texas A&M,Houston",3/8/1996,5,,,2023,1,buf
 5.0,Matt Barkley,33,QB,,,234,6-2,USC,9/8/1990,10,,Philadelphia Eagles / 4th / 98th pick / 2013,2023,1,buf
 11.0,Cole Beasley,34,WR,,,174,5-8,SMU,4/26/1989,11,,,2023,1,buf
-28.0,James Cook,24,RB,,,190,5-11,Georgia,9/25/1999,1,,Buffalo Bills / 2nd / 63rd pick / 2022,2023,1,buf
+4.0,James Cook,24,RB,,,190,5-11,Georgia,9/25/1999,1,,Buffalo Bills / 2nd / 63rd pick / 2022,2023,1,buf
 84.0,Zach Davidson,25,TE,,,245,6-7,Central Missouri St.,7/15/1998,Rook,,Minnesota Vikings / 5th / 168th pick / 2021,2023,1,buf
 13.0,Gabriel Davis,24,WR,,,210,6-2,Central Florida,4/1/1999,3,,Buffalo Bills / 4th / 128th pick / 2020,2023,1,buf
 14.0,Stefon Diggs,30,WR,,,191,6-0,Maryland,11/29/1993,8,,Minnesota Vikings / 5th / 146th pick / 2015,2023,1,buf
 41.0,Reggie Gilliam,26,RB,,,244,6-0,Toledo,8/20/1997,3,,,2023,1,buf
 22.0,Damien Harris,26,RB,,,213,5-11,Alabama,2/11/1997,4,,New England Patriots / 3rd / 87th pick / 2019,2023,1,buf
 11.0,Deonte Harty,26,WR,,,170,5-6,Assumption,12/4/1997,4,,,2023,1,buf
-20.0,Nyheim Hines,27,RB,,,196,5-9,North Carolina St.,11/12/1996,5,,Indianapolis Colts / 4th / 104th pick / 2018,2023,1,buf
+,Nyheim Hines,27,RB,,,196,5-9,North Carolina St.,11/12/1996,5,,Indianapolis Colts / 4th / 104th pick / 2018,2023,1,buf
 19.0,KeeSean Johnson,27,WR,,,201,6-1,Fresno St.,10/9/1996,4,,Arizona Cardinals / 6th / 174th pick / 2019,2023,1,buf
 88.0,Dawson Knox,27,TE,,,254,6-4,Mississippi,11/14/1996,4,,Buffalo Bills / 3rd / 96th pick / 2019,2023,1,buf
 85.0,Quintin Morris,24,TE,,,248,6-4,Bowling Green,1/21/1999,1,,,2023,1,buf
-10.0,Dezmon Patmon,25,WR,,,220,6-4,Washington St.,8/6/1998,3,,Indianapolis Colts / 6th / 212th pick / 2020,2023,1,buf
+19.0,Dezmon Patmon,25,WR,,,220,6-4,Washington St.,8/6/1998,3,,Indianapolis Colts / 6th / 212th pick / 2020,2023,1,buf
 10.0,Khalil Shakir,23,WR,,,190,6-0,Boise St.,2/3/2000,1,,Buffalo Bills / 5th / 148th pick / 2022,2023,1,buf
 16.0,Trent Sherfield,27,WR,,,219,6-1,Vanderbilt,2/26/1996,5,,,2023,1,buf
 20.0,Raheem Blackshear,24,RB,,,194,5-9,"Rutgers,Virginia Tech",6/5/1999,1,,,2023,1,car
 41.0,Spencer Brown,25,RB,,,220,6-0,Ala-Birmingham,11/13/1998,2,,,2023,1,car
+,Damiere Byrd,30,WR,,,175,5-9,South Carolina,1/27/1993,7,,,2023,1,car
 ,DJ Chark,27,WR,,,198,6-4,LSU,9/23/1996,5,,Jacksonville Jaguars / 2nd / 61st pick / 2018,2023,1,car
 9.0,Matt Corral,24,QB,,,205,6-1,Mississippi,1/31/1999,Rook,,Carolina Panthers / 3rd / 94th pick / 2022,2023,1,car
 ,Andy Dalton,36,QB,,,219,6-2,TCU,10/29/1987,12,,Cincinnati Bengals / 2nd / 35th pick / 2011,2023,1,car
@@ -108,21 +110,22 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 10.0,Chase Claypool,25,WR,,,238,6-4,Notre Dame,7/7/1998,3,,Pittsburgh Steelers / 2nd / 49th pick / 2020,2023,1,chi
 25.0,Trestan Ebner,24,RB,,,215,5-11,Baylor,1/2/1999,1,,Chicago Bears / 6th / 203rd pick / 2022,2023,1,chi
 1.0,Justin Fields,24,QB,,,228,6-3,"Georgia,Ohio St.",3/5/1999,2,,Chicago Bears / 1st / 11th pick / 2021,2023,1,chi
-,D\'Onta Foreman,27,RB,,,236,6-1,Texas,4/24/1996,6,,Houston Texans / 3rd / 89th pick / 2017,2023,1,chi
-83.0,Daurice Fountain,28,WR,,,210,6-2,Northern Iowa,12/22/1995,5,,Indianapolis Colts / 5th / 159th pick / 2018,2023,1,chi
+29.0,D\'Onta Foreman,27,RB,,,236,6-1,Texas,4/24/1996,6,,Houston Texans / 3rd / 89th pick / 2017,2023,1,chi
+82.0,Daurice Fountain,28,WR,,,210,6-2,Northern Iowa,12/22/1995,5,,Indianapolis Colts / 5th / 159th pick / 2018,2023,1,chi
 24.0,Khalil Herbert,25,RB,,,212,5-9,"Kansas,Virginia Tech",4/21/1998,2,,Chicago Bears / 6th / 217th pick / 2021,2023,1,chi
-,Travis Homer,25,RB,,,202,5-10,Miami (FL),8/7/1998,4,,Seattle Seahawks / 6th / 204th pick / 2019,2023,1,chi
+20.0,Travis Homer,25,RB,,,202,5-10,Miami (FL),8/7/1998,4,,Seattle Seahawks / 6th / 204th pick / 2019,2023,1,chi
 12.0,Velus Jones Jr.,26,WR,,,200,6-0,"USC,Tennessee",5/11/1997,1,,Chicago Bears / 3rd / 71st pick / 2022,2023,1,chi
 85.0,Cole Kmet,24,TE,,,260,6-6,Notre Dame,3/10/1999,3,,Chicago Bears / 2nd / 43rd pick / 2020,2023,1,chi
 11.0,Darnell Mooney,26,WR,,,173,5-11,Tulane,10/29/1997,3,,Chicago Bears / 5th / 173rd pick / 2020,2023,1,chi
 2.0,D.J. Moore,26,WR,,,210,6-0,Maryland,4/14/1997,5,,Carolina Panthers / 1st / 24th pick / 2018,2023,1,chi
 14.0,Nathan Peterman,29,QB,,,225,6-2,"Tennessee,Pittsburgh",5/4/1994,6,,Buffalo Bills / 5th / 171st pick / 2017,2023,1,chi
+86.0,Dante Pettis,28,WR,,,195,6-1,Washington,10/23/1995,5,,San Francisco 49ers / 2nd / 44th pick / 2018,2023,1,chi
 80.0,Joe Reed,25,WR,,,224,6-0,Virginia,1/4/1998,3,,Los Angeles Chargers / 5th / 151st pick / 2020,2023,1,chi
 19.0,Equanimeous St. Brown,27,WR,,,214,6-5,Notre Dame,9/30/1996,5,,Green Bay Packers / 6th / 207th pick / 2018,2023,1,chi
 81.0,Jake Tonges,24,TE,,,240,6-4,California,7/8/1999,1,,,2023,1,chi
-,Robert Tonyan,29,TE,,,237,6-5,Indiana St.,4/30/1994,5,,,2023,1,chi
-,P.J. Walker,28,QB,,,210,5-11,Temple,2/26/1995,5,,,2023,1,chi
-17.0,Nsimba Webster,27,WR,,,180,5-10,East. Washington,1/27/1996,4,,,2023,1,chi
+18.0,Robert Tonyan,29,TE,,,237,6-5,Indiana St.,4/30/1994,5,,,2023,1,chi
+15.0,P.J. Walker,28,QB,,,210,5-11,Temple,2/26/1995,5,,,2023,1,chi
+83.0,Nsimba Webster,27,WR,,,180,5-10,East. Washington,1/27/1996,4,,,2023,1,chi
 86.0,Devin Asiasi,26,TE,,,257,6-3,"Michigan,UCLA",8/14/1997,3,,New England Patriots / 3rd / 91st pick / 2020,2023,1,cin
 82.0,Nick Bowers,27,TE,,,265,6-4,Penn St.,5/26/1996,2,,,2023,1,cin
 83.0,Tyler Boyd,29,WR,,,203,6-2,Pittsburgh,11/15/1994,7,,Cincinnati Bengals / 2nd / 55th pick / 2016,2023,1,cin
@@ -136,17 +139,18 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 18.0,Kwamie Lassiter II,25,WR,,,185,5-11,Kansas,1/21/1998,1,,,2023,1,cin
 28.0,Joe Mixon,27,RB,,,220,6-1,Oklahoma,7/24/1996,6,,Cincinnati Bengals / 2nd / 48th pick / 2017,2023,1,cin
 17.0,Stanley Morgan Jr.,27,WR,,,205,6-0,Nebraska,9/7/1996,4,,,2023,1,cin
-,Irv Smith Jr.,25,TE,,,240,6-2,Alabama,8/9/1998,4,,Minnesota Vikings / 2nd / 50th pick / 2019,2023,1,cin
+89.0,Drew Sample,27,TE,,,258,6-4,Washington,4/16/1996,4,,Cincinnati Bengals / 2nd / 52nd pick / 2019,2023,1,cin
+81.0,Irv Smith Jr.,25,TE,,,240,6-2,Alabama,8/9/1998,4,,Minnesota Vikings / 2nd / 50th pick / 2019,2023,1,cin
 11.0,Trent Taylor,29,WR,,,180,5-8,Louisiana Tech,4/30/1994,6,,San Francisco 49ers / 5th / 177th pick / 2017,2023,1,cin
 32.0,Trayveon Williams,26,RB,,,206,5-8,Texas A&M,10/18/1997,4,,Cincinnati Bengals / 6th / 182nd pick / 2019,2023,1,cin
-,Jordan Akins,31.0,TE,,,243,6-4,Central Florida,4/19/1992,5,,Houston Texans / 3rd / 98th pick / 2018,2023,1,cle
+84.0,Jordan Akins,31.0,TE,,,243,6-4,Central Florida,4/19/1992,5,,Houston Texans / 3rd / 98th pick / 2018,2023,1,cle
 17.0,Daylen Baldwin,24.0,WR,,,212,6-2,"Morgan St.,Jackson St.,Michigan",11/24/1999,1,,,2023,1,cle
 18.0,David Bell,23.0,WR,,,205,6-2,Purdue,12/14/2000,1,,Cleveland Browns / 3rd / 99th pick / 2022,2023,1,cle
 88.0,Harrison Bryant,25.0,TE,,,230,6-5,Florida Atlantic,4/23/1998,3,,Cleveland Browns / 4th / 115th pick / 2020,2023,1,cle
 24.0,Nick Chubb,28.0,RB,,,227,5-11,Georgia,12/27/1995,5,,Cleveland Browns / 2nd / 35th pick / 2018,2023,1,cle
 2.0,Amari Cooper,29.0,WR,,,210,6-1,Alabama,6/17/1994,8,,Oakland Raiders / 1st / 4th pick / 2015,2023,1,cle
 16.0,Jaelon Darden,24.0,WR,,,174,5-8,North Texas,1/14/1999,2,,Tampa Bay Buccaneers / 4th / 129th pick / 2021,2023,1,cle
-11.0,Joshua Dobbs,28.0,QB,,,216,6-3,Tennessee,1/26/1995,5,,Pittsburgh Steelers / 4th / 135th pick / 2017,2023,1,cle
+,Joshua Dobbs,28.0,QB,,,216,6-3,Tennessee,1/26/1995,5,,Pittsburgh Steelers / 4th / 135th pick / 2017,2023,1,cle
 25.0,Demetric Felton,25.0,RB,,,189,5-9,UCLA,7/16/1998,2,,Cleveland Browns / 6th / 211th pick / 2021,2023,1,cle
 34.0,Jerome Ford,24.0,RB,,,220,5-11,"Alabama,Cincinnati",12/9/1999,1,,Cleveland Browns / 5th / 156th pick / 2022,2023,1,cle
 ,Marquise Goodwin,33.0,WR,,,180,5-9,Texas,11/19/1990,10,,Buffalo Bills / 3rd / 78th pick / 2013,2023,1,cle
@@ -155,8 +159,8 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 41.0,John Kelly,27.0,RB,,,205,5-10,Tennessee,10/4/1996,5,,Los Angeles Rams / 6th / 176th pick / 2018,2023,1,cle
 ,Nate McCrary,24.0,RB,,,213,6-0,Saginaw Valley St.,4/9/1999,2,,,2023,1,cle
 83.0,Zaire Mitchell-Paden,24.0,TE,,,256,6-5,Florida Atlantic,8/20/1999,Rook,,,2023,1,cle
-8.0,Kellen Mond,24.0,QB,,,212,6-3,Texas A&M,6/22/1999,2,,Minnesota Vikings / 3rd / 66th pick / 2021,2023,1,cle
-,Elijah Moore,23.0,WR,,,178,5-10,Mississippi,3/27/2000,2,,New York Jets / 2nd / 34th pick / 2021,2023,1,cle
+7.0,Kellen Mond,24.0,QB,,,212,6-3,Texas A&M,6/22/1999,2,,Minnesota Vikings / 3rd / 66th pick / 2021,2023,1,cle
+8.0,Elijah Moore,23.0,WR,,,178,5-10,Mississippi,3/27/2000,2,,New York Jets / 2nd / 34th pick / 2021,2023,1,cle
 85.0,David Njoku,27.0,TE,,,246,6-4,Miami (FL),7/10/1996,6,,Cleveland Browns / 1st / 29th pick / 2017,2023,1,cle
 11.0,Donovan Peoples-Jones,24.0,WR,,,204,6-2,Michigan,2/19/1999,3,,Cleveland Browns / 6th / 187th pick / 2020,2023,1,cle
 10.0,Anthony Schwartz,23.0,WR,,,186,6-0,Auburn,9/5/2000,2,,Cleveland Browns / 3rd / 91st pick / 2021,2023,1,cle
@@ -187,7 +191,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 9.0,KaVontae Turpin,27.0,WR,,,153,5-9,TCU,8/2/1996,1,,,2023,1,dal
 36.0,Tyler Badie,23.0,RB,,,194,5-8,Missouri,2/7/2000,1,,Baltimore Ravens / 6th / 196th pick / 2022,2023,1,den
 ,Michael Burton,31.0,RB,,,243,6-0,Rutgers,2/1/1992,8,,Detroit Lions / 5th / 168th pick / 2015,2023,1,den
-1.0,Marquez Callaway,25.0,WR,,,204,6-2,Tennessee,3/27/1998,3,,,2023,1,den
+,Marquez Callaway,25.0,WR,,,204,6-2,Tennessee,3/27/1998,3,,,2023,1,den
 28.0,Damarea Crockett,26.0,RB,,,225,5-11,Missouri,12/22/1997,2,,,2023,1,den
 80.0,Greg Dulcich,23.0,TE,,,245,6-3,UCLA,3/26/2000,1,,Denver Broncos / 3rd / 80th pick / 2022,2023,1,den
 11.0,Jarrett Guarantano,26.0,QB,,,219,6-3,Washington State,11/4/1997,Rook,,,2023,1,den
@@ -196,7 +200,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 ,Lil\'Jordan Humphrey,25.0,WR,,,225,6-4,Texas,4/19/1998,4,,,2023,1,den
 10.0,Jerry Jeudy,24.0,WR,,,193,6-1,Alabama,4/24/1999,3,,Denver Broncos / 1st / 15th pick / 2020,2023,1,den
 89.0,Brandon Johnson,25.0,WR,,,195,6-2,"Tennessee,Central Florida",7/26/1998,1,,,2023,1,den
-32.0,Tony Jones,26.0,RB,,,224,5-11,Notre Dame,11/24/1997,3,,,2023,1,den
+,Tony Jones,26.0,RB,,,224,5-11,Notre Dame,11/24/1997,3,,,2023,1,den
 ,Chris Manhertz,31.0,TE,,,255,6-6,Canisius,4/10/1992,9,,,2023,1,den
 39.0,Tyreik McAllister,,RB,,,180,5-11,Charleston,,Rook,,,2023,1,den
 85.0,Albert Okwuegbunam,25.0,TE,,,258,6-5,Missouri,4/25/1998,3,,Denver Broncos / 4th / 118th pick / 2020,2023,1,den
@@ -219,7 +223,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 ,Marvin Jones,33.0,WR,,,199,6-2,California,3/12/1990,11,,Cincinnati Bengals / 5th / 166th pick / 2012,2023,1,det
 85.0,Tom Kennedy,27.0,WR,,,195,5-10,Bryant,7/29/1996,4,,,2023,1,det
 82.0,James Mitchell,24.0,TE,,,255,6-3,Virginia Tech,8/11/1999,1,,Detroit Lions / 5th / 177th pick / 2022,2023,1,det
-,David Montgomery,26.0,RB,,,224,5-11,Iowa St.,6/7/1997,4,,Chicago Bears / 3rd / 73rd pick / 2019,2023,1,det
+5.0,David Montgomery,26.0,RB,,,224,5-11,Iowa St.,6/7/1997,4,,Chicago Bears / 3rd / 73rd pick / 2019,2023,1,det
 11.0,Kalif Raymond,29.0,WR,,,182,5-8,Holy Cross,8/8/1994,7,,,2023,1,det
 46.0,Craig Reynolds,27.0,RB,,,215,5-11,Kutztown (PA),6/15/1996,4,,,2023,1,det
 8.0,Josh Reynolds,28.0,WR,,,196,6-3,Texas A&M,2/16/1995,6,,Los Angeles Rams / 4th / 117th pick / 2017,2023,1,det
@@ -246,9 +250,9 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 83.0,Samori Toure,25,WR,,,190.0,6-3,"Montana,Nebraska",3/24/1998,1,,Green Bay Packers / 7th / 258th pick / 2022,2023,1,gnb
 9.0,Christian Watson,24,WR,,,200.0,6-5,North Dakota St.,5/12/1999,1,,Green Bay Packers / 2nd / 34th pick / 2022,2023,1,gnb
 14.0,Alex Bachman,27,WR,,,190,6-0,Wake Forest,5/29/1996,3,,,2023,1,htx
-83.0,Andrew Beck,27,RB,,,255,6-3,Texas,5/15/1996,4,,,2023,1,htx
+47.0,Andrew Beck,27,RB,,,255,6-3,Texas,5/15/1996,4,,,2023,1,htx
 44.0,Mike Boone,28,RB,,,205,5-10,Cincinnati,7/30/1995,5,,,2023,1,htx
-,Noah Brown,27,WR,,,225,6-2,Ohio St.,1/6/1996,6,,Dallas Cowboys / 7th / 239th pick / 2017,2023,1,htx
+85.0,Noah Brown,27,WR,,,225,6-2,Ohio St.,1/6/1996,6,,Dallas Cowboys / 7th / 239th pick / 2017,2023,1,htx
 17.0,Jalen Camp,25,WR,,,220,6-2,Georgia Tech,7/10/1998,2,,Jacksonville Jaguars / 6th / 209th pick / 2021,2023,1,htx
 12.0,Nico Collins,24,WR,,,215,6-4,Michigan,3/19/1999,2,,Houston Texans / 3rd / 89th pick / 2021,2023,1,htx
 27.0,Gerrid Doaks,25,RB,,,230,6-0,Cincinnati,6/9/1998,Rook,,Miami Dolphins / 7th / 244th pick / 2021,2023,1,htx
@@ -265,7 +269,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 84.0,Teagan Quitoriano,23,TE,,,256,6-6,Oregon St.,3/15/2000,1,,Houston Texans / 5th / 170th pick / 2022,2023,1,htx
 19.0,Amari Rodgers,24,WR,,,212,5-9,Clemson,9/23/1999,2,,Green Bay Packers / 3rd / 85th pick / 2021,2023,1,htx
 86.0,Mason Schreck,30,TE,,,252,6-5,Buffalo,11/4/1993,5,,Cincinnati Bengals / 7th / 251st pick / 2017,2023,1,htx
-86.0,Dalton Schultz,27,TE,,,244,6-5,Stanford,7/11/1996,5,,Dallas Cowboys / 4th / 137th pick / 2018,2023,1,htx
+83.0,Dalton Schultz,27,TE,,,244,6-5,Stanford,7/11/1996,5,,Dallas Cowboys / 4th / 137th pick / 2018,2023,1,htx
 15.0,Steven Sims,26,WR,,,176,5-10,Kansas,3/31/1997,4,,,2023,1,htx
 26.0,Devin Singletary,26,RB,,,203,5-7,Florida Atlantic,9/3/1997,4,,Buffalo Bills / 3rd / 74th pick / 2019,2023,1,htx
 2.0,Robert Woods,31,WR,,,195,6-0,USC,4/10/1992,10,,Buffalo Bills / 2nd / 41st pick / 2013,2023,1,htx
@@ -291,6 +295,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 17.0,Mike Strachan,26.0,WR,,,224.0,6-5,Charleston (WV),8/13/1997,2,,Indianapolis Colts / 7th / 229th pick / 2021,2023,1,clt
 28.0,Jonathan Taylor,24.0,RB,,,226.0,5-10,Wisconsin,1/19/1999,3,,Indianapolis Colts / 2nd / 41st pick / 2020,2023,1,clt
 12.0,Malik Turner,27.0,WR,,,200.0,6-2,Illinois,1/30/1996,5,,,2023,1,clt
+5.0,Kristian Wilkerson,26.0,WR,,,214.0,6-1,SE Missouri St.,1/10/1997,3,,,2023,1,clt
 80.0,Jelani Woods,25.0,TE,,,265.0,6-7,"Oklahoma St.,Virginia",10/9/1998,1,,Indianapolis Colts / 3rd / 73rd pick / 2022,2023,1,clt
 49.0,Jalen Wydermyer,23.0,TE,,,255.0,,Texas A&M,12/20/2000,Rook,,,2023,1,clt
 39.0,Jamal Agnew,28,WR,,,190,5-10,San Diego,4/3/1995,6,,Detroit Lions / 5th / 165th pick / 2017,2023,1,jax
@@ -320,8 +325,9 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 89.0,Jerrion Ealy,23,WR,,,190,,Mississippi,8/19/2000,Rook,,,2023,1,kan
 25.0,Clyde Edwards-Helaire,24,RB,,,209,5-8,LSU,4/11/1999,3,,Kansas City Chiefs / 1st / 32nd pick / 2020,2023,1,kan
 88.0,Jody Fortson,28,TE,,,230,6-6,Valdosta St.,12/7/1995,2,,,2023,1,kan
+,Blaine Gabbert,34,QB,,,235,6-5,Missouri,10/15/1989,12,,Jacksonville Jaguars / 1st / 10th pick / 2011,2023,1,kan
 83.0,Noah Gray,24,TE,,,240,6-4,Duke,4/30/1999,2,,Kansas City Chiefs / 5th / 162nd pick / 2021,2023,1,kan
-,Richie James,28,WR,,,185,5-9,Middle Tenn. St.,9/5/1995,5,,San Francisco 49ers / 7th / 240th pick / 2018,2023,1,kan
+80.0,Richie James,28,WR,,,185,5-9,Middle Tenn. St.,9/5/1995,5,,San Francisco 49ers / 7th / 240th pick / 2018,2023,1,kan
 87.0,Travis Kelce,34,TE,,,256,6-5,Cincinnati,10/5/1989,10,,Kansas City Chiefs / 3rd / 63rd pick / 2013,2023,1,kan
 15.0,Patrick Mahomes,28,QB,,,225,6-2,Texas Tech,9/17/1995,6,,Kansas City Chiefs / 1st / 10th pick / 2017,2023,1,kan
 24.0,Skyy Moore,23,WR,,,195,5-10,Western Michigan,9/10/2000,1,,Kansas City Chiefs / 2nd / 54th pick / 2022,2023,1,kan
@@ -333,6 +339,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 82.0,Ihmir Smith-Marsette,24,WR,,,185,6-1,Iowa,8/29/1999,2,,Minnesota Vikings / 5th / 157th pick / 2021,2023,1,kan
 19.0,Kadarius Toney,24,WR,,,193,6-0,Florida,1/27/1999,2,,New York Giants / 1st / 20th pick / 2021,2023,1,kan
 11.0,Marquez Valdes-Scantling,29,WR,,,206,6-4,"North Carolina St.,South Florida",10/10/1994,5,,Green Bay Packers / 5th / 174th pick / 2018,2023,1,kan
+,Justin Watson,27,WR,,,215,6-3,Pennsylvania,4/4/1996,5,,Tampa Bay Buccaneers / 5th / 144th pick / 2018,2023,1,kan
 22.0,Ameer Abdullah,30,RB,,,196,5-9,Nebraska,6/13/1993,8,,Detroit Lions / 2nd / 54th pick / 2015,2023,1,rai
 17.0,Davante Adams,31,WR,,,215,6-1,Fresno St.,12/24/1992,9,,Green Bay Packers / 2nd / 53rd pick / 2014,2023,1,rai
 34.0,Brandon Bolden,33,RB,,,220,5-11,Mississippi,1/26/1990,11,,,2023,1,rai
@@ -361,6 +368,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 86.0,Keelan Doss,27,WR,,,215,6-3,UC Davis,3/21/1996,4,,,2023,1,sdg
 30.0,Austin Ekeler,28,RB,,,200,5-10,Western St. (CO),5/17/1995,6,,,2023,1,sdg
 7.0,Gerald Everett,29,TE,,,240,6-3,South Alabama,6/25/1994,6,,Los Angeles Rams / 2nd / 44th pick / 2017,2023,1,sdg
+15.0,Jalen Guyton,26,WR,,,212,6-1,North Texas,6/7/1997,4,,,2023,1,sdg
 10.0,Justin Herbert,25,QB,,,237,6-6,Oregon,3/10/1998,3,,Los Angeles Chargers / 1st / 6th pick / 2020,2023,1,sdg
 84.0,John Hightower,27,WR,,,189,6-1,Boise St.,5/31/1996,3,,Philadelphia Eagles / 5th / 168th pick / 2020,2023,1,sdg
 40.0,Zander Horvath,25,RB,,,230,6-3,Purdue,12/10/1998,1,,Los Angeles Chargers / 7th / 260th pick / 2022,2023,1,sdg
@@ -384,13 +392,13 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 82.0,Lance McCutcheon,24,WR,,,202,6-3,Montana St.,2/28/1999,1,,,2023,1,ram
 16.0,Bryce Perkins,27,QB,,,214,6-3,"Arizona St.,Arizona Western,Virginia",12/20/1996,1,,,2023,1,ram
 30.0,Ronnie Rivers,24,RB,,,195,,Fresno St.,1/31/1999,1,,,2023,1,ram
-1.0,Allen Robinson,30,WR,,,220,6-2,Penn St.,8/24/1993,9,,Jacksonville Jaguars / 2nd / 61st pick / 2014,2023,1,ram
 18.0,Ben Skowronek,26,WR,,,224,6-3,"Northwestern,Notre Dame",6/27/1997,2,,Los Angeles Rams / 7th / 249th pick / 2021,2023,1,ram
 9.0,Matthew Stafford,35,QB,,,220,6-3,Georgia,2/7/1988,14,,Detroit Lions / 1st / 1st pick / 2009,2023,1,ram
 81.0,Austin Trammell,25,WR,,,185,5-10,Rice,7/4/1998,2,,,2023,1,ram
 23.0,Kyren Williams,23,RB,,,195,5-9,Notre Dame,8/26/2000,1,,Los Angeles Rams / 5th / 164th pick / 2022,2023,1,ram
 13.0,John Wolford,28,QB,,,200,6-1,Wake Forest,10/16/1995,3,,,2023,1,ram
 26.0,Salvon Ahmed,25,RB,,,197,5-11,Washington,12/29/1998,3,,,2023,1,mia
+,Chosen Anderson,30,WR,,,190,6-3,Temple,5/9/1993,7,,,2023,1,mia
 ,Braxton Berrios,28,WR,,,190,5-9,Miami (FL),10/6/1995,5,,New England Patriots / 6th / 210th pick / 2018,2023,1,mia
 80.0,Tanner Conner,25,TE,,,232,6-3,Idaho St.,3/20/1998,1,,,2023,1,mia
 85.0,River Cracraft,29,WR,,,198,6-0,Washington St.,11/1/1994,5,,,2023,1,mia
@@ -436,6 +444,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 36.0,Kevin Harris,23,RB,,,225,5-10,South Carolina,11/17/2000,1,,New England Patriots / 6th / 183rd pick / 2022,2023,1,nwe
 85.0,Hunter Henry,29,TE,,,250,6-5,Arkansas,12/7/1994,7,,San Diego Chargers / 2nd / 35th pick / 2016,2023,1,nwe
 10.0,Mac Jones,25,QB,,,217,6-3,Alabama,9/5/1998,2,,New England Patriots / 1st / 15th pick / 2021,2023,1,nwe
+,Trace McSorley,28,QB,,,202,6-0,Penn St.,8/23/1995,4,,Baltimore Ravens / 6th / 197th pick / 2019,2023,1,nwe
 14.0,Ty Montgomery,30,WR,,,216,6-0,Stanford,1/22/1993,8,,Green Bay Packers / 3rd / 94th pick / 2015,2023,1,nwe
 82.0,Tre Nixon,25,WR,,,180,6-2,"Mississippi,Central Florida",1/26/1998,Rook,,New England Patriots / 7th / 242nd pick / 2021,2023,1,nwe
 1.0,DeVante Parker,30,WR,,,219,6-3,Louisville,1/20/1993,8,,Miami Dolphins / 1st / 14th pick / 2015,2023,1,nwe
@@ -547,17 +556,18 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 38.0,Jason Huntley,25.0,RB,,,193,5-9,New Mexico St.,4/20/1998,3,,Detroit Lions / 5th / 172nd pick / 2020,2023,1,pit
 18.0,Diontae Johnson,27.0,WR,,,183,5-10,Toledo,7/5/1996,4,,Pittsburgh Steelers / 3rd / 66th pick / 2019,2023,1,pit
 26.0,Anthony McFarland Jr.,24.0,RB,,,198,5-9,Maryland,3/4/1999,3,,Pittsburgh Steelers / 4th / 124th pick / 2020,2023,1,pit
-33.0,Jeremy McNichols,28.0,RB,,,205,5-9,Boise St.,12/26/1995,6,,Tampa Bay Buccaneers / 5th / 162nd pick / 2017,2023,1,pit
 17.0,Anthony Miller,29.0,WR,,,199,5-11,Memphis,10/9/1994,5,,Chicago Bears / 2nd / 51st pick / 2018,2023,1,pit
 89.0,Gunner Olszewski,27.0,WR,,,190,6-0,Bemidji St.,11/26/1996,4,,,2023,1,pit
 14.0,George Pickens,22.0,WR,,,200,6-3,Georgia,3/4/2001,1,,Pittsburgh Steelers / 2nd / 52nd pick / 2022,2023,1,pit
 8.0,Kenny Pickett,25.0,QB,,,220,6-3,Pittsburgh,6/6/1998,1,,Pittsburgh Steelers / 1st / 20th pick / 2022,2023,1,pit
+,Allen Robinson,30.0,WR,,,220,6-2,Penn St.,8/24/1993,9,,Jacksonville Jaguars / 2nd / 61st pick / 2014,2023,1,pit
 ,Master Teague,,RB,,,225,,Ohio St.,,Rook,,,2023,1,pit
 10.0,Mitchell Trubisky,29.0,QB,,,220,6-2,North Carolina,8/20/1994,6,,Chicago Bears / 1st / 2nd pick / 2017,2023,1,pit
 30.0,Jaylen Warren,25.0,RB,,,215,,"Snow College (UT),Utah St.,Oklahoma St.",11/1/1998,1,,,2023,1,pit
 15.0,Cody White,25.0,WR,,,210,6-3,Michigan St.,11/28/1998,2,,,2023,1,pit
 87.0,Rodney Williams,25.0,TE,,,235,6-4,Tennessee-Martin,4/8/1998,Rook,,,2023,1,pit
 11.0,Brandon Aiyuk,25,WR,,,200,6-0,Arizona St.,3/17/1998,3,,San Francisco 49ers / 1st / 25th pick / 2020,2023,1,sfo
+,Chris Conley,31,WR,,,205,6-3,Georgia,10/25/1992,8,,Kansas City Chiefs / 3rd / 76th pick / 2015,2023,1,sfo
 14.0,Sam Darnold,26,QB,,,225,6-3,USC,6/5/1997,5,,New York Jets / 1st / 3rd pick / 2018,2023,1,sfo
 32.0,Tyrion Davis-Price,23,RB,,,232,6-1,LSU,10/23/2000,1,,San Francisco 49ers / 3rd / 93rd pick / 2022,2023,1,sfo
 82.0,Ross Dwelley,28,TE,,,235,6-5,San Diego,1/26/1995,5,,,2023,1,sfo
@@ -580,8 +590,6 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 89.0,Will Dissly,27,TE,,,265,6-4,Washington,7/8/1996,5,,Seattle Seahawks / 4th / 120th pick / 2018,2023,1,sea
 1.0,D\'Wayne Eskridge,26,WR,,,190,5-9,Western Michigan,3/23/1997,2,,Seattle Seahawks / 2nd / 56th pick / 2021,2023,1,sea
 87.0,Noah Fant,26,TE,,,249,6-4,Iowa,11/20/1997,4,,Denver Broncos / 1st / 20th pick / 2019,2023,1,sea
-19.0,Penny Hart,27,WR,,,180,5-8,Georgia St.,7/5/1996,3,,,2023,1,sea
-38.0,Godwin Igwebuike,29,RB,,,212,6-0,Northwestern,9/10/1994,5,,,2023,1,sea
 88.0,Cade Johnson,25,WR,,,180,5-10,South Dakota St.,4/10/1998,1,,,2023,1,sea
 2.0,Drew Lock,27,QB,,,228,6-4,Missouri,11/10/1996,4,,Denver Broncos / 2nd / 42nd pick / 2019,2023,1,sea
 16.0,Tyler Lockett,31,WR,,,182,5-10,Kansas St.,9/28/1992,8,,Seattle Seahawks / 3rd / 69th pick / 2015,2023,1,sea
@@ -590,11 +598,7 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 84.0,Colby Parkinson,24,TE,,,251,6-7,Stanford,1/8/1999,3,,Seattle Seahawks / 4th / 133rd pick / 2020,2023,1,sea
 7.0,Geno Smith,33,QB,,,221,6-3,West Virginia,10/10/1990,10,,New York Jets / 2nd / 39th pick / 2013,2023,1,sea
 15.0,Cody Thompson,27,WR,,,205,6-2,Toledo,1/11/1996,2,,,2023,1,sea
-36.0,Darwin Thompson,26,RB,,,200,5-8,Utah St.,2/12/1997,4,,Kansas City Chiefs / 6th / 214th pick / 2019,2023,1,sea
-18.0,Laquon Treadwell,28,WR,,,215,6-2,Mississippi,6/14/1995,7,,Minnesota Vikings / 1st / 23rd pick / 2016,2023,1,sea
 9.0,Kenneth Walker III,23,RB,,,211,5-9,"Wake Forest,Michigan St.",10/20/2000,1,,Seattle Seahawks / 2nd / 41st pick / 2022,2023,1,sea
-81.0,Connor Wedington,24,WR,,,198,6-0,Stanford,5/28/1999,Rook,,,2023,1,sea
-86.0,Easop Winston,27,WR,,,190,5-11,Washington St.,12/17/1996,2,,,2023,1,sea
 83.0,Dareke Young,24,WR,,,223,6-2,Lenoir-Rhyne,6/4/1999,1,,Seattle Seahawks / 7th / 233rd pick / 2022,2023,1,sea
 ,Dominique Dafney,26,TE,,,243,6-2,"Iowa,Indiana St.",6/3/1997,3,,,2023,1,tam
 ,Chase Edmonds,27,RB,,,210,5-9,Fordham,4/13/1996,5,,Arizona Cardinals / 4th / 134th pick / 2018,2023,1,tam
@@ -614,7 +618,6 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 80.0,C.J. Board,30.0,WR,,,181,6-1,Chattanooga,12/12/1993,5,,,2023,1,oti
 16.0,Treylon Burks,23.0,WR,,,225,6-3,Arkansas,3/23/2000,1,,Tennessee Titans / 1st / 18th pick / 2022,2023,1,oti
 36.0,Julius Chestnut,23.0,RB,,,228,5-11,Sacred Heart,10/26/2000,1,,,2023,1,oti
-19.0,Chris Conley,31.0,WR,,,205,6-3,Georgia,10/25/1992,8,,Kansas City Chiefs / 3rd / 76th pick / 2015,2023,1,oti
 25.0,Hassan Haskins,24.0,RB,,,220,6-1,Michigan,11/26/1999,1,,Tennessee Titans / 4th / 131st pick / 2022,2023,1,oti
 22.0,Derrick Henry,29.0,RB,,,247,6-3,Alabama,1/4/1994,7,,Tennessee Titans / 2nd / 45th pick / 2016,2023,1,oti
 8.0,Cody Hollister,30.0,WR,,,209,6-4,Arkansas,11/18/1993,4,,,2023,1,oti
@@ -637,11 +640,11 @@ No.,Player,Age,Pos,G,GS,Wt,Ht,College/Univ,BirthDate,Yrs,AV,Drafted (tm/rnd/yr),
 2.0,Dyami Brown,24,WR,,,195,6-0,North Carolina,11/1/1999,2,,Washington Football Team / 3rd / 82nd pick / 2021,2023,1,was
 1.0,Jahan Dotson,23,WR,,,184,5-11,Penn St.,3/22/2000,1,,Washington Commanders / 1st / 16th pick / 2022,2023,1,was
 86.0,Alex Erickson,31,WR,,,195,6-0,Wisconsin,11/6/1992,7,,,2023,1,was
-16.0,Jake Fromm,25,QB,,,219,6-2,Georgia,7/30/1998,2,,Buffalo Bills / 5th / 167th pick / 2020,2023,1,was
+19.0,Jake Fromm,25,QB,,,219,6-2,Georgia,7/30/1998,2,,Buffalo Bills / 5th / 167th pick / 2020,2023,1,was
 24.0,Antonio Gibson,25,RB,,,220,6-2,Memphis,6/23/1998,3,,Washington Football Team / 3rd / 66th pick / 2020,2023,1,was
 80.0,Curtis Hodges,24,TE,,,240,,Arizona St.,7/3/1999,Rook,,,2023,1,was
 14.0,Sam Howell,23,QB,,,220,6-1,North Carolina,9/16/2000,1,,Washington Commanders / 5th / 144th pick / 2022,2023,1,was
-19.0,Marcus Kemp,28,WR,,,208,6-4,Hawaii,8/14/1995,6,,,2023,1,was
+84.0,Marcus Kemp,28,WR,,,208,6-4,Hawaii,8/14/1995,6,,,2023,1,was
 83.0,Kyric McGowan,24,WR,,,198,5-11,"Northwestern,Georgia Tech",11/1/1999,1,,,2023,1,was
 17.0,Terry McLaurin,28,WR,,,210,6-0,Ohio St.,9/15/1995,4,,Washington Redskins / 3rd / 76th pick / 2019,2023,1,was
 15.0,Dax Milne,24,WR,,,190,6-0,BYU,6/23/1999,2,,Washington Football Team / 7th / 258th pick / 2021,2023,1,was
