@@ -201,14 +201,9 @@ def statMaker():
     rushRec.drop(rushRec[rushRec['Player'] == 'Team Total'].index, inplace = True)
     rushRec.drop(rushRec[rushRec['Player'] == 'Opp Total'].index, inplace = True)
     
-    #passing.drop(df[df['Fee'] >= 24000].index, inplace = True)
-
-
 
     print(passing)
     print(rushRec)
-
-
 
     #write into csv
     passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv", encoding='utf-8', index=False)

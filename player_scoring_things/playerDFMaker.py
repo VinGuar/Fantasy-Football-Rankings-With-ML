@@ -12,11 +12,41 @@ def dfMaker():
     ppr = 0
 
     #read csv files into pandas
-    qbStats = pd.read_csv("teamsOldQBStats.csv")
-    rushRecStats = pd.read_csv("teamsOldRushRecStats.csv")
-    currTeams = pd.read_csv("currYearRoster")
-    pastTeams = pd.read_csv("teamsPastRoster")
-    currAVs = pd.read_csv("teamsAVGrades")
+    oldQBStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv")
+    oldRushRecStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv")
+    currTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/currYearRoster.csv")
+    pastTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv")
+    currAVs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv")
+
+    for index in range(len(currTeamsRoster)):
+       
+        year = currTeamsRoster.loc[index, 'Yrs']
+        bday = currTeamsRoster.loc[index, 'BirthDate']
+        pos = currTeamsRoster.loc[index, 'Pos']
+        age = currTeamsRoster.loc[index, 'Age']
+        name = currTeamsRoster.loc[index, 'Player']
+
+        #see if rookie
+        if int(year) > 0:
+            pass
+        else:
+            #YOOO THIS WHERE YOU PUT ROOKIE STUFF. also have place for it later
+            continue
+        while True:
+            x = 1
+            playerRow = pastTeamsRoster.loc[(pastTeamsRoster['Player'] == name) & (pastTeamsRoster["YearsBack"] == x) & (pastTeamsRoster["BirthDate"] == bday)].copy()
+            print(playerRow)
+            x+=1
+            break
+
+
+        break
+
+dfMaker()
+
+
+
+
 
     
 
