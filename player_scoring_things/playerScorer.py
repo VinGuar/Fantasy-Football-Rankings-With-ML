@@ -14,3 +14,18 @@
 #make the df based on certain number of games over multiple years if not enough in last year.
 #make sure all columns used in model are their in correct order for each position.
 #remember rookies and to scale data or other necessary cleaning for model
+
+'''
+#make ppg column
+rushRec.loc[:, "FantasyPPG"] = (rushRec["RushYds"]*0.1) + (rushRec["RecYds"]*0.1) + (rushRec["RushTD"]*6) + (rushRec["RecTD"]*6) + (rushRec["Fmb"]*-2)
+if ppr == 2:
+    rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"] + (rushRec["Rec"])
+elif ppr == 1:
+    rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"] + ((rushRec["Rec"])/2)
+
+rushRec.loc[:, "FantasyPPG"] = rushRec["FantasyPPG"]/rushRec["G"]
+
+#make ppg column
+passing.loc[:, "FantasyPPG"] = (passing["RushYds"]*0.1) + (passing["Yds"]*.04) + (passing["RushTD"]*6) + (passing["TD"]*4) + (passing["Fmb"]*-2) + (passing["Int"]*-2)
+passing.loc[:, "FantasyPPG"] = passing["FantasyPPG"]/passing["G"]
+'''
