@@ -25,13 +25,15 @@ def dfMaker():
         pos = currTeamsRoster.loc[index, 'Pos']
         age = currTeamsRoster.loc[index, 'Age']
         name = currTeamsRoster.loc[index, 'Player']
+        team = currTeamsRoster.loc[index, 'Team']
 
         #see if rookie
         if int(year) > 0:
             pass
         else:
-            #YOOO THIS WHERE YOU PUT ROOKIE STUFF. also have place for it later
+            #YOOO THIS WHERE YOU PUT ROOKIE STUFF. also have place for it later if not enough data
             continue
+
         while True:
             x = 1
             playerRow = pastTeamsRoster.loc[(pastTeamsRoster['Player'] == name) & (pastTeamsRoster["YearsBack"] == x) & (pastTeamsRoster["BirthDate"] == bday)].copy()
