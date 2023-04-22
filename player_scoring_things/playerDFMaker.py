@@ -18,8 +18,15 @@ def dfMaker():
     pastTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv")
     currAVs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv")
 
+    completeDFQB = pd.DataFrame(columns= ["Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFOther = pd.DataFrame(columns= ["Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+
+
     for index in range(len(currTeamsRoster)):
-       
+
+        individualDFQB = pd.DataFrame(columns= ["Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+        individualDFOther = pd.DataFrame(columns= ["Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
+        
         year = currTeamsRoster.loc[index, 'Yrs']
         bday = currTeamsRoster.loc[index, 'BirthDate']
         pos = currTeamsRoster.loc[index, 'Pos']
@@ -51,6 +58,7 @@ def dfMaker():
                     playerRowStats = oldQBStats.loc[(oldQBStats["Team"]== teamCurr) & (oldQBStats["Player"]==name) & (oldQBStats["No."]==numberCurr) & oldQBStats["YearsBack"]==x]
                 else:
                     playerRowStats = oldRushRecStats.loc[(oldRushRecStats["Team"]== teamCurr) & (oldRushRecStats["Player"]==name) & (oldRushRecStats["No."]==numberCurr) & (oldRushRecStats["YearsBack"]==x)]
+                
                 print(playerRowStats)
 
 
