@@ -35,6 +35,8 @@ def dfMaker():
         name = currTeamsRoster.loc[index, 'Player']
         team = currTeamsRoster.loc[index, 'Team']
 
+        games = 0
+
         #see if rookie
         if int(year) > 0:
             pass
@@ -54,10 +56,14 @@ def dfMaker():
             for ind in range(len(playerRowRoster)):
                 teamCurr = playerRowRoster.loc[ind, "Team"]
                 numberCurr = playerRowRoster.loc[ind, "No."]
+
                 
                 if pos == "QB":
                     playerRowStats = oldQBStats.loc[(oldQBStats["Team"]== teamCurr) & (oldQBStats["Player"]==name) & (oldQBStats["No."]==numberCurr) & oldQBStats["YearsBack"]==x]
                     playerRowStats = playerRowStats.reset_index() 
+
+                    games = games + playerRowStats["G"]
+
 
                 else:
                     playerRowStats = oldRushRecStats.loc[(oldRushRecStats["Team"]== teamCurr) & (oldRushRecStats["Player"]==name) & (oldRushRecStats["No."]==numberCurr) & (oldRushRecStats["YearsBack"]==x)]
@@ -71,25 +77,41 @@ def dfMaker():
                     individualDFOther["RushingAtt"] = playerRowStats.loc[0, "Att"] + individualDFOther["RushingAtt"]            
                     individualDFOther["ReceivingYds"] = playerRowStats.loc[0, "RecYds"] + individualDFOther["ReceivingYds"]            
                     individualDFOther["ReceivingTD"] = playerRowStats.loc[0, "RecTD"] + individualDFOther["ReceivingTD"]            
-                    individualDFOther["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFOther["Fumbles"]            
+                    individualDFOther["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFOther["Fumbles"]    
 
-                #add other columns needed
-                individualDFOther["Age"] = age
-                print(currAVs)
-                individualDFOther["Age"] = age
-                individualDFOther["Age"] = age
-                individualDFOther["Age"] = age
-                individualDFOther["Age"] = age
-                individualDFOther["Age"] = age
+                    games = games + playerRowStats["G"]
+ 
 
-            
-            
-            print(individualDFOther)
-
-
+            #make it all per game not total.
+        if pos == "qb":
+            pass
+        else:
+            individualDFOther["Tgt"] = individualDFOther["Tgt"]/games
+            individualDFOther["Rec"] = individualDFOther["Rec"]/games
+            individualDFOther["RushingYds"] = individualDFOther["RushingYds"]/games
+            individualDFOther["RushingTD"] = individualDFOther["RushingTD"]/games            
+            individualDFOther["RushingAtt"] = individualDFOther["RushingAtt"]/games            
+            individualDFOther["ReceivingYds"] = individualDFOther["ReceivingYds"]/games            
+            individualDFOther["ReceivingTD"] = individualDFOther["ReceivingTD"]/games            
+            individualDFOther["Fumbles"] = individualDFOther["Fumbles"]/games   
+                
             #if not playerRow.empty:
             x+=1
             break
+       
+
+        #add other columns needed
+        individualDFOther["Age"] = age
+        individualDFOther["ol"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "ol"]
+        individualDFOther["rb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "rb"]
+        individualDFOther["wr"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "wr"]
+        individualDFOther["qb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "qb"]
+        individualDFOther["te"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "te"]
+
+            
+            
+        print(individualDFOther)
+
 
 
         break
