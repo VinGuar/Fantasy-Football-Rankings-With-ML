@@ -205,6 +205,12 @@ def statMaker():
     print(passing)
     print(rushRec)
 
+    #remove *+ that say if pro bowler or not for simplicity.
+    passing["Player"] = passing["Player"].replace("*", "")
+    passing["Player"] = passing["Player"].replace("+", "")
+    rushRec["Player"] = rushRec["Player"].replace("*", "")
+    rushRec["Player"] = rushRec["Player"].replace("+", "")
+
     #write into csv
     passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv", encoding='utf-8', index=False)
     rushRec.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv", encoding='utf-8', index=False)

@@ -33,11 +33,28 @@ def dfMaker():
         else:
             #YOOO THIS WHERE YOU PUT ROOKIE STUFF. also have place for it later if not enough data
             continue
-
+        
+        totalStats = []
         while True:
             x = 1
-            playerRow = pastTeamsRoster.loc[(pastTeamsRoster['Player'] == name) & (pastTeamsRoster["YearsBack"] == x) & (pastTeamsRoster["BirthDate"] == bday)].copy()
-            print(playerRow)
+            name = "Christian McCaffrey"
+            bday = "6/7/1996"            
+            #get all player rows from past year
+            playerRowRoster = pastTeamsRoster.loc[(pastTeamsRoster['Player'] == name) & (pastTeamsRoster["YearsBack"] == x) & (pastTeamsRoster["BirthDate"] == bday)].copy()
+            playerRowRoster = playerRowRoster.reset_index()
+            for ind in range(len(playerRowRoster)):
+                print(x)
+                teamCurr = playerRowRoster.loc[ind, "Team"]
+                numberCurr = playerRowRoster.loc[ind, "No."]
+                
+                if pos == "QB":
+                    playerRowStats = oldQBStats.loc[(oldQBStats["Team"]== teamCurr) & (oldQBStats["Player"]==name) & (oldQBStats["No."]==numberCurr) & oldQBStats["YearsBack"]==x]
+                else:
+                    playerRowStats = oldRushRecStats.loc[(oldRushRecStats["Team"]== teamCurr) & (oldRushRecStats["Player"]==name) & (oldRushRecStats["No."]==numberCurr) & (oldRushRecStats["YearsBack"]==x)]
+                print(playerRowStats)
+
+
+            #if not playerRow.empty:
             x+=1
             break
 
