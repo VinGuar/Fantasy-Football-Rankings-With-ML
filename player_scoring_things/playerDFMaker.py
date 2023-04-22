@@ -80,10 +80,14 @@ def dfMaker():
                     individualDFOther["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFOther["Fumbles"]    
 
                     games = games + playerRowStats["G"]
+
+            #if not playerRow.empty:
+            x+=1
+            break
  
 
-            #make it all per game not total.
-        if pos == "qb":
+        #make it all per game not total.
+        if pos == "QB":
             pass
         else:
             individualDFOther["Tgt"] = individualDFOther["Tgt"]/games
@@ -95,9 +99,7 @@ def dfMaker():
             individualDFOther["ReceivingTD"] = individualDFOther["ReceivingTD"]/games            
             individualDFOther["Fumbles"] = individualDFOther["Fumbles"]/games   
                 
-            #if not playerRow.empty:
-            x+=1
-            break
+
        
 
         #add other columns needed
