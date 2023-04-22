@@ -202,14 +202,16 @@ def statMaker():
     rushRec.drop(rushRec[rushRec['Player'] == 'Opp Total'].index, inplace = True)
     
 
-    print(passing)
-    print(rushRec)
+
 
     #remove *+ that say if pro bowler or not for simplicity.
-    passing["Player"] = passing["Player"].replace("*", "")
-    passing["Player"] = passing["Player"].replace("+", "")
-    rushRec["Player"] = rushRec["Player"].replace("*", "")
-    rushRec["Player"] = rushRec["Player"].replace("+", "")
+    passing["Player"] = passing["Player"].str.replace("*", "")
+    passing["Player"] = passing["Player"].str.replace("+", "")
+    rushRec["Player"] = rushRec["Player"].str.replace("*", "")
+    rushRec["Player"] = rushRec["Player"].str.replace("+", "")
+
+    print(passing)
+    print(rushRec)
 
     #write into csv
     passing.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv", encoding='utf-8', index=False)
