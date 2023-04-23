@@ -49,8 +49,8 @@ def rosterMaker():
     global rate
 
     #years used for grading. changes each season. if making currYearRoster, use array below with current year
-    #years = ["2021", "2020", "2019", "2018"]
-    years = ["2022"]
+    years = ["2021", "2020", "2019", "2018"]
+    #years = ["2022"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -201,9 +201,6 @@ def statMaker():
     rushRec.drop(rushRec[rushRec['Player'] == 'Team Total'].index, inplace = True)
     rushRec.drop(rushRec[rushRec['Player'] == 'Opp Total'].index, inplace = True)
     
-
-
-
     #remove *+ that say if pro bowler or not for simplicity.
     passing["Player"] = passing["Player"].str.replace("*", "")
     passing["Player"] = passing["Player"].str.replace("+", "")
