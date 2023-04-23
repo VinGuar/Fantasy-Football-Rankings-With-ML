@@ -174,7 +174,7 @@ statsPreviousAll = []
 if x:
     pass
 else: 
-    yearsSmall = ["2022"] 
+    yearsSmall = ["2021"] 
 
 #for loop gets data to use for grading of the next year
 for arr in yearsSmall:
@@ -215,7 +215,7 @@ q = 0
 if x:
     pass
 else: 
-    yearsBig = ["2023"] 
+    yearsBig = ["2022"] 
 
 
 #grading the year with past data (achieved from yearsSmall in for loop above)

@@ -49,8 +49,8 @@ def rosterMaker():
     global rate
 
     #years used for grading. changes each season. if making currYearRoster, use array below with current year
-    years = ["2021", "2020", "2019", "2018"]
-    #years = ["2023"]
+    #years = ["2021", "2020", "2019", "2018"]
+    years = ["2022"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -107,7 +107,7 @@ def rosterMaker():
 def statMaker():
     global rate
 
-    years = ["2022", "2021", "2020", "2019"]
+    years = ["2021", "2020", "2019", "2019"]
 
     #team abbr list
     teams = ["crd", "atl", "rav", "buf", "car", "chi", "cin", "cle", "dal", "den", "det", "gnb", "htx", "clt", "jax", "kan", "rai", "sdg", "ram", "mia", "min", "nwe", "nor", "nyg", "nyj", "phi", "pit", "sfo", "sea", "tam", "oti", "was"]
@@ -219,5 +219,5 @@ def statMaker():
              
 
 #comment out whichever one you are not running.
-#rosterMaker()
-statMaker()
+rosterMaker()
+#statMaker()

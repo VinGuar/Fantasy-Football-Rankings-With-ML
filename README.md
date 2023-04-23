@@ -12,7 +12,7 @@ must change if ppr, half ppr, or non ppr in modelMaker, playerDFMaker, playerSco
 
 **BE PATIENT
 ***explain how to run, and whether run each year or just before making. 
-ex: yearly: need to run models in each ppr, get models Old/past/final in in all_rosters_stats thing from csvteamrosterstatmaker
+ex: yearly: need to run models in each ppr, get models Old/past/final in in all_rosters_stats thing from csvteamrosterstatmaker. make sure to say each line in code that you change year for.
 
 **BE PATIENT
 before making list: make curryearroster from csvteamrosterstatmaker, make teamsavgrades from teampositiongrading, make playerstatsmatchedcsv from playerdfmaker, run playerscorer to grade players and make csv of final rankings. then run main.
