@@ -10,7 +10,7 @@ def dfMaker():
 
     #if ppr is 0 it is non ppr, if it is 1 it is half ppr, if its 2 it is full ppr
     ppr = 0
-
+    
     #read csv files into pandas
     oldQBStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv")
     oldRushRecStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldRushRecStats.csv")
@@ -18,8 +18,8 @@ def dfMaker():
     pastTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv")
     currAVs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv")
 
-    completeDFQB = pd.DataFrame(columns= ["Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-    completeDFOther = pd.DataFrame(columns= ["Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFQB = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFOther = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
     rookieList = []
 
     f = 0
@@ -32,8 +32,11 @@ def dfMaker():
         #years back variable
         x = 1
 
-        individualDFQB = pd.DataFrame(columns= ["Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-        individualDFOther = pd.DataFrame(columns= ["Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
+        #penalty variable for injuries
+        penalty = 0
+
+        individualDFQB = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+        individualDFOther = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
         individualDFOther.loc[0] = [0] * len(individualDFOther.columns)
         individualDFQB.loc[0] = [0] * len(individualDFQB.columns)
 
@@ -68,11 +71,14 @@ def dfMaker():
                 if x>3:
                     if games>6:
                         break
-                    else:
+                    elif (int(year)<4):
                         #add player to rookie column
                         dict = {}
                         dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
                         rookieList.append(dict)
+                        breakBool = True
+                        break
+                    else:
                         breakBool = True
                         break
 
@@ -123,13 +129,24 @@ def dfMaker():
 
                     games = games + playerRowStats.loc[0, "G"]
 
-                
+                #add penalty variable
+                if (x==1):
+                    penalty = penalty + playerRowStats.loc[0, "G"]   
+                elif (x==2):
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.8)   
+                elif (x==3):
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.6)   
+                elif (x==4):
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.4)   
 
-            if (games<6) and (x>3):
+            if (games<6) and (x>3) and (int(year)<4):
                 #add player to rookie column
                 dict = {}
                 dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
                 rookieList.append(dict)
+                breakBool = True
+                break
+            elif (games<6) and (x>3):
                 breakBool = True
                 break
             if (games>6) or (x>3):
@@ -154,6 +171,11 @@ def dfMaker():
             individualDFQB["Fumbles"] = individualDFQB["Fumbles"]/games  
             individualDFQB["Name"] = name
             individualDFQB["Games"] = games
+            individualDFQB["Penalty"] = penalty/games
+
+            #ppg column
+            individualDFQB.loc[:, "PPG"] = (individualDFQB["RushingYds"]*0.1) + (individualDFQB["PassingYds"]*.04) + (individualDFQB["RushingTD"]*6) + (individualDFQB["PassingTD"]*4) + (individualDFQB["Fumbles"]*-2) + (individualDFQB["Int"]*-2)
+            individualDFQB.loc[:, "PPG"] = individualDFQB["PPG"]
             
             #add other columns needed
             individualDFQB["Age"] = age
@@ -180,6 +202,7 @@ def dfMaker():
 
         else:
             #make it all per game not total
+            print(games)
             individualDFOther["Tgt"] = individualDFOther["Tgt"]/games
             individualDFOther["Rec"] = individualDFOther["Rec"]/games
             individualDFOther["RushingYds"] = individualDFOther["RushingYds"]/games
@@ -190,6 +213,16 @@ def dfMaker():
             individualDFOther["Fumbles"] = individualDFOther["Fumbles"]/games   
             individualDFOther["Name"] = name
             individualDFOther["Games"] = games
+            individualDFOther["Penalty"] = penalty/games
+
+            #ppg column
+            individualDFOther.loc[:, "PPG"] = (individualDFOther["RushingYds"]*0.1) + (individualDFOther["ReceivingYds"]*0.1) + (individualDFOther["RushingTD"]*6) + (individualDFOther["ReceivingTD"]*6) + (individualDFOther["Fumbles"]*-2)
+            if ppr == 2:
+                individualDFOther.loc[:, "PPG"] = individualDFOther["PPG"] + (individualDFOther["Rec"])
+            elif ppr == 1:
+                individualDFOther.loc[:, "PPG"] = individualDFOther["PPG"] + ((individualDFOther["Rec"])/2)
+
+            individualDFOther.loc[:, "PPG"] = individualDFOther["PPG"]
                    
             #add other columns needed
             individualDFOther["Age"] = age
@@ -213,14 +246,20 @@ def dfMaker():
             completeDFOther = pd.concat([completeDFOther, individualDFOther], ignore_index=True, join="inner")                
                 
 
-        #if f >50:
     print(completeDFOther)
     print(completeDFQB)
     print(rookieList)
-            
-
-            #break
-
+    
+    #write into csv based on ppr
+    if ppr == 0:
+        completeDFOther.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelNonPPR.csv", encoding='utf-8', index=False)
+        completeDFQB.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelNonPPR.csv", encoding='utf-8', index=False)
+    elif ppr == 1:
+        completeDFOther.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelHalfPPR.csv", encoding='utf-8', index=False)
+        completeDFQB.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelHalfPPR.csv", encoding='utf-8', index=False)
+    elif ppr == 2:
+        completeDFOther.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelPPR.csv", encoding='utf-8', index=False)
+        completeDFQB.to_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelPPR.csv", encoding='utf-8', index=False)
 dfMaker()
 
 
