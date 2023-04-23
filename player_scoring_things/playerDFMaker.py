@@ -160,16 +160,20 @@ def dfMaker():
 
             #locate row with correct team and pos and add it
             rowOL = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFQB['ol'] = row['ol']
+            individualDFQB['ol'] = rowOL['ol']
             
             rowRB = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFQB['ol'] = rowRB['rb']
+            individualDFQB['rb'] = rowRB['rb']
+
+                      
+            rowWR = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFQB['wr'] = rowWR['wr']
 
             rowQB = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFQB['ol'] = rowQB['qb']
+            individualDFQB['qb'] = rowQB['qb']
 
             rowTE = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFQB['ol'] = rowTE['te']
+            individualDFQB['te'] = rowTE['te']
 
             completeDFQB = pd.concat([completeDFQB, individualDFQB], ignore_index=True, join="inner")                
                 
@@ -192,27 +196,30 @@ def dfMaker():
 
             #locate row with correct team and pos and add it
             rowOL = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFOther['ol'] = row['ol']
+            individualDFOther['ol'] = rowOL['ol']
             
             rowRB = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFOther['ol'] = rowRB['rb']
+            individualDFOther['rb'] = rowRB['rb']
 
             rowQB = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFOther['ol'] = rowQB['qb']
+            individualDFOther['qb'] = rowQB['qb']
+
+            rowWR = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFOther['wr'] = rowWR['wr']
 
             rowTE = currAVs.loc[currAVs['team'] == team].iloc[0]
-            individualDFOther['ol'] = rowTE['te']
+            individualDFOther['te'] = rowTE['te']
             
             completeDFOther = pd.concat([completeDFOther, individualDFOther], ignore_index=True, join="inner")                
                 
 
-        if f >50:
-            print(completeDFOther)
-            print(completeDFQB)
-            print(rookieList)
+        #if f >50:
+    print(completeDFOther)
+    print(completeDFQB)
+    print(rookieList)
             
 
-            break
+            #break
 
 dfMaker()
 
