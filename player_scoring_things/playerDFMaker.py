@@ -9,7 +9,7 @@ from itertools import chain
 def dfMaker():
 
     #if ppr is 0 it is non ppr, if it is 1 it is half ppr, if its 2 it is full ppr
-    ppr = 0
+    ppr = 2
     
     #read csv files into pandas
     oldQBStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv")
@@ -18,8 +18,8 @@ def dfMaker():
     pastTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv")
     currAVs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv")
 
-    completeDFQB = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-    completeDFOther = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFQB = pd.DataFrame(columns= ["Pos", "Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFOther = pd.DataFrame(columns= ["Pos", "Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
     rookieList = []
 
     f = 0
@@ -35,8 +35,8 @@ def dfMaker():
         #penalty variable for injuries
         penalty = 0
 
-        individualDFQB = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-        individualDFOther = pd.DataFrame(columns= ["Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
+        individualDFQB = pd.DataFrame(columns= ["Pos", "Penalty", "Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+        individualDFOther = pd.DataFrame(columns= ["Pos", "Penalty", "Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
         individualDFOther.loc[0] = [0] * len(individualDFOther.columns)
         individualDFQB.loc[0] = [0] * len(individualDFQB.columns)
 
@@ -170,6 +170,7 @@ def dfMaker():
             individualDFQB["Int"] = individualDFQB["Int"]/games            
             individualDFQB["Fumbles"] = individualDFQB["Fumbles"]/games  
             individualDFQB["Name"] = name
+            individualDFQB["Pos"] = pos
             individualDFQB["Games"] = games
             individualDFQB["Penalty"] = penalty/games
 
@@ -212,6 +213,7 @@ def dfMaker():
             individualDFOther["ReceivingTD"] = individualDFOther["ReceivingTD"]/games            
             individualDFOther["Fumbles"] = individualDFOther["Fumbles"]/games   
             individualDFOther["Name"] = name
+            individualDFOther["Pos"] = pos
             individualDFOther["Games"] = games
             individualDFOther["Penalty"] = penalty/games
 

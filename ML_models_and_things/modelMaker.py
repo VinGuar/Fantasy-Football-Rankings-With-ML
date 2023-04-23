@@ -410,8 +410,8 @@ print(dfFantasyQB.columns)
 print(dfFantasyRB.columns)
 
 #loads models
-#loadedRB = joblib.load("ML_models_and_things/models_per_position/rbModel.joblib")
-#loadedWR = joblib.load("ML_models_and_things/models_per_position/wrModel.joblib")
-#loadedQB = joblib.load("ML_models_and_things/models_per_position/qbModel.joblib")
-#loadedTE = joblib.load("ML_models_and_things/models_per_position/teModel.joblib")
+#loadedRB = joblib.load("ML_models_and_things/all_models/rbModel.joblib")
+#loadedWR = joblib.load("ML_models_and_things/all_models/wrModel.joblib")
+#loadedQB = joblib.load("ML_models_and_things/all_models/qbModel.joblib")
+#loadedTE = joblib.load("ML_models_and_things/all_models/teModel.joblib"))
 
