@@ -18,17 +18,22 @@ def dfMaker():
     pastTeamsRoster = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsPastRoster.csv")
     currAVs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsAVGrades.csv")
 
-    completeDFQB = pd.DataFrame(columns= ["Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-    completeDFOther = pd.DataFrame(columns= ["Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFQB = pd.DataFrame(columns= ["Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+    completeDFOther = pd.DataFrame(columns= ["Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
     rookieList = []
 
-
+    f = 0
     for index in range(len(currTeamsRoster)):
+
+        f+=1
         #boolean to break if rookie
         breakBool = False
 
-        individualDFQB = pd.DataFrame(columns= ["Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
-        individualDFOther = pd.DataFrame(columns= ["Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
+        #years back variable
+        x = 1
+
+        individualDFQB = pd.DataFrame(columns= ["Games", "Name", "Age", "PassingYds", "PassingTD", "PassingAtt", "RushingYds", "RushingTD", "RushingAtt", "Int", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])
+        individualDFOther = pd.DataFrame(columns= ["Games", "Name", "Age", "Tgt", "Rec", "RushingYds", "RushingTD", "RushingAtt", "ReceivingYds", "ReceivingTD", "Fumbles", "PPG", "ol", "rb", "wr", "qb", "te"])       
         individualDFOther.loc[0] = [0] * len(individualDFOther.columns)
         individualDFQB.loc[0] = [0] * len(individualDFQB.columns)
 
@@ -38,30 +43,40 @@ def dfMaker():
         age = currTeamsRoster.loc[index, 'Age']
         name = currTeamsRoster.loc[index, 'Player']
         team = currTeamsRoster.loc[index, 'Team']
+        print(name, team)
 
         games = 0
 
         #see if rookie
-        if int(year) > 0:
-            pass
-        else:
+        if year == "Rook":
             #add player to rookie column
             dict = {}
             dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
             rookieList.append(dict)
+            breakBool = True
+
             continue
         
         totalStats = []
         while True:
-            x = 1
-            name = "Patrick Mahomes"
-            pos = "QB"
-            bday = "9/17/1995"            
+         
             #get all player rows from past year
             playerRowRoster = pastTeamsRoster.loc[(pastTeamsRoster['Player'] == name) & (pastTeamsRoster["YearsBack"] == x) & (pastTeamsRoster["BirthDate"] == bday)].copy()
             playerRowRoster = playerRowRoster.reset_index()
             
             if playerRowRoster.empty:
+                if x>3:
+                    if games>6:
+                        break
+                    else:
+                        #add player to rookie column
+                        dict = {}
+                        dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
+                        rookieList.append(dict)
+                        breakBool = True
+                        break
+
+                x=x+1
                 continue
 
             for ind in range(len(playerRowRoster)):
@@ -72,7 +87,11 @@ def dfMaker():
                 if pos == "QB":
                     playerRowStats = oldQBStats.loc[(oldQBStats["Team"]== teamCurr) & (oldQBStats["Player"]==name) & (oldQBStats["No."]==numberCurr) & (oldQBStats["YearsBack"]==x)]
                     playerRowStats = playerRowStats.reset_index() 
-                                        
+                    playerRowStats = playerRowStats.fillna(0)
+
+                    if playerRowStats.empty:
+                        continue
+                                                
                     #add columns to each other to get df of stats per player
                     individualDFQB["PassingYds"] = playerRowStats.loc[0, "Yds"] + individualDFQB["PassingYds"]
                     individualDFQB["PassingTD"] = playerRowStats.loc[0, "TD"] + individualDFQB["PassingTD"]
@@ -82,11 +101,15 @@ def dfMaker():
                     individualDFQB["RushingAtt"] = playerRowStats.loc[0, "RushAtt"] + individualDFQB["RushingAtt"]            
                     individualDFQB["Int"] = playerRowStats.loc[0, "Int"] + individualDFQB["Int"]            
                     individualDFQB["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFQB["Fumbles"]    
-                    games = games + playerRowStats.loc[ind, "G"]
+                    games = games + playerRowStats.loc[0, "G"]
 
                 else:
                     playerRowStats = oldRushRecStats.loc[(oldRushRecStats["Team"]== teamCurr) & (oldRushRecStats["Player"]==name) & (oldRushRecStats["No."]==numberCurr) & (oldRushRecStats["YearsBack"]==x)]
                     playerRowStats = playerRowStats.reset_index() 
+                    playerRowStats = playerRowStats.fillna(0)
+                    
+                    if playerRowStats.empty:
+                        continue
 
                     #add columns to each other to get df of stats per player
                     individualDFOther["Tgt"] = playerRowStats.loc[0, "Tgt"] + individualDFOther["Tgt"]
@@ -98,23 +121,26 @@ def dfMaker():
                     individualDFOther["ReceivingTD"] = playerRowStats.loc[0, "RecTD"] + individualDFOther["ReceivingTD"]            
                     individualDFOther["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFOther["Fumbles"]    
 
-                    games = games + playerRowStats.loc[ind, "G"]
+                    games = games + playerRowStats.loc[0, "G"]
 
-                print(games)
                 
-                if (games>6) or (x>3):
-                    break
-                elif (games<6) and (x>3):
-                    #add player to rookie column
-                    dict = {}
-                    dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
-                    rookieList.append(dict)
-                    breakBool = True
+
+            if (games<6) and (x>3):
+                #add player to rookie column
+                dict = {}
+                dict = {"Name": name, "Year": year, "Bday": bday, "Age": age, "Team": team}
+                rookieList.append(dict)
+                breakBool = True
+                break
+            if (games>6) or (x>3):
+                break
+
             x+=1
-            break
+
+
         #break if rookie
         if (breakBool == True):
-            break
+            continue
 
         if pos == "QB":
             #make it all per game not total
@@ -126,18 +152,27 @@ def dfMaker():
             individualDFQB["RushingAtt"] = individualDFQB["RushingAtt"]/games            
             individualDFQB["Int"] = individualDFQB["Int"]/games            
             individualDFQB["Fumbles"] = individualDFQB["Fumbles"]/games  
-
+            individualDFQB["Name"] = name
+            individualDFQB["Games"] = games
+            
             #add other columns needed
             individualDFQB["Age"] = age
-            individualDFQB["ol"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "ol"]
-            individualDFQB["rb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "rb"]
-            individualDFQB["wr"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "wr"]
-            individualDFQB["qb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "qb"]
-            individualDFQB["te"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "te"]
+
+            #locate row with correct team and pos and add it
+            rowOL = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFQB['ol'] = row['ol']
+            
+            rowRB = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFQB['ol'] = rowRB['rb']
+
+            rowQB = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFQB['ol'] = rowQB['qb']
+
+            rowTE = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFQB['ol'] = rowTE['te']
 
             completeDFQB = pd.concat([completeDFQB, individualDFQB], ignore_index=True, join="inner")                
                 
-            print(completeDFQB)
 
         else:
             #make it all per game not total
@@ -149,22 +184,35 @@ def dfMaker():
             individualDFOther["ReceivingYds"] = individualDFOther["ReceivingYds"]/games            
             individualDFOther["ReceivingTD"] = individualDFOther["ReceivingTD"]/games            
             individualDFOther["Fumbles"] = individualDFOther["Fumbles"]/games   
-                    
+            individualDFOther["Name"] = name
+            individualDFOther["Games"] = games
+                   
             #add other columns needed
             individualDFOther["Age"] = age
-            individualDFOther["ol"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "ol"]
-            individualDFOther["rb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "rb"]
-            individualDFOther["wr"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "wr"]
-            individualDFOther["qb"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "qb"]
-            individualDFOther["te"] = currAVs.loc[currAVs.index[currAVs['team'] == team], "te"]
+
+            #locate row with correct team and pos and add it
+            rowOL = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFOther['ol'] = row['ol']
+            
+            rowRB = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFOther['ol'] = rowRB['rb']
+
+            rowQB = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFOther['ol'] = rowQB['qb']
+
+            rowTE = currAVs.loc[currAVs['team'] == team].iloc[0]
+            individualDFOther['ol'] = rowTE['te']
             
             completeDFOther = pd.concat([completeDFOther, individualDFOther], ignore_index=True, join="inner")                
                 
+
+        if f >50:
             print(completeDFOther)
+            print(completeDFQB)
+            print(rookieList)
+            
 
-
-
-        break
+            break
 
 dfMaker()
 
