@@ -9,7 +9,7 @@ from itertools import chain
 def dfMaker():
 
     #if ppr is 0 it is non ppr, if it is 1 it is half ppr, if its 2 it is full ppr
-    ppr = 2
+    ppr = 0
     
     #read csv files into pandas
     oldQBStats = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/teamsOldQBStats.csv")

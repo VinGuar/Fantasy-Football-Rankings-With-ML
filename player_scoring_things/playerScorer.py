@@ -25,7 +25,7 @@ def scorer():
     scaler = MinMaxScaler()
 
     #ppr variable. if 0 its non ppr, if 1 its half ppr, if 2 its full ppr
-    ppr = 2
+    ppr = 0
 
     #dict of scores
     dictScores = {}
@@ -82,7 +82,7 @@ def scorer():
         model = modelsDict[pos]
         prediction = model.predict(currRowForModel)        
 
-        if pos == "RB":
+        if pos == "TE":
             rb[name] = prediction*penalty
 
         dictScores[name] = prediction[0]*penalty
