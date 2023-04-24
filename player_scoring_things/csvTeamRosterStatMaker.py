@@ -11,9 +11,9 @@ from itertools import chain
 rate = 0
 def checkRate(r):
     global rate
-    if r > 16:
-        rate = 0
-        time.sleep(61)
+    #if r > 16:
+        #rate = 0
+    time.sleep(5)
 
 #since roster table is hidden in comments, needs this to fish it out
 def makeCommentTable(soup1, type):

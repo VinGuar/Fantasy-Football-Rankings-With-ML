@@ -64,15 +64,15 @@ def scorer():
 
     modelsDict = {"QB": qbModel, "WR": wrModel, "RB": rbModel, "TE": teModel}
     otherScaled = other.copy()
-    otherScaled = otherScaled.drop(columns=["Games", "Pos", "Penalty", "Name"])        
+    otherScaled = otherScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
     otherScaled[otherScaled.columns] = scaler.fit_transform(otherScaled[otherScaled.columns])
     
     qbsScaled = qbs.copy()
-    qbsScaled = qbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name"])        
+    qbsScaled = qbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
     qbsScaled[qbsScaled.columns] = scaler.fit_transform(qbsScaled[qbsScaled.columns])
 
     rb = {}
-    '''
+    
     for ind in range(len(other)):
         currRow = other.iloc[[ind]]
         currRow = currRow.reset_index()
@@ -91,13 +91,16 @@ def scorer():
             rb[name] = prediction*penalty
 
         dictScores[name] = prediction[0]*penalty
-        sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-        sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
-        df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-        #df.to_csv("rankings.csv", encoding='utf-8', index=False)
-
-    print(df)
+    '''    
+    sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
+    sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
+    df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
+    #df.to_csv("rankings.csv", encoding='utf-8', index=False)
     '''
+
+    #print(df)
+    
+    teamDict = {}
     for ind in range(len(qbs)):
         currRow = qbs.iloc[[ind]]
         currRow = currRow.reset_index()
@@ -108,18 +111,22 @@ def scorer():
         pos = currRow.loc[0, "Pos"]
         name = currRow.loc[0, "Name"]
         penalty = currRow.loc[0, "Penalty"]
+        team = currRow.loc[0, "Team"]
 
         model = modelsDict[pos]
         prediction = model.predict(currRowForModel)        
 
         if pos == "QB":
-            rb[name] = prediction*penalty
+            rb[name] = prediction[0]*penalty      
+
+        #teamDict[team]
 
         dictScores[name] = prediction[0]*penalty
-        sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-        sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
-        df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-        df.to_csv("rankings.csv", encoding='utf-8', index=False)
+        
+    sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
+    #sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
+    df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
+    df.to_csv("rankings.csv", encoding='utf-8', index=False)
 
     print(df)
 
