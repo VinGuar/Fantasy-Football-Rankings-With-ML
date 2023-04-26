@@ -16,3 +16,5 @@ ex: yearly: need to run models in each ppr, get models Old/past/final in in all_
 
 **BE PATIENT
 before making list: make curryearroster from csvteamrosterstatmaker, make teamsavgrades from teampositiongrading, make playerstatsmatchedcsv from playerdfmaker, run playerscorer to grade players and make csv of final rankings. then run main.
+
+tell them how co starters like knight and hall or allegier and rookie rb may overvalue botj
