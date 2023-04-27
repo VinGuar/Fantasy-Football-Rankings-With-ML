@@ -108,6 +108,7 @@ def dfMaker():
                     individualDFQB["Int"] = playerRowStats.loc[0, "Int"] + individualDFQB["Int"]            
                     individualDFQB["Fumbles"] = playerRowStats.loc[0, "Fmb"] + individualDFQB["Fumbles"]    
                     games = games + playerRowStats.loc[0, "G"]
+ 
 
                 else:
                     playerRowStats = oldRushRecStats.loc[(oldRushRecStats["Team"]== teamCurr) & (oldRushRecStats["Player"]==name) & (oldRushRecStats["No."]==numberCurr) & (oldRushRecStats["YearsBack"]==x)]
@@ -133,11 +134,11 @@ def dfMaker():
                 if (x==1):
                     penalty = penalty + playerRowStats.loc[0, "G"]   
                 elif (x==2):
-                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.8)   
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.9)   
                 elif (x==3):
-                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.6)   
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.8)   
                 elif (x==4):
-                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.4)   
+                    penalty = penalty + (playerRowStats.loc[0, "G"]*0.7)   
 
             if (games<6) and (x>3) and (int(year)<4):
                 #add player to rookie column
@@ -218,6 +219,8 @@ def dfMaker():
             individualDFOther["Team"] = team
             individualDFOther["Games"] = games
             individualDFOther["Penalty"] = penalty/games
+            #individualDFOther["Penalty"] = 1
+
 
             #ppg column
             individualDFOther.loc[:, "PPG"] = (individualDFOther["RushingYds"]*0.1) + (individualDFOther["ReceivingYds"]*0.1) + (individualDFOther["RushingTD"]*6) + (individualDFOther["ReceivingTD"]*6) + (individualDFOther["Fumbles"]*-2)

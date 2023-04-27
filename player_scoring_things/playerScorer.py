@@ -117,12 +117,16 @@ def scorer():
     allPosDfsScaled = [rbsScaled, wrsScaled, tesScaled, qbsScaled]
     scaleBack = [scaleRB, scaleWR, scaleTE, scaleQB]
 
-    #for ind in range(len(allPosDFs)):
-    for ind in range(3):
+    currPosDict = {}
+    indPosArr = []
+
+    for ind in range(len(allPosDFs)):
         ind = 0
         currDF = allPosDFs[ind]
         scaled = allPosDfsScaled[ind]
         arr = scaleBack[ind]
+        currPosDict = {}
+    
 
         for i in range(len(currDF)):
             currRow = currDF.iloc[[i]]
@@ -140,69 +144,40 @@ def scorer():
 
             #inverse transform the scaled predictions to get the original scale by reversing formula
             prediction = (prediction*(arr[1] - arr[0])) + arr[0]
-            
+           
             dictScores[name] = prediction[0]*penalty
-    
+            currPosDict[name] = prediction[0]*penalty   
+
+        indPosArr.append(currPosDict)
+
         break
-
-    '''
-    for ind in range(len(other)):
-        
-        currRow = other.iloc[[ind]]
-        currRow = currRow.reset_index()
-        otherScaled = otherScaled.reset_index()
-        otherScaled = otherScaled.drop(columns=["index"])        
-        currRowForModel = otherScaled.iloc[[ind]] 
-
-        pos = currRow.loc[0, "Pos"]
-        name = currRow.loc[0, "Name"]
-        penalty = currRow.loc[0, "Penalty"]
-
-        model = modelsDict[pos]
-        prediction = model.predict(currRowForModel)        
-
-        if pos == "TE":
-            rb[name] = prediction*penalty
-
-        dictScores[name] = prediction[0]*penalty
+   
         
     sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-    sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
     df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-    #df.to_csv("rankings.csv", encoding='utf-8', index=False)
-    
 
-    #print(df)
-    
-    teamDict = {}
-    for ind in range(len(qbs)):
-        currRow = qbs.iloc[[ind]]
-        currRow = currRow.reset_index()
-        qbsScaled = qbsScaled.reset_index()
-        qbsScaled = qbsScaled.drop(columns=["index"])        
-        currRowForModel = qbsScaled.iloc[[ind]] 
+    finalrbs = indPosArr[0]
+    finalwrs = indPosArr[1]
+    finaltes = indPosArr[2]
+    finalqbs = indPosArr[3]
 
-        pos = currRow.loc[0, "Pos"]
-        name = currRow.loc[0, "Name"]
-        penalty = currRow.loc[0, "Penalty"]
-        team = currRow.loc[0, "Team"]
+    finalrbs = dict(sorted(finalrbs.items(), key=lambda item: item[1], reverse=True))
+    finalwrs = dict(sorted(finalwrs.items(), key=lambda item: item[1], reverse=True))
+    finaltes = dict(sorted(finaltes.items(), key=lambda item: item[1], reverse=True))
+    finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
 
-        model = modelsDict[pos]
-        prediction = model.predict(currRowForModel)        
+    finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name', 'Score'])
+    finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
+    finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
+    finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
 
-        if pos == "QB":
-            rb[name] = prediction[0]*penalty      
 
-        #teamDict[team]
 
-        dictScores[name] = prediction[0]*penalty
-    '''
-    
-        
-    sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-    #sorted_dict = dict(sorted(rb.items(), key=lambda item: item[1], reverse=True))
-    df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-    df.to_csv("rankings.csv", encoding='utf-8', index=False)
+    df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
+    finalrbs.to_csv("final_rankings/final_RBs.csv", encoding='utf-8', index=False)
+    finalwrs.to_csv("final_rankings/final_WRs,csv", encoding='utf-8', index=False)
+    finaltes.to_csv("final_rankings/final_TEs.csv", encoding='utf-8', index=False)
+    finalqbs.to_csv("final_rankings/final_QBs.csv", encoding='utf-8', index=False)
 
     print(df)
 
