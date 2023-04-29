@@ -279,132 +279,133 @@ def test(df, model, arr):
   mae = mean_absolute_error(y_test, predict_test)
   print("test ", mae)
 
-#if ppr is 0, than it is non ppr. if 1, then it is half ppr. if 2, full ppr. need to run each to get each model.
-ppr = 0
-dfFantasy = dfFantasy.dropna()
+#if ppr is 0, than it is non ppr. if 1, then it is half ppr. if 2, full ppr. loops through each.
+for ppr in range(3):
+  dfFantasy = dfFantasy.dropna()
 
-#removes 2 team players as it will not work well with datasets
-dfFantasy = dfFantasy[dfFantasy.Tm != "2TM"] 
-dfFantasy = dfFantasy[dfFantasy.Tm != "3TM"]
-dfFantasy = dfFantasy[dfFantasy.Tm != "4TM"]
+  #removes 2 team players as it will not work well with datasets
+  dfFantasy = dfFantasy[dfFantasy.Tm != "2TM"] 
+  dfFantasy = dfFantasy[dfFantasy.Tm != "3TM"]
+  dfFantasy = dfFantasy[dfFantasy.Tm != "4TM"]
 
-#make team abbreviations correct
-dfFantasy = getTeamAbbrMatching(dfFantasy)
+  #make team abbreviations correct
+  dfFantasy = getTeamAbbrMatching(dfFantasy)
 
-#makes dataframes only their position
-dfFantasyRB = dfFantasy[dfFantasy.Pos == "RB"]
-dfFantasyWR = dfFantasy[dfFantasy.Pos == "WR"]
-dfFantasyQB = dfFantasy[dfFantasy.Pos == "QB"]
-dfFantasyTE = dfFantasy[dfFantasy.Pos == "TE"]
+  #makes dataframes only their position
+  dfFantasyRB = dfFantasy[dfFantasy.Pos == "RB"]
+  dfFantasyWR = dfFantasy[dfFantasy.Pos == "WR"]
+  dfFantasyQB = dfFantasy[dfFantasy.Pos == "QB"]
+  dfFantasyTE = dfFantasy[dfFantasy.Pos == "TE"]
 
-#makes the data correct as shown by method CorrectData (enough games played, ppr or not, etc)
-dfFantasyRB = correctData(dfFantasyRB, "RB", ppr)
-dfFantasyWR = correctData(dfFantasyWR, "WR", ppr)
-dfFantasyQB = correctData(dfFantasyQB, "QB", ppr)
-dfFantasyTE = correctData(dfFantasyTE, "TE", ppr)
+  #makes the data correct as shown by method CorrectData (enough games played, ppr or not, etc)
+  dfFantasyRB = correctData(dfFantasyRB, "RB", ppr)
+  dfFantasyWR = correctData(dfFantasyWR, "WR", ppr)
+  dfFantasyQB = correctData(dfFantasyQB, "QB", ppr)
+  dfFantasyTE = correctData(dfFantasyTE, "TE", ppr)
 
-#add on avs
-dfFantasyWR = putAV(dfFantasyWR, dfGrades)
-dfFantasyRB = putAV(dfFantasyRB, dfGrades)
-dfFantasyTE = putAV(dfFantasyTE, dfGrades)
-dfFantasyQB = putAV(dfFantasyQB, dfGrades)
+  #add on avs
+  dfFantasyWR = putAV(dfFantasyWR, dfGrades)
+  dfFantasyRB = putAV(dfFantasyRB, dfGrades)
+  dfFantasyTE = putAV(dfFantasyTE, dfGrades)
+  dfFantasyQB = putAV(dfFantasyQB, dfGrades)
 
-#shift the years so its predicting correctly
-dfFantasyWR = makeCorrectShift(dfFantasyWR)
-dfFantasyRB = makeCorrectShift(dfFantasyRB)
-dfFantasyTE = makeCorrectShift(dfFantasyTE)
-dfFantasyQB = makeCorrectShift(dfFantasyQB)
+  #shift the years so its predicting correctly
+  dfFantasyWR = makeCorrectShift(dfFantasyWR)
+  dfFantasyRB = makeCorrectShift(dfFantasyRB)
+  dfFantasyTE = makeCorrectShift(dfFantasyTE)
+  dfFantasyQB = makeCorrectShift(dfFantasyQB)
 
-#removes any rows with the year 2011
-dfFantasyWR = dfFantasyWR.loc[dfFantasyWR["Year"] != 2011]
-dfFantasyTE = dfFantasyTE.loc[dfFantasyTE["Year"] != 2011]
-dfFantasyRB = dfFantasyRB.loc[dfFantasyRB["Year"] != 2011]
-dfFantasyQB = dfFantasyQB.loc[dfFantasyQB["Year"] != 2011]
+  #removes any rows with the year 2011
+  dfFantasyWR = dfFantasyWR.loc[dfFantasyWR["Year"] != 2011]
+  dfFantasyTE = dfFantasyTE.loc[dfFantasyTE["Year"] != 2011]
+  dfFantasyRB = dfFantasyRB.loc[dfFantasyRB["Year"] != 2011]
+  dfFantasyQB = dfFantasyQB.loc[dfFantasyQB["Year"] != 2011]
 
-#get right columns
-dfFantasyWR = removeUnwanted(dfFantasyWR, "WR")
-dfFantasyRB = removeUnwanted(dfFantasyRB, "RB")
-dfFantasyTE = removeUnwanted(dfFantasyTE, "TE")
-dfFantasyQB = removeUnwanted(dfFantasyQB, "QB")
+  #get right columns
+  dfFantasyWR = removeUnwanted(dfFantasyWR, "WR")
+  dfFantasyRB = removeUnwanted(dfFantasyRB, "RB")
+  dfFantasyTE = removeUnwanted(dfFantasyTE, "TE")
+  dfFantasyQB = removeUnwanted(dfFantasyQB, "QB")
 
-#resets index of dataframes
-dfFantasyWR = dfFantasyWR.reset_index(drop=True)
-dfFantasyRB = dfFantasyRB.reset_index(drop=True)
-dfFantasyTE = dfFantasyTE.reset_index(drop=True)
-dfFantasyQB = dfFantasyQB.reset_index(drop=True)
+  #resets index of dataframes
+  dfFantasyWR = dfFantasyWR.reset_index(drop=True)
+  dfFantasyRB = dfFantasyRB.reset_index(drop=True)
+  dfFantasyTE = dfFantasyTE.reset_index(drop=True)
+  dfFantasyQB = dfFantasyQB.reset_index(drop=True)
 
-#gets fantasypoints scale per each position
-scaleQB = getScaleBack(dfFantasyQB)
-scaleRB = getScaleBack(dfFantasyRB)
-scaleWR = getScaleBack(dfFantasyWR)
-scaleTE = getScaleBack(dfFantasyTE)
+  #gets fantasypoints scale per each position
+  scaleQB = getScaleBack(dfFantasyQB)
+  scaleRB = getScaleBack(dfFantasyRB)
+  scaleWR = getScaleBack(dfFantasyWR)
+  scaleTE = getScaleBack(dfFantasyTE)
 
-#scale data to 1
-dfFantasyWR[dfFantasyWR.columns] = scaler.fit_transform(dfFantasyWR[dfFantasyWR.columns])
-dfFantasyTE[dfFantasyTE.columns] = scaler.fit_transform(dfFantasyTE[dfFantasyTE.columns])
-dfFantasyQB[dfFantasyQB.columns] = scaler.fit_transform(dfFantasyQB[dfFantasyQB.columns])
-dfFantasyRB[dfFantasyRB.columns] = scaler.fit_transform(dfFantasyRB[dfFantasyRB.columns])
+  #scale data to 1
+  dfFantasyWR[dfFantasyWR.columns] = scaler.fit_transform(dfFantasyWR[dfFantasyWR.columns])
+  dfFantasyTE[dfFantasyTE.columns] = scaler.fit_transform(dfFantasyTE[dfFantasyTE.columns])
+  dfFantasyQB[dfFantasyQB.columns] = scaler.fit_transform(dfFantasyQB[dfFantasyQB.columns])
+  dfFantasyRB[dfFantasyRB.columns] = scaler.fit_transform(dfFantasyRB[dfFantasyRB.columns])
 
-#obtained by running the getBestParams function per each respective position
-paramRB = {'activation': 'logistic', 'hidden_layer_sizes': (64, 32), 'max_iter': 200, 'solver': 'lbfgs'}
-#paramRB = getBestParams(dfFantasyRB, scaleRB)
+  #obtained by running the getBestParams function per each respective position
+  paramRB = {'activation': 'logistic', 'hidden_layer_sizes': (64, 32), 'max_iter': 200, 'solver': 'lbfgs'}
+  #paramRB = getBestParams(dfFantasyRB, scaleRB)
 
-#obtained by running the getBestParams function per each respective position
-paramWR = {'activation': 'logistic', 'hidden_layer_sizes': (64, 32), 'max_iter': 500, 'solver': 'lbfgs'}
-#paramWR = getBestParams(dfFantasyWR, scaleWR)
+  #obtained by running the getBestParams function per each respective position
+  paramWR = {'activation': 'logistic', 'hidden_layer_sizes': (64, 32), 'max_iter': 500, 'solver': 'lbfgs'}
+  #paramWR = getBestParams(dfFantasyWR, scaleWR)
 
-#obtained by running the getBestParams function per each respective position
-paramTE = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
-#paramTE = getBestParams(dfFantasyTE, scaleTE)
+  #obtained by running the getBestParams function per each respective position
+  paramTE = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
+  #paramTE = getBestParams(dfFantasyTE, scaleTE)
 
-#obtained by running the getBestParams function per each respective position
-paramQB = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
-#paramQB = getBestParams(dfFantasyQB, scaleQB)
+  #obtained by running the getBestParams function per each respective position
+  paramQB = {'activation': 'tanh', 'hidden_layer_sizes': (64, 64), 'max_iter': 200, 'solver': 'adam'}
+  #paramQB = getBestParams(dfFantasyQB, scaleQB)
 
-#makes array of model and score, then prints it
-rbArray = machineLearning(dfFantasyRB, scaleRB, paramRB)
-num = rbArray[0]
-rbModel = rbArray[1]
-
-print("rb score(ppg off on average per player): ", num)
-
-#makes array of model and score, then prints it
-wrArray = machineLearning(dfFantasyWR, scaleWR, paramWR)
-num = wrArray[0]
-wrModel = wrArray[1]
-
-print("wr score(ppg off on average per player): ", num)
-
-#makes array of model and score, then prints it
-teArray = machineLearning(dfFantasyTE, scaleTE, paramTE)
-num = teArray[0]
-teModel = teArray[1]
-
-print("te score(ppg off on average per player): ", num)
-
-#makes array of model and score, then prints it
-qbArray = machineLearning(dfFantasyQB, scaleQB, paramQB)
-num = qbArray[0]
-qbModel = qbArray[1]
+  #makes array of model and score, then prints it
+  rbArray = machineLearning(dfFantasyRB, scaleRB, paramRB)
+  num = rbArray[0]
+  rbModel = rbArray[1]
   
-print("qb score(ppg off on average per player): ", num)
+  print(ppr)
+  print("rb score(ppg off on average per player): ", num)
 
-if ppr == 0:
-  joblib.dump(rbModel, "ML_models_and_things/all_models/NonPPR_models/rbModelNonPPR.joblib")
-  joblib.dump(wrModel, "ML_models_and_things/all_models/NonPPR_models/wrModelNonPPR.joblib")
-  joblib.dump(qbModel, "ML_models_and_things/all_models/NonPPR_models/qbModelNonPPR.joblib")
-  joblib.dump(teModel, "ML_models_and_things/all_models/NonPPR_models/teModelNonPPR.joblib")
-#dumps each model into a file to be used later.
-elif ppr == 1:
-  joblib.dump(rbModel, "ML_models_and_things/all_models/HalfPPR_models/rbModelHalfPPR.joblib")
-  joblib.dump(wrModel, "ML_models_and_things/all_models/HalfPPR_models/wrModelHalfPPR.joblib")
-  joblib.dump(qbModel, "ML_models_and_things/all_models/HalfPPR_models/qbModelHalfPPR.joblib")
-  joblib.dump(teModel, "ML_models_and_things/all_models/HalfPPR_models/teModelHalfPPR.joblib")
-elif ppr == 2:
-  joblib.dump(rbModel, "ML_models_and_things/all_models/PPR_models/rbModelPPR.joblib")
-  joblib.dump(wrModel, "ML_models_and_things/all_models/PPR_models/wrModelPPR.joblib")
-  joblib.dump(qbModel, "ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
-  joblib.dump(teModel, "ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
+  #makes array of model and score, then prints it
+  wrArray = machineLearning(dfFantasyWR, scaleWR, paramWR)
+  num = wrArray[0]
+  wrModel = wrArray[1]
+
+  print("wr score(ppg off on average per player): ", num)
+
+  #makes array of model and score, then prints it
+  teArray = machineLearning(dfFantasyTE, scaleTE, paramTE)
+  num = teArray[0]
+  teModel = teArray[1]
+
+  print("te score(ppg off on average per player): ", num)
+
+  #makes array of model and score, then prints it
+  qbArray = machineLearning(dfFantasyQB, scaleQB, paramQB)
+  num = qbArray[0]
+  qbModel = qbArray[1]
+    
+  print("qb score(ppg off on average per player): ", num)
+  print("")
+  if ppr == 0:
+    joblib.dump(rbModel, "ML_models_and_things/all_models/NonPPR_models/rbModelNonPPR.joblib")
+    joblib.dump(wrModel, "ML_models_and_things/all_models/NonPPR_models/wrModelNonPPR.joblib")
+    joblib.dump(qbModel, "ML_models_and_things/all_models/NonPPR_models/qbModelNonPPR.joblib")
+    joblib.dump(teModel, "ML_models_and_things/all_models/NonPPR_models/teModelNonPPR.joblib")
+  #dumps each model into a file to be used later.
+  elif ppr == 1:
+    joblib.dump(rbModel, "ML_models_and_things/all_models/HalfPPR_models/rbModelHalfPPR.joblib")
+    joblib.dump(wrModel, "ML_models_and_things/all_models/HalfPPR_models/wrModelHalfPPR.joblib")
+    joblib.dump(qbModel, "ML_models_and_things/all_models/HalfPPR_models/qbModelHalfPPR.joblib")
+    joblib.dump(teModel, "ML_models_and_things/all_models/HalfPPR_models/teModelHalfPPR.joblib")
+  elif ppr == 2:
+    joblib.dump(rbModel, "ML_models_and_things/all_models/PPR_models/rbModelPPR.joblib")
+    joblib.dump(wrModel, "ML_models_and_things/all_models/PPR_models/wrModelPPR.joblib")
+    joblib.dump(qbModel, "ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
+    joblib.dump(teModel, "ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
 
 #print(dfFantasyQB.columns)
 #print(dfFantasyRB.columns)

@@ -21,4 +21,6 @@ tell them how co starters like knight and hall or allegier and rookie rb may ove
 
 tell them how complete rankings maker with varying multiplicators for each pos score may need to be varied every couple years as the league evolves.
 
-tell them may need to run models again if its looking bad, sometimes a bad batch happens
+tell them may need to run models again if its looking bad, sometimes a rly bad batch happens. unlikely, however happens more with qbs. still unlikely tho, so just re-run models and such.
+
+tell them how it may vary a tiny bit with new models. players will stay in same area, just a few small alterations up or down for players each time.
