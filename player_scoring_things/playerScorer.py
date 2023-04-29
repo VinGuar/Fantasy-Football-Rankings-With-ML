@@ -121,7 +121,7 @@ def scorer():
     indPosArr = []
 
     for ind in range(len(allPosDFs)):
-        ind = 0
+        #ind = 0
         currDF = allPosDFs[ind]
         scaled = allPosDfsScaled[ind]
         arr = scaleBack[ind]
@@ -144,18 +144,31 @@ def scorer():
 
             #inverse transform the scaled predictions to get the original scale by reversing formula
             prediction = (prediction*(arr[1] - arr[0])) + arr[0]
-           
-            dictScores[name] = prediction[0]*penalty
+            
+            if pos == "RB":
+                score = prediction[0]*penalty
+                dictScores[name] = score*score
+            elif pos == "WR":
+                score = prediction[0]*penalty
+                dictScores[name] = score*9
+            elif pos == "TE":
+                score = prediction[0]*penalty
+                dictScores[name] = score*score*1.5
+            elif pos == "QB":
+                score = prediction[0]*penalty
+                dictScores[name] = score*3
+
             currPosDict[name] = prediction[0]*penalty   
 
         indPosArr.append(currPosDict)
 
-        break
+        
    
         
     sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
     df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
 
+    print(indPosArr)
     finalrbs = indPosArr[0]
     finalwrs = indPosArr[1]
     finaltes = indPosArr[2]
@@ -175,7 +188,7 @@ def scorer():
 
     df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
     finalrbs.to_csv("final_rankings/final_RBs.csv", encoding='utf-8', index=False)
-    finalwrs.to_csv("final_rankings/final_WRs,csv", encoding='utf-8', index=False)
+    finalwrs.to_csv("final_rankings/final_WRs.csv", encoding='utf-8', index=False)
     finaltes.to_csv("final_rankings/final_TEs.csv", encoding='utf-8', index=False)
     finalqbs.to_csv("final_rankings/final_QBs.csv", encoding='utf-8', index=False)
 

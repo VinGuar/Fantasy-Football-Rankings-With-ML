@@ -366,28 +366,28 @@ rbArray = machineLearning(dfFantasyRB, scaleRB, paramRB)
 num = rbArray[0]
 rbModel = rbArray[1]
 
-print("rb score: ", num)
+print("rb score(ppg off on average per player): ", num)
 
 #makes array of model and score, then prints it
 wrArray = machineLearning(dfFantasyWR, scaleWR, paramWR)
 num = wrArray[0]
 wrModel = wrArray[1]
 
-print("wr score: ", num)
+print("wr score(ppg off on average per player): ", num)
 
 #makes array of model and score, then prints it
 teArray = machineLearning(dfFantasyTE, scaleTE, paramTE)
 num = teArray[0]
 teModel = teArray[1]
 
-print("te score: ", num)
+print("te score(ppg off on average per player): ", num)
 
 #makes array of model and score, then prints it
 qbArray = machineLearning(dfFantasyQB, scaleQB, paramQB)
 num = qbArray[0]
 qbModel = qbArray[1]
   
-print("qb score: ", num)
+print("qb score(ppg off on average per player): ", num)
 
 if ppr == 0:
   joblib.dump(rbModel, "ML_models_and_things/all_models/NonPPR_models/rbModelNonPPR.joblib")
@@ -406,8 +406,8 @@ elif ppr == 2:
   joblib.dump(qbModel, "ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
   joblib.dump(teModel, "ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
 
-print(dfFantasyQB.columns)
-print(dfFantasyRB.columns)
+#print(dfFantasyQB.columns)
+#print(dfFantasyRB.columns)
 
 #loads models
 #loadedRB = joblib.load("ML_models_and_things/all_models/rbModel.joblib")
