@@ -153,7 +153,7 @@ def scorer():
                 dictScores[name] = score*9
             elif pos == "TE":
                 score = prediction[0]*penalty
-                dictScores[name] = score*score*2
+                dictScores[name] = score*score*1.5
             elif pos == "QB":
                 score = prediction[0]*penalty
                 dictScores[name] = score*3
