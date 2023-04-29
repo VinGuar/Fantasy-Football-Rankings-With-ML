@@ -169,7 +169,6 @@ def scorer():
         sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
         df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
 
-        print(indPosArr)
         finalrbs = indPosArr[0]
         finalwrs = indPosArr[1]
         finaltes = indPosArr[2]
@@ -188,20 +187,20 @@ def scorer():
 
         if ppr == 0:
             #df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
-            finalrbs.to_csv("final_rankings/RBs_NonPPR.csv", encoding='utf-8', index=False)
-            finalwrs.to_csv("final_rankings/WRs_NonPPR.csv", encoding='utf-8', index=False)
-            finaltes.to_csv("final_rankings/TEs_NonPPR.csv", encoding='utf-8', index=False)
-            finalqbs.to_csv("final_rankings/QBs_NonPPR.csv", encoding='utf-8', index=False)
+            finalrbs.to_csv("final_rankings/NonPPR_rankings/RBs_NonPPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/NonPPR_rankings/WRs_NonPPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/NonPPR_rankings/TEs_NonPPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/NonPPR_rankings/QBs_NonPPR.csv", encoding='utf-8', index=False)
         elif ppr == 1:
-            finalrbs.to_csv("final_rankings/RBs_HalfPPR.csv", encoding='utf-8', index=False)
-            finalwrs.to_csv("final_rankings/WRs_HalfPPR.csv", encoding='utf-8', index=False)
-            finaltes.to_csv("final_rankings/TEs_HalfPPR.csv", encoding='utf-8', index=False)
-            finalqbs.to_csv("final_rankings/QBs_HalfPPR.csv", encoding='utf-8', index=False)
+            finalrbs.to_csv("final_rankings/HalfPPR_rankings/RBs_HalfPPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/HalfPPR_rankings/WRs_HalfPPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/HalfPPR_rankings/TEs_HalfPPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/HalfPPR_rankings/QBs_HalfPPR.csv", encoding='utf-8', index=False)
         elif ppr == 2:
-            finalrbs.to_csv("final_rankings/RBs_PPR.csv", encoding='utf-8', index=False)
-            finalwrs.to_csv("final_rankings/WRs_PPR.csv", encoding='utf-8', index=False)
-            finaltes.to_csv("final_rankings/TEs_PPR.csv", encoding='utf-8', index=False)
-            finalqbs.to_csv("final_rankings/QBs_PPR.csv", encoding='utf-8', index=False)
+            finalrbs.to_csv("final_rankings/PPR_rankings/RBs_PPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/PPR_rankings/WRs_PPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/PPR_rankings/TEs_PPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/PPR_rankings/QBs_PPR.csv", encoding='utf-8', index=False)
 
 
     print(df)
