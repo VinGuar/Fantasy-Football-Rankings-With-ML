@@ -38,159 +38,171 @@ def scorer():
     #scaler to scale data
     scaler = MinMaxScaler()
 
-    #ppr variable. if 0 its non ppr, if 1 its half ppr, if 2 its full ppr
-    ppr = 0
+    #if 0 its non ppr, if 1 its half ppr, if 2 its full ppr. loops through.
 
-    #dict of scores
-    dictScores = {}
+    for ppr in range(3):
+        #dict of scores
+        dictScores = {}
 
-    if ppr == 0:
-        #read in player stats df
-        qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelNonPPR.csv")
-        other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelNonPPR.csv")
-        rbs = other.loc[other['Pos'] == "RB"].copy()
-        wrs = other.loc[other['Pos'] == "WR"].copy()
-        tes = other.loc[other['Pos'] == "TE"].copy()
+        if ppr == 0:
+            #read in player stats df
+            qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelNonPPR.csv")
+            other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelNonPPR.csv")
+            rbs = other.loc[other['Pos'] == "RB"].copy()
+            wrs = other.loc[other['Pos'] == "WR"].copy()
+            tes = other.loc[other['Pos'] == "TE"].copy()
 
-        #loads models
-        rbModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/rbModelNonPPR.joblib")
-        wrModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/wrModelNonPPR.joblib")
-        qbModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/qbModelNonPPR.joblib")
-        teModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/teModelNonPPR.joblib")
-    elif ppr == 1:
-        #read in player stats df
-        qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelHalfPPR.csv")
-        other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelHalfPPR.csv")
-        rbs = other.loc[other['Pos'] == "RB"].copy()
-        wrs = other.loc[other['Pos'] == "WR"].copy()
-        tes = other.loc[other['Pos'] == "TE"].copy()
+            #loads models
+            rbModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/rbModelNonPPR.joblib")
+            wrModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/wrModelNonPPR.joblib")
+            qbModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/qbModelNonPPR.joblib")
+            teModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/teModelNonPPR.joblib")
+        elif ppr == 1:
+            #read in player stats df
+            qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelHalfPPR.csv")
+            other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelHalfPPR.csv")
+            rbs = other.loc[other['Pos'] == "RB"].copy()
+            wrs = other.loc[other['Pos'] == "WR"].copy()
+            tes = other.loc[other['Pos'] == "TE"].copy()
 
-        #loads models
-        rbModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/rbModelHalfPPR.joblib")
-        wrModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/wrModelHalfPPR.joblib")
-        qbModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/qbModelHalfPPR.joblib")
-        teModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/teModelHalfPPR.joblib")
-    elif ppr == 2:        
-        #read in player stats df
-        qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelPPR.csv")
-        other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelPPR.csv")
-        rbs = other.loc[other['Pos'] == "RB"].copy()
-        wrs = other.loc[other['Pos'] == "WR"].copy()
-        tes = other.loc[other['Pos'] == "TE"].copy()
+            #loads models
+            rbModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/rbModelHalfPPR.joblib")
+            wrModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/wrModelHalfPPR.joblib")
+            qbModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/qbModelHalfPPR.joblib")
+            teModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/teModelHalfPPR.joblib")
+        elif ppr == 2:        
+            #read in player stats df
+            qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelPPR.csv")
+            other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelPPR.csv")
+            rbs = other.loc[other['Pos'] == "RB"].copy()
+            wrs = other.loc[other['Pos'] == "WR"].copy()
+            tes = other.loc[other['Pos'] == "TE"].copy()
 
-        #loads models
-        rbModel = joblib.load("ML_models_and_things/all_models/PPR_models/rbModelPPR.joblib")
-        wrModel = joblib.load("ML_models_and_things/all_models/PPR_models/wrModelPPR.joblib")
-        qbModel = joblib.load("ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
-        teModel = joblib.load("ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
-
-
-    modelsDict = {"QB": qbModel, "WR": wrModel, "RB": rbModel, "TE": teModel}
-
-    #gets fantasypoints scale per each position
-    scaleQB = getScaleBack(qbs)
-    scaleRB = getScaleBack(rbs)
-    scaleWR = getScaleBack(wrs)
-    scaleTE = getScaleBack(tes)
-
-    rbsScaled = rbs.copy()
-    rbsScaled = rbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
-    rbsScaled[rbsScaled.columns] = scaler.fit_transform(rbsScaled[rbsScaled.columns])
-
-    wrsScaled = wrs.copy()
-    wrsScaled = wrsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
-    wrsScaled[wrsScaled.columns] = scaler.fit_transform(wrsScaled[wrsScaled.columns])
-
-    tesScaled = tes.copy()
-    tesScaled = tesScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
-    tesScaled[tesScaled.columns] = scaler.fit_transform(tesScaled[tesScaled.columns])
-    
-    qbsScaled = qbs.copy()
-    qbsScaled = qbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
-    qbsScaled[qbsScaled.columns] = scaler.fit_transform(qbsScaled[qbsScaled.columns])
+            #loads models
+            rbModel = joblib.load("ML_models_and_things/all_models/PPR_models/rbModelPPR.joblib")
+            wrModel = joblib.load("ML_models_and_things/all_models/PPR_models/wrModelPPR.joblib")
+            qbModel = joblib.load("ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
+            teModel = joblib.load("ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
 
 
+        modelsDict = {"QB": qbModel, "WR": wrModel, "RB": rbModel, "TE": teModel}
 
-    rb = {}
+        #gets fantasypoints scale per each position
+        scaleQB = getScaleBack(qbs)
+        scaleRB = getScaleBack(rbs)
+        scaleWR = getScaleBack(wrs)
+        scaleTE = getScaleBack(tes)
 
-    allPosDFs = [rbs, wrs, tes, qbs]
-    allPosDfsScaled = [rbsScaled, wrsScaled, tesScaled, qbsScaled]
-    scaleBack = [scaleRB, scaleWR, scaleTE, scaleQB]
+        rbsScaled = rbs.copy()
+        rbsScaled = rbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
+        rbsScaled[rbsScaled.columns] = scaler.fit_transform(rbsScaled[rbsScaled.columns])
 
-    currPosDict = {}
-    indPosArr = []
+        wrsScaled = wrs.copy()
+        wrsScaled = wrsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
+        wrsScaled[wrsScaled.columns] = scaler.fit_transform(wrsScaled[wrsScaled.columns])
 
-    for ind in range(len(allPosDFs)):
-        #ind = 0
-        currDF = allPosDFs[ind]
-        scaled = allPosDfsScaled[ind]
-        arr = scaleBack[ind]
+        tesScaled = tes.copy()
+        tesScaled = tesScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
+        tesScaled[tesScaled.columns] = scaler.fit_transform(tesScaled[tesScaled.columns])
+        
+        qbsScaled = qbs.copy()
+        qbsScaled = qbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
+        qbsScaled[qbsScaled.columns] = scaler.fit_transform(qbsScaled[qbsScaled.columns])
+
+
+
+        rb = {}
+
+        allPosDFs = [rbs, wrs, tes, qbs]
+        allPosDfsScaled = [rbsScaled, wrsScaled, tesScaled, qbsScaled]
+        scaleBack = [scaleRB, scaleWR, scaleTE, scaleQB]
+
         currPosDict = {}
-    
+        indPosArr = []
 
-        for i in range(len(currDF)):
-            currRow = currDF.iloc[[i]]
-            currRow = currRow.reset_index()
-            scaled = scaled.reset_index()
-            scaled = scaled.drop(columns=["index"])
-            currRowForModel = scaled.iloc[[i]] 
+        for ind in range(len(allPosDFs)):
+            #ind = 0
+            currDF = allPosDFs[ind]
+            scaled = allPosDfsScaled[ind]
+            arr = scaleBack[ind]
+            currPosDict = {}
+        
 
-            pos = currRow.loc[0, "Pos"]
-            name = currRow.loc[0, "Name"]
-            penalty = currRow.loc[0, "Penalty"]     
+            for i in range(len(currDF)):
+                currRow = currDF.iloc[[i]]
+                currRow = currRow.reset_index()
+                scaled = scaled.reset_index()
+                scaled = scaled.drop(columns=["index"])
+                currRowForModel = scaled.iloc[[i]] 
 
-            model = modelsDict[pos]
-            prediction = model.predict(currRowForModel)  
+                pos = currRow.loc[0, "Pos"]
+                name = currRow.loc[0, "Name"]
+                penalty = currRow.loc[0, "Penalty"]     
 
-            #inverse transform the scaled predictions to get the original scale by reversing formula
-            prediction = (prediction*(arr[1] - arr[0])) + arr[0]
+                model = modelsDict[pos]
+                prediction = model.predict(currRowForModel)  
+
+                #inverse transform the scaled predictions to get the original scale by reversing formula
+                prediction = (prediction*(arr[1] - arr[0])) + arr[0]
+                '''
+                if pos == "RB":
+                    score = prediction[0]*penalty
+                    dictScores[name] = score*score
+                elif pos == "WR":
+                    score = prediction[0]*penalty
+                    dictScores[name] = score*9
+                elif pos == "TE":
+                    score = prediction[0]*penalty
+                    dictScores[name] = score*score*1.5
+                elif pos == "QB":
+                    score = prediction[0]*penalty
+                    dictScores[name] = score*3
+                '''
+
+                currPosDict[name] = prediction[0]*penalty   
+
+            indPosArr.append(currPosDict)
+
             
-            if pos == "RB":
-                score = prediction[0]*penalty
-                dictScores[name] = score*score
-            elif pos == "WR":
-                score = prediction[0]*penalty
-                dictScores[name] = score*9
-            elif pos == "TE":
-                score = prediction[0]*penalty
-                dictScores[name] = score*score*1.5
-            elif pos == "QB":
-                score = prediction[0]*penalty
-                dictScores[name] = score*3
+    
+            
+        sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
+        df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
 
-            currPosDict[name] = prediction[0]*penalty   
+        print(indPosArr)
+        finalrbs = indPosArr[0]
+        finalwrs = indPosArr[1]
+        finaltes = indPosArr[2]
+        finalqbs = indPosArr[3]
 
-        indPosArr.append(currPosDict)
+        finalrbs = dict(sorted(finalrbs.items(), key=lambda item: item[1], reverse=True))
+        finalwrs = dict(sorted(finalwrs.items(), key=lambda item: item[1], reverse=True))
+        finaltes = dict(sorted(finaltes.items(), key=lambda item: item[1], reverse=True))
+        finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
 
-        
-   
-        
-    sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-    df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-
-    print(indPosArr)
-    finalrbs = indPosArr[0]
-    finalwrs = indPosArr[1]
-    finaltes = indPosArr[2]
-    finalqbs = indPosArr[3]
-
-    finalrbs = dict(sorted(finalrbs.items(), key=lambda item: item[1], reverse=True))
-    finalwrs = dict(sorted(finalwrs.items(), key=lambda item: item[1], reverse=True))
-    finaltes = dict(sorted(finaltes.items(), key=lambda item: item[1], reverse=True))
-    finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
-
-    finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name', 'Score'])
-    finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
-    finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
-    finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
+        finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name', 'Score'])
+        finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
+        finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
+        finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
 
 
+        if ppr == 0:
+            #df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
+            finalrbs.to_csv("final_rankings/RBs_NonPPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/WRs_NonPPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/TEs_NonPPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/QBs_NonPPR.csv", encoding='utf-8', index=False)
+        elif ppr == 1:
+            finalrbs.to_csv("final_rankings/RBs_HalfPPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/WRs_HalfPPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/TEs_HalfPPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/QBs_HalfPPR.csv", encoding='utf-8', index=False)
+        elif ppr == 2:
+            finalrbs.to_csv("final_rankings/RBs_PPR.csv", encoding='utf-8', index=False)
+            finalwrs.to_csv("final_rankings/WRs_PPR.csv", encoding='utf-8', index=False)
+            finaltes.to_csv("final_rankings/TEs_PPR.csv", encoding='utf-8', index=False)
+            finalqbs.to_csv("final_rankings/QBs_PPR.csv", encoding='utf-8', index=False)
 
-    df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
-    finalrbs.to_csv("final_rankings/final_RBs.csv", encoding='utf-8', index=False)
-    finalwrs.to_csv("final_rankings/final_WRs.csv", encoding='utf-8', index=False)
-    finaltes.to_csv("final_rankings/final_TEs.csv", encoding='utf-8', index=False)
-    finalqbs.to_csv("final_rankings/final_QBs.csv", encoding='utf-8', index=False)
 
     print(df)
 

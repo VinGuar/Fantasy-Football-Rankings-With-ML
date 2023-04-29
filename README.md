@@ -7,7 +7,7 @@ change year for how teams grade was made.
 change years for how the last four years in csvGradingMaker was made
 potentially change machine learning years if wanted. (optional)
 
-must change if ppr, half ppr, or non ppr in modelMaker, playerDFMaker, playerScorer
+must change if ppr, half ppr, or non ppr in modelMaker, playerDFMaker, playerScorer. ACTUALLY MAY NOT HAVE TO
 
 
 **BE PATIENT
