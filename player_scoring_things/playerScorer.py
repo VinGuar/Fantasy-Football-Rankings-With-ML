@@ -168,7 +168,7 @@ def scorer():
         finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
 
         #makes data into list with wanted columns
-        finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name', 'Score'])
+        finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name'])
         finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
         finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
         finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
