@@ -14,9 +14,7 @@ from sklearn.metrics import mean_absolute_error
 import warnings
 warnings.filterwarnings("ignore", message="X has feature names, but MLPRegressor was fitted without feature names")
 
-#REMEMBER ROOKIES
-#rmbr to scale data and have exact columns in correct order among other cleaning for model
-
+#gets ppg back into normal form
 def getScaleBack(df):
   #index of column
   column_index = df.columns.get_loc("PPG")
@@ -45,7 +43,7 @@ def scorer():
         dictScores = {}
 
         if ppr == 0:
-            #read in player stats df
+            #read in player stats df and make positional dfs
             qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelNonPPR.csv")
             other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelNonPPR.csv")
             rbs = other.loc[other['Pos'] == "RB"].copy()
@@ -58,7 +56,7 @@ def scorer():
             qbModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/qbModelNonPPR.joblib")
             teModel = joblib.load("ML_models_and_things/all_models/NonPPR_models/teModelNonPPR.joblib")
         elif ppr == 1:
-            #read in player stats df
+            #read in player stats df and make positional dfs
             qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelHalfPPR.csv")
             other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelHalfPPR.csv")
             rbs = other.loc[other['Pos'] == "RB"].copy()
@@ -71,7 +69,7 @@ def scorer():
             qbModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/qbModelHalfPPR.joblib")
             teModel = joblib.load("ML_models_and_things/all_models/HalfPPR_models/teModelHalfPPR.joblib")
         elif ppr == 2:        
-            #read in player stats df
+            #read in player stats df and make positional dfs
             qbs = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/QBDFForModelPPR.csv")
             other = pd.read_csv("player_scoring_things/all_rosters_stats_and_av_csvs/playersDFsForModels/rushRecDFForModelPPR.csv")
             rbs = other.loc[other['Pos'] == "RB"].copy()
@@ -84,7 +82,7 @@ def scorer():
             qbModel = joblib.load("ML_models_and_things/all_models/PPR_models/qbModelPPR.joblib")
             teModel = joblib.load("ML_models_and_things/all_models/PPR_models/teModelPPR.joblib")
 
-
+        #dictionary to easily call models
         modelsDict = {"QB": qbModel, "WR": wrModel, "RB": rbModel, "TE": teModel}
 
         #gets fantasypoints scale per each position
@@ -93,6 +91,7 @@ def scorer():
         scaleWR = getScaleBack(wrs)
         scaleTE = getScaleBack(tes)
 
+        #create a scaled version of each positional df, and have it be same parameters as models
         rbsScaled = rbs.copy()
         rbsScaled = rbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
         rbsScaled[rbsScaled.columns] = scaler.fit_transform(rbsScaled[rbsScaled.columns])
@@ -109,10 +108,7 @@ def scorer():
         qbsScaled = qbsScaled.drop(columns=["Games", "Pos", "Penalty", "Name", "Team"])        
         qbsScaled[qbsScaled.columns] = scaler.fit_transform(qbsScaled[qbsScaled.columns])
 
-
-
-        rb = {}
-
+        #have these so it can iterate through easily
         allPosDFs = [rbs, wrs, tes, qbs]
         allPosDfsScaled = [rbsScaled, wrsScaled, tesScaled, qbsScaled]
         scaleBack = [scaleRB, scaleWR, scaleTE, scaleQB]
@@ -120,15 +116,20 @@ def scorer():
         currPosDict = {}
         indPosArr = []
 
+        #iterates through each position
         for ind in range(len(allPosDFs)):
-            #ind = 0
+            #gets current position df, scaled current df, and array to help get ppg to normal.
             currDF = allPosDFs[ind]
             scaled = allPosDfsScaled[ind]
             arr = scaleBack[ind]
+
+            #dictionary to store current position grades.
             currPosDict = {}
         
-
+            #iterates through all players in current position.
             for i in range(len(currDF)):
+
+                #gets current information for current player
                 currRow = currDF.iloc[[i]]
                 currRow = currRow.reset_index()
                 scaled = scaled.reset_index()
@@ -139,54 +140,41 @@ def scorer():
                 name = currRow.loc[0, "Name"]
                 penalty = currRow.loc[0, "Penalty"]     
 
+                #gets in correct positinal model and predicts each player
                 model = modelsDict[pos]
                 prediction = model.predict(currRowForModel)  
 
                 #inverse transform the scaled predictions to get the original scale by reversing formula
                 prediction = (prediction*(arr[1] - arr[0])) + arr[0]
-                '''
-                if pos == "RB":
-                    score = prediction[0]*penalty
-                    dictScores[name] = score*score
-                elif pos == "WR":
-                    score = prediction[0]*penalty
-                    dictScores[name] = score*9
-                elif pos == "TE":
-                    score = prediction[0]*penalty
-                    dictScores[name] = score*score*1.5
-                elif pos == "QB":
-                    score = prediction[0]*penalty
-                    dictScores[name] = score*3
-                '''
 
+                #this is where the penalty is added and prediction is entered into the dictionary
                 currPosDict[name] = prediction[0]*penalty   
 
+            #appends current position grades to all of them.
             indPosArr.append(currPosDict)
 
             
     
-            
-        sorted_dict = dict(sorted(dictScores.items(), key=lambda item: item[1], reverse=True))
-        df = pd.DataFrame(list(sorted_dict.items()), columns=['Name', 'Score'])
-
+        #sorts dictionary
         finalrbs = indPosArr[0]
         finalwrs = indPosArr[1]
         finaltes = indPosArr[2]
         finalqbs = indPosArr[3]
 
+        #sorts data
         finalrbs = dict(sorted(finalrbs.items(), key=lambda item: item[1], reverse=True))
         finalwrs = dict(sorted(finalwrs.items(), key=lambda item: item[1], reverse=True))
         finaltes = dict(sorted(finaltes.items(), key=lambda item: item[1], reverse=True))
         finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
 
+        #makes data into list with wanted columns
         finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name', 'Score'])
         finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
         finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
         finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
 
-
+        #writes into csv files
         if ppr == 0:
-            #df.to_csv("final_rankings/complete_rankings.csv", encoding='utf-8', index=False)
             finalrbs.to_csv("final_rankings/NonPPR_rankings/RBs_NonPPR.csv", encoding='utf-8', index=False)
             finalwrs.to_csv("final_rankings/NonPPR_rankings/WRs_NonPPR.csv", encoding='utf-8', index=False)
             finaltes.to_csv("final_rankings/NonPPR_rankings/TEs_NonPPR.csv", encoding='utf-8', index=False)
@@ -203,7 +191,7 @@ def scorer():
             finalqbs.to_csv("final_rankings/PPR_rankings/QBs_PPR.csv", encoding='utf-8', index=False)
 
 
-    print(df)
+    #print(df)
 
 
 scorer()

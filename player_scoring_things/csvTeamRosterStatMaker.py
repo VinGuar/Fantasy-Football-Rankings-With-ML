@@ -11,8 +11,6 @@ from itertools import chain
 rate = 0
 def checkRate(r):
     global rate
-    #if r > 16:
-        #rate = 0
     time.sleep(5)
 
 #since roster table is hidden in comments, needs this to fish it out
@@ -48,7 +46,7 @@ def rosterMaker():
 
     global rate
 
-    #years used for grading. changes each season. if making currYearRoster, use array below with current year
+    #years used for grading. changes each season. if making currYearRoster, use array below with just current year
     #years = ["2022", "2021", "2020", "2019"]
     years = ["2023"]
 
@@ -219,5 +217,5 @@ def statMaker():
              
 
 #comment out whichever one you are not running.
-#rosterMaker()
+rosterMaker()
 statMaker()

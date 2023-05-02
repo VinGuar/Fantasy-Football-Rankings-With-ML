@@ -24,3 +24,16 @@ tell them how complete rankings maker with varying multiplicators for each pos s
 tell them may need to run models again if its looking bad, sometimes a rly bad batch happens. unlikely, however happens more with qbs. still unlikely tho, so just re-run models and such.
 
 tell them how it may vary a tiny bit with new models. players will stay in same area, just a few small alterations up or down for players each time.
+
+tell them how i couldnt do rookies
+
+
+# Hey! To run everything to get data, there are some steps you need to do. Refer to README for specifics.
+
+# Some things you need to run yearly to get new data, and others you run each time before you run rankings.
+
+# Yearly:
+# 1. 
+
+
+
