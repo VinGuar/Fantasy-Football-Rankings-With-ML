@@ -211,7 +211,5 @@ def scorer():
             finalqbs.to_csv("final_rankings/PPR_rankings/QBs_PPR.csv", encoding='utf-8', index=False)
 
 
-    #print(df)
-
 
 scorer()
