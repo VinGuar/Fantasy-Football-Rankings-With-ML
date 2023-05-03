@@ -167,11 +167,31 @@ def scorer():
         finaltes = dict(sorted(finaltes.items(), key=lambda item: item[1], reverse=True))
         finalqbs = dict(sorted(finalqbs.items(), key=lambda item: item[1], reverse=True))
 
-        #makes data into list with wanted columns
-        finalrbs = pd.DataFrame(list(finalrbs.items()), columns=['Name'])
-        finalwrs = pd.DataFrame(list(finalwrs.items()), columns=['Name', 'Score'])
-        finaltes = pd.DataFrame(list(finaltes.items()), columns=['Name', 'Score'])
-        finalqbs = pd.DataFrame(list(finalqbs.items()), columns=['Name', 'Score'])
+        #makes data into list and add Rank/Name column for each position
+        n = len(finalrbs)
+        rankNums = np.arange(1, n+1)
+        finalrbs = list(finalrbs.keys())
+        finalrbs = pd.DataFrame(finalrbs, columns=['Name'])
+        finalrbs.insert(0, "Rank", rankNums, True)
+
+        n = len(finalwrs)
+        rankNums = np.arange(1, n+1)
+        finalwrs = list(finalwrs.keys())
+        finalwrs = pd.DataFrame(finalwrs, columns=['Name'])
+        finalwrs.insert(0, "Rank", rankNums, True)
+
+        n = len(finaltes)
+        rankNums = np.arange(1, n+1)
+        finaltes = list(finaltes.keys())
+        finaltes = pd.DataFrame(finaltes, columns=['Name'])
+        finaltes.insert(0, "Rank", rankNums, True)
+
+        n = len(finalqbs)
+        rankNums = np.arange(1, n+1)
+        finalqbs = list(finalqbs.keys())
+        finalqbs = pd.DataFrame(finalqbs, columns=['Name'])
+        finalqbs.insert(0, "Rank", rankNums, True)
+
 
         #writes into csv files
         if ppr == 0:
