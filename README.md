@@ -29,8 +29,20 @@ In this repository it ranks fantasy football players inside their position using
 ## File Breakdown:
 
 ### Python files:
+- modelMaker.py:
+- csvTeamRosterStatMaker.py:
+- playerDFMaker.py:
+- playerScorer.py:
+- teamPositionGrading.py:
 
 ### CSV files:
+- HalfPPR/NonPPR/PPR csv final rankings for all positions (final_rankings folder): 
+- 12-21FantasyData.csv: 
+- 12-21Grades.csv
+- HalfPPR/NonPPR/PPR csv DFs of each player for model (playerDFsForModels folder):
+
+
+### Machine Learning Models:
 
 <br/>
 
