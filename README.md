@@ -3,6 +3,7 @@
 ### Short description:
 In this repository it ranks fantasy football players inside their position using neural networks (machine learning) based on previous year per-game stats, and grades for current teams positional groups (like Oline grade, QB grade, etc). Includes rankings for RBs, WRs, TEs, and QBs. I used neural networks so the machine learning could account for the complexities of fantasy football. Code is adaptable to be able to be used for future years as well. Unfortunately, I am currently unable to incorporate rookies or one combined ranking of all positions, however it is something that I aim to add in the future.
 
+<br/>
 
 ## How to use program
 ***BE PATIENT!* Running some of the code takes some time**
@@ -23,8 +24,11 @@ In this repository it ranks fantasy football players inside their position using
 - run playerDFMaker.py. This makes player stats in manner necessary for models
 - run playerScorer.py. This is where the actual rankings are predicted.
 
+<br/>
+
 ## File Breakdown:
 
+<br/>
 
 ## Other notes:
 - If landscape of NFL dramatically changes in the distant future, may need to redo data for machine learning. To Re-do it you need to find a recent data set with at least 10 years of data that has all data needed in model, and also need to run teamPositionGrading.py to get the same 10 years as the data set. Overall, it may take a good bit of time and effort to do this.
