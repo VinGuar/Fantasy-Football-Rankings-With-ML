@@ -2,7 +2,8 @@
 
 ### Short description:
 In this repository it ranks fantasy football players inside their position using neural networks (machine learning) based on previous year per-game stats, and grades for current teams positional groups (like Oline grade, QB grade, etc). Includes rankings for RBs, WRs, TEs, and QBs. I used neural networks so the machine learning could account for the complexities of fantasy football. Code is adaptable to be able to be used for future years as well. Unfortunately, I am currently unable to incorporate rookies or one combined ranking of all positions, however it is something that I aim to add in the future.
-<br/>
+
+
 
 ## How to use program
 ***BE PATIENT!* Running some of the code takes some time**
