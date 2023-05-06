@@ -23,7 +23,6 @@ In this repository it ranks fantasy football players inside their position using
 - run playerDFMaker.py. This makes player stats in manner necessary for models
 - run playerScorer.py. This is where the actual rankings are predicted.
 
-<br/>
 
 ## Other notes:
 
