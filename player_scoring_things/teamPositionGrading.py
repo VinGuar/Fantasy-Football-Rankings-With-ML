@@ -173,6 +173,7 @@ if x:
     pass
 else: 
     yearsSmall = ["2022"] 
+    yearsBig = ["2023"] 
 
 #for loop gets data to use for grading of the next year
 for arr in yearsSmall:
@@ -208,12 +209,6 @@ bigYears = {}
 
 
 q = 0
-
-#only current year if x is false
-if x:
-    pass
-else: 
-    yearsBig = ["2023"] 
 
 
 #grading the year with past data (achieved from yearsSmall in for loop above)
