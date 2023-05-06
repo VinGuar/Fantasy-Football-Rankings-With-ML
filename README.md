@@ -32,7 +32,7 @@ In this repository it ranks fantasy football players inside their position using
 
 ## Other notes:
 - Re-running modelMaker.py to get new models can create different rankings, although players will be in same general area, just with slight altercations. Sometimes, although it is very rare, there will be a bad batch of rankings with model, and if there is just re-run modelMaker.py again to get new models to be used for rankings (mostly just happens with QBs).
-- If landscape of NFL dramatically changes in the distant future, may need to redo data for machine learning. To Re-do it you need to find a recent data set with at least 10 years of data that has all data needed in model, and also need to run teamPositionGrading.py to get the same 10 years as the data set. Overall, it may take a good bit of time and effort to do this.
+- If landscape of NFL dramatically changes in the distant future, may need to redo data for machine learning. To Re-do it you need to find a recent data set with at least 10 years of data that has all data needed in model, and also need to run teamPositionGrading.py to get the same 10 years as the data set. Overall, it may take a good bit of time and effort to do this, and is not likely to be necessary for quite some time
 - If a RB/TE is in a committee the rankings may slightly over-value them, as it is difficult for model to incorporate this into predictions. Same with WRs if there are so many good ones on one team, albeit this is rarer.
 - QB grades may include a couple non-starters highly ranked. This is because it is grading each player almost as if they were a starter.
 - Future potential updates: include rookies, and make one combined ranking that includes all positions
