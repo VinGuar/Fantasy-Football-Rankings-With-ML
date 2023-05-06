@@ -28,6 +28,10 @@ In this repository it ranks fantasy football players inside their position using
 
 ## File Breakdown:
 
+### Python files:
+
+### CSV files:
+
 <br/>
 
 ## Other notes:
