@@ -23,6 +23,11 @@ In this repository it ranks fantasy football players inside their position using
 - run playerDFMaker.py. This makes player stats in manner necessary for models
 - run playerScorer.py. This is where the actual rankings are predicted.
 
+## File Breakdown:
+
 
 ## Other notes:
-
+- If landscape of NFL dramatically changes in the distant future, may need to redo data for machine learning. To Re-do it you need to find a recent data set with at least 10 years of data that has all data needed in model, and also need to run teamPositionGrading.py to get the same 10 years as the data set. Overall, it may take a good bit of time and effort to do this.
+- If a RB/TE is in a committee the rankings may slightly over-value them, as it is difficult for model to incorporate this into predictions. Same with WRs if there are so many good ones on one team, albeit this is rarer.
+- QB grades may include a couple non-starters highly ranked. This is because it is grading each player almost as if they were a starter.
+- Future potential updates: include rookies, and make one combined ranking that includes all positions
