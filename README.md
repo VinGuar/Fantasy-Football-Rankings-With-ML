@@ -10,4 +10,5 @@ In this repository it ranks fantasy football players inside their position using
 - install lxml
 
 ## How to use code
+**BE PATIENT**
 0
