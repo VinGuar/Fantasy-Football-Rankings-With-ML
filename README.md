@@ -16,8 +16,6 @@ In this repository it ranks fantasy football players inside their position using
 - run modelMaker.py to get each model used.
 - run csvTeamRosterStatMaker.py's functions statMaker and rosterMaker with the last four years. ex: if it is July 2023, use array with 2022, 2021, 2020, 2019. This is data used to rank players
 
-<br/>
-
 ### Things that need to be done to update rankings inside of each year:
 - run csvTeamRosterStatMaker.py functions rosterMaker with only current year. ex: if July 2023, use 2023. This updates the teams roster.
 - run teamPositionGrading.py and set x to false and scroll down a little bit and change yearsSmall in the if loop to last year and yearsBig to current year. ex: if it is July 2023, make yearsSmall 2022 and yearsBig 2023. This updates teams positional grade.
