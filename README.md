@@ -5,6 +5,9 @@ In this repository it ranks fantasy football players inside their position using
 
 ### Requirements:
 
+- install python
+- install needed modules and libraries listed at top of each file that you do not already have downloaded.
+- install lxml
 
 ## How to use code
 0
