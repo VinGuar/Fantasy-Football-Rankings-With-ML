@@ -6,12 +6,10 @@ from sklearn.preprocessing import MinMaxScaler
 
 pd.options.mode.chained_assignment = None
 
-
 import sklearn
 from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_absolute_error
-
 
 from sklearn.model_selection import train_test_split
 import joblib
