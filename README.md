@@ -11,7 +11,6 @@ In this repository it ranks fantasy football players inside their position using
 - install python
 - install needed modules and libraries listed at top of each file that you do not already have downloaded.
 - install lxml
-<br/>
 
 ### Things that need to be done once per year:
 - run modelMaker.py to get each model used.
