@@ -327,7 +327,7 @@ if x:
     largeDF.columns = ["team", "ol", "rb", "wr", "qb", "te", "year"]
 
     #write dataframe into csv to be used later
-    largeDF.to_csv("12Grades.csv", encoding='utf-8', index=False)
+    largeDF.to_csv("12-21Grades.csv", encoding='utf-8', index=False)
 
     print(largeDF)
 
