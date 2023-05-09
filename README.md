@@ -59,5 +59,6 @@ In this repository it ranks fantasy football players inside their position using
 - QB grades may include a couple non-starters highly ranked. This is because it is grading each player almost as if they were a starter.
 - Future potential updates: include rookies, and make one combined ranking that includes all positions
 
+<br/>
 
 ## Let me know if you have any questions ever, I am happy to answer any!
