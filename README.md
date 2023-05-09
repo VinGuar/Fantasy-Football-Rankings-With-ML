@@ -1,7 +1,7 @@
 # Fantasy Football Positional Rankings with Machine Learning
 
 ### Short description:
-In this repository it ranks fantasy football players inside their position using neural networks (machine learning) based on previous year per-game stats, and grades for current teams positional groups (like Oline grade, QB grade, etc). Includes rankings for RBs, WRs, TEs, and QBs. I used neural networks so the machine learning could account for the complexities of fantasy football. Code is adaptable to be able to be used for future years as well. Unfortunately, I am currently unable to incorporate rookies or one combined ranking of all positions, however it is something that I aim to add in the future.
+In this repository it ranks fantasy football players inside their position using neural networks (machine learning) based on previous year per-game stats, and grades for current teams positional groups (like Oline grade, QB grade, etc). Includes rankings for RBs, WRs, TEs, and QBs in Non PPR, Half PPR, and Full PPR. I used neural networks so the machine learning could account for the complexities of fantasy football. Code is adaptable to be able to be used for future years as well. Unfortunately, I am currently unable to incorporate rookies or one combined ranking of all positions, however it is something that I aim to add in the future.
 
 <br/>
 
@@ -29,10 +29,10 @@ In this repository it ranks fantasy football players inside their position using
 ## File Breakdown:
 
 ### Python files:
-- modelMaker.py:
-- csvTeamRosterStatMaker.py:
-- playerDFMaker.py:
-- playerScorer.py:
+- modelMaker.py: This is where the nueral network machine learning models are made. It takes players per game stats from previous year and grades for current year team positional group and uses this to predict PPG, which is how the rankings are done. Does it for Non PPR, Half PPR, and Full PPR, and stores them in all_models folder using joblib.
+- csvTeamRosterStatMaker.py: This is where the data is obtained from past four years for DF. It makes current year roster (currYearRoster.csv) for each team and then past four years rosters (teamsPastRoster.csv) to help indentify and confirm a players stats for each year. It also makes teamsOldQBStats.csv and teamsOldRushRec.csv, which is players stats for last four years.
+- playerDFMaker.py: This file makes each individual players, who is currently on a team, dataframe row that has everything needed for the model. It takes the grades for their current team, and stats for last year. If they were hurt or suspended so they did not play at least 7 games, it goes to previous years until it can get enough, adding penalty for each year back so it is not fully counted. If they are a rookie, only needs a few games instead. Writes it into playersDFsForModels folder.
+- playerScorer.py: This is where the rankings are made. It puts each player into the model and ranks them. It then sorts all players in each position in order from highest to lowest and writes rankings into final_rankings folder.
 - teamPositionGrading.py:
 
 ### CSV files:

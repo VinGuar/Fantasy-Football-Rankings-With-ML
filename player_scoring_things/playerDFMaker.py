@@ -260,10 +260,6 @@ def dfMaker():
                 
                 completeDFOther = pd.concat([completeDFOther, individualDFOther], ignore_index=True, join="inner")                
                     
-
-        #print(completeDFOther)
-        #print(completeDFQB)
-        #print(rookieList)
         
         #write into csv based on if ppr or not
         if ppr == 0:
