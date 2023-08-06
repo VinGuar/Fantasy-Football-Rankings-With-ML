@@ -9,10 +9,8 @@ In this repository it ranks fantasy football players inside their position using
 ***BE PATIENT!* Running some of the code takes some time**
 <br/>
 
-### Requirements:
-- install python
-- install needed modules and libraries listed at top of each file that you do not already have downloaded.
-- install lxml
+### Required installations:
+- requirements.txt
 
 ### Things that need to be done once per year:
 - run modelMaker.py to get each model used.
@@ -20,7 +18,7 @@ In this repository it ranks fantasy football players inside their position using
 
 ### Things that need to be done to update rankings inside of each year:
 - run csvTeamRosterStatMaker.py functions rosterMaker with only current year. ex: if July 2023, set years array to just 2023. This updates the teams roster.
-- run teamPositionGrading.py and set x to false and scroll down a little bit and change yearsSmall in the if loop to last year and yearsBig to current year. ex: if it is July 2023, make yearsSmall 2022 and yearsBig 2023. This updates teams positional grade.
+- run teamPositionGrading.py and set x to false (around line 160) and scroll down a little bit and change yearsSmall in the if loop to last year and yearsBig to current year. ex: if it is July 2023, make yearsSmall 2022 and yearsBig 2023. This updates teams positional grade.
 - run playerDFMaker.py. This makes player stats in manner necessary for models
 - run playerScorer.py. This is where the actual rankings are predicted.
 
